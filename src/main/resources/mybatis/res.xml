@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 자식 XML 태그들은 dev.mvc.res.ResDAOInter.java interface와 연결됨 -->
+<mapper namespace="dev.mvc.res.ResDAOInter">
+ <!-- return : 등록한 레코드 갯수를 1을 리턴, parameterType: 전달받는 데이터-->
+ <insert id="create" parameterType="dev.mvc.res.ResVO">
+    INSERT INTO RESTAURANT(resno, resname, resaddress, resphone, restime, resstar) 
+    VALUES(restaurant_seq.nextval, #{resname}, #{resaddress}, #{resphone}, #{restime}, 0)
+ </insert>
+ 
+ <!-- 전체 목록, SQL -> ResVO -> ArrayList<ResVO> return -->
+<!--  <select id="list_all" resultType="dev.mvc.res.ResVO">
+    SELECT resno, resname, resaddress, resphone, restime, resstar 
+    FROM RESTAURANT ORDER BY resno ASC
+ </select> -->
+
+ <!-- 출력 우선순위 적용 -->
+<!--  <select id="list_all" resultType="dev.mvc.res.ResVO">
+    SELECT resno, resname, resaddress, resphone, restime, resstar, seqno
+    FROM RESTAURANT ORDER BY seqno ASC
+ </select> -->
+ 
+ <!-- 출력 모드 적용 -->
+  <select id="list_all" resultType="dev.mvc.res.ResVO">
+    SELECT resno, resname, resaddress, resphone, restime, resstar, seqno, visible
+    FROM RESTAURANT ORDER BY seqno ASC
+ </select>
+ 
+     <!-- 비회원/회원 SELECTE LIST -->
+  <select id="list_all_y" resultType="dev.mvc.res.ResVO">
+    SELECT resno, resname, resaddress, resphone, restime, resstar, seqno, visible
+    FROM RESTAURANT
+    WHERE visible = 'Y'
+    ORDER BY seqno ASC
+  </select>
+ 
+  <!-- 읽기, SQL -> ResVO return -->
+ <select id="read" resultType="dev.mvc.res.ResVO" parameterType="int">
+		SELECT resno, resname, resaddress, resphone, restime, resstar 
+		FROM RESTAURANT
+		WHERE resno = #{resno}
+ </select>
+ 
+  <!-- return : 수정한 레코드 갯수를 1을 리턴, parameterType: 수정할 레코드 정보-->
+	 <update id="update" parameterType="dev.mvc.res.ResVO">
+	    UPDATE RESTAURANT 
+      SET resname = #{resname}, resaddress = #{resaddress}, resphone = #{resphone}, restime = #{restime}
+      WHERE resno = #{resno}
+	 </update>
+ 
+  <!-- return : 삭제한 레코드 갯수를 리턴, parameterType: 수정할 레코드 정보-->
+	 <delete id="delete" parameterType="int">
+	    DELETE FROM RESTAURANT where resno = #{resno}
+	 </delete>
+ 
+   <!-- 우선 순위 높임, 10등 -> 1등 -->
+   <update id="update_seqno_forward" parameterType="int">
+      UPDATE RESTAURANT SET seqno = seqno-1 WHERE resno = #{resno}
+   </update>
+   
+   <!-- 우선 순위 낮춤, 1등 -> 10등 -->
+   <update id="update_seqno_backward" parameterType="int">
+      UPDATE RESTAURANT SET seqno = seqno+1 WHERE resno = #{resno}
+   </update>
+ 
+   <!-- 카테고리 공개 설정 -->
+  <update id="update_visible_y" parameterType="int">
+    UPDATE RESTAURANT SET visible = 'Y' WHERE resno = #{resno}
+  </update>
+  
+   <!-- 카테고리 바공개 설정 -->
+  <update id="update_visible_n" parameterType="int">
+    UPDATE RESTAURANT SET visible = 'N' WHERE resno = #{resno}
+  </update>
+ 
+</mapper>

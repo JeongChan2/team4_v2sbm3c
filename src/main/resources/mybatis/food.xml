@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "dev.mvc.food.FoodDAOInter">
+
+	<insert id="create" parameterType="dev.mvc.food.FoodVO">
+    INSERT INTO food(foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat)
+    VALUES (food_seq.nextval, #{foodname}, #{f_calories}, #{f_carbohydrates}, #{f_protein}, #{f_fat})
+  </insert>
+
+	<select id="list_all" resultType="dev.mvc.food.FoodVO">
+	    SELECT foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat
+	    FROM food
+      ORDER BY foodno ASC
+	 </select>
+
+	  <!-- 읽기, SQL -> FoodVO return -->
+	 <select id="read" resultType="dev.mvc.food.FoodVO" parameterType="int">
+	    SELECT foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat 
+	    FROM food
+	    WHERE foodno = #{foodno}
+	 </select>
+	 
+  <!-- return : 수정한 레코드 갯수를 1을 리턴, parameterType: 수정할 레코드 정보-->
+   <update id="update" parameterType="dev.mvc.food.FoodVO">
+      UPDATE food 
+      SET foodname = #{foodname}, f_calories = #{f_calories}, f_carbohydrates = #{f_carbohydrates},
+      f_protein = #{f_protein}, f_fat = #{f_fat}
+      WHERE foodno = #{foodno}
+   </update>
+
+  <!-- return : 삭제한 레코드 갯수를 리턴, parameterType: 수정할 레코드 정보-->
+   <delete id="delete" parameterType="int">
+      DELETE FROM food where foodno = #{foodno}
+   </delete>
+
+</mapper> 
