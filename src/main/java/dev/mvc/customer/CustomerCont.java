@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.login.LoginProc;
+import dev.mvc.login.LoginProcInter;
 import dev.mvc.manager.ManagerProcInter;
 
 @Controller
@@ -26,6 +28,10 @@ public class CustomerCont {
   @Qualifier("dev.mvc.manager.ManagerProc") // @Component("dev.mvc.manager.ManagerProc")
   private ManagerProcInter managerProc;
 
+  @Autowired
+  @Qualifier("dev.mvc.login.LoginProc")
+  private LoginProcInter loginProc;
+  
   @Autowired
   @Qualifier("dev.mvc.customer.CustomerProc")
   private CustomerProcInter customerProc = null;
@@ -440,6 +446,11 @@ public class CustomerCont {
                             String passwd,
                             @RequestParam(value="id_save", defaultValue="") String id_save,
                             @RequestParam(value="passwd_save", defaultValue="") String passwd_save) {
+    // client ip
+    String ip=request.getRemoteAddr();
+    System.out.println("-> ip: " + ip); // 자기자신은 0.0.0.0 으로 출력되고 외부 접속은 정상적으로 ip가 나옴
+    
+    
     ModelAndView mav = new ModelAndView();
     HashMap<String, Object> map = new HashMap<String, Object>();
     map.put("id", id);
@@ -453,7 +464,12 @@ public class CustomerCont {
       session.setAttribute("id", id);
       session.setAttribute("cname", customerVO.getCname());
       session.setAttribute("grade", customerVO.getGrade());
-   
+      
+      map.put("customerno", customerVO.getCustomerno());  // map에 login의 매개변수인 customerno와 ip추가
+      map.put("ip", ip);
+      
+      loginProc.login_cookie_proc(map); // map을 loginProc로 전달해 로그인 내역 저장
+      
       // -------------------------------------------------------------------
       // id 관련 쿠기 저장
       // -------------------------------------------------------------------
