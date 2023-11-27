@@ -57,7 +57,7 @@ public class FoodCont {
     ModelAndView mav = new ModelAndView();
     
     if(this.managerProc.isManager(session)) {
-      mav.setViewName("/food/list_all");// /WEB-INF/views/res/list_all.jsp
+      mav.setViewName("/food/list_all");// /WEB-INF/views/food/list_all.jsp
       
       ArrayList<FoodVO> list = this.foodProc.list_all();
       mav.addObject("list",list);

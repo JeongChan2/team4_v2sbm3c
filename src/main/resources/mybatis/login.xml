@@ -7,4 +7,10 @@
     VALUES(login_seq.nextval, #{customerno}, #{ip}, sysdate)
   </insert>
 
+  <select id="login_list" resultType="dev.mvc.login.LoginVO">
+		SELECT loginno, customerno, ip, logindate 
+		from LOGIN
+		ORDER BY logindate DESC
+   </select>
+
 </mapper> 

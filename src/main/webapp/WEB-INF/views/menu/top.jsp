@@ -86,7 +86,7 @@
                     <a class="dropdown-item" href="/customer/read_info.do">가입 정보</a>
                     <a class="dropdown-item" href="/customer/passwd_update.do">비밀번호 변경</a>
                     <a class="dropdown-item" href="/customer/read.do">회원 정보 수정</a>
-                    <a class="dropdown-item" href="javascript: alert('개발 예정')">로그인 내역</a>
+                    <a class="dropdown-item" href="/login/login_list.do">로그인 내역</a>
                     <a class="dropdown-item" href="javascript: alert('개발 예정')">회원 탈퇴</a>
                   </c:otherwise>
                 </c:choose>

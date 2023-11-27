@@ -1,5 +1,6 @@
 package dev.mvc.login;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,5 +36,25 @@ public class LoginCont {
     System.out.println("-> LoginCont created.");
   }
  
+  /**
+   * 로그인 내역
+   * // FORM 데이터 처리 http://localhost:9093/login/login_list.do
+   * @return
+   */
+  @RequestMapping(value="/login/login_list.do",method = RequestMethod.GET)
+  public ModelAndView list_all(HttpSession session) {
+    ModelAndView mav = new ModelAndView();
+    
+    if(this.customerProc.isCustomer(session) ||this.managerProc.isManager(session)) {
+      mav.setViewName("/login/login_list");// /WEB-INF/views/login/login_list.jsp
+      
+      ArrayList<LoginVO> list = this.loginProc.login_list();
+      mav.addObject("list",list);
+    }
+    else {
+      mav.setViewName("/customer/login_need");// /webapp/WEB-INF/views/customer/login_need.jsp
+    }
+    return mav;
+  }
   
 }

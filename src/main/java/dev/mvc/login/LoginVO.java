@@ -15,9 +15,9 @@ public class LoginVO {
   /** 회원 번호 */
   private int customerno;
   /** 접속 IP */
-  private int ip;
+  private String ip;
   /** 로그인 날짜 */
-  private int logindate;
+  private String logindate;
   
   
   public int getLoginno() {
@@ -32,16 +32,16 @@ public class LoginVO {
   public void setCustomerno(int customerno) {
     this.customerno = customerno;
   }
-  public int getIp() {
+  public String getIp() {
     return ip;
   }
-  public void setIp(int ip) {
+  public void setIp(String ip) {
     this.ip = ip;
   }
-  public int getLogindate() {
+  public String getLogindate() {
     return logindate;
   }
-  public void setLogindate(int logindate) {
+  public void setLogindate(String logindate) {
     this.logindate = logindate;
   }
   
