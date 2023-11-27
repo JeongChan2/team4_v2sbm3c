@@ -4,7 +4,7 @@
 <mapper namespace = "dev.mvc.login.LoginDAOInter">
   <insert id="login_cookie_proc" parameterType="HashMap">
     INSERT INTO LOGIN(loginno, customerno, ip, logindate)
-    VALUES(login_seq.nextval, #{customerno}, #{ip}, sysdate);
+    VALUES(login_seq.nextval, #{customerno}, #{ip}, sysdate)
   </insert>
 
 </mapper> 

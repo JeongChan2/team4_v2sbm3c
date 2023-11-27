@@ -465,10 +465,12 @@ public class CustomerCont {
       session.setAttribute("cname", customerVO.getCname());
       session.setAttribute("grade", customerVO.getGrade());
       
-      map.put("customerno", customerVO.getCustomerno());  // map에 login의 매개변수인 customerno와 ip추가
-      map.put("ip", ip);
+      HashMap<String, Object> lmap = new HashMap<String, Object>();
       
-      loginProc.login_cookie_proc(map); // map을 loginProc로 전달해 로그인 내역 저장
+      lmap.put("customerno", (int)customerVO.getCustomerno());  // map에 login의 매개변수인 customerno와 ip추가
+      lmap.put("ip", ip);
+      
+      loginProc.login_cookie_proc(lmap); // map을 loginProc로 전달해 로그인 내역 저장
       
       // -------------------------------------------------------------------
       // id 관련 쿠기 저장

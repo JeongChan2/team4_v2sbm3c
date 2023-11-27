@@ -2,11 +2,13 @@ package dev.mvc.login;
 
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 @Component("dev.mvc.login.LoginProc")
 public class LoginProc implements LoginProcInter {
+  @Autowired
   private LoginDAOInter loginDAO;
 
   @Override
