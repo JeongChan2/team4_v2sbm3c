@@ -37,14 +37,16 @@
 	  <div class='top_icon' style='float:left; margin-right: 10px;'></div>
 	  <a class="top_icon_label" href="/">NBH Management</a>
 	  
-      <c:choose>
-          <c:when test="${sessionScope.id == null}">
-              <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href="/customer/login.do">로그인</a>
-          </c:when>
-          <c:otherwise>
-              <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href='/customer/logout.do'>${sessionScope.cname } 로그아웃</a>
-          </c:otherwise>
-      </c:choose>   
+    <c:choose>
+        <c:when test="${sessionScope.id == null}">
+            <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href="/customer/login.do">로그인</a>
+        </c:when>
+        <c:otherwise>
+            <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href='/customer/logout.do'>${sessionScope.cname } 로그아웃</a>
+        </c:otherwise>
+    </c:choose>   
+    
+    <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href="C:/kd/ws_python/openai/llama_index/chatbot_oracle.py">챗봇|</a>
   </div>
 
   <div class='top_img' style='margin-top: 26px;'>     </div> <!-- <div class='top_img'></div> 종료 -->

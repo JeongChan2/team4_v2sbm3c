@@ -24,4 +24,6 @@ CREATE SEQUENCE login_seq
 INSERT INTO LOGIN(loginno, customerno, ip, logindate)
 VALUES(login_seq.nextval, 2, '0.0.0.0', sysdate);
 
-SELECT loginno, customerno, ip, logindate from LOGIN;
+SELECT loginno, customerno, ip, logindate 
+from LOGIN
+ORDER BY logindate DESC;
