@@ -37,6 +37,8 @@
   </tbody>
 </table>
 <h3>논리적 모델링</h3>
-<img src="https://github.com/JeongChan2/team4_v2sbm3c/assets/108655272/d8a6e19f-fea3-488d-98e1-219d955a3189"/><hr>
+<img src="https://github.com/JeongChan2/team4_v2sbm3c/assets/108655272/bfa2cbcb-bd70-44fc-804f-516e02072a03"/><hr>
 <h3>물리적 모델링</h3>
-<img src="https://github.com/JeongChan2/team4_v2sbm3c/assets/108655272/da3d8ec8-a86c-46fd-9e07-a4f671428fea"/>
+<img src="https://github.com/JeongChan2/team4_v2sbm3c/assets/108655272/88a7390f-3d7c-4873-9529-575c00c11078"/>
+
+
