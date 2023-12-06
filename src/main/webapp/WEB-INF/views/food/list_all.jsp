@@ -47,6 +47,22 @@
         <input type="text" class="form-control form-control-sm" name="f_fat" value="" required="required" placeholder="지방" autofocus="autofocus" 
                 class="" style="width: 50%">
      </div>
+     
+     
+     <input type="hidden" name="managerno" value="${managerVO.managerno }">
+     
+     <div style="text-align: center;">
+       <label for="resno">식당 음식 분류</label>
+       <select name="resno" id="resno">
+         <c:forEach var="resVO" items="${res_list }" varStatus="info">
+           <c:set var="resno" value="${resVO.resno }"/>
+           <c:set var="resname" value="${resVO.resname }"/>
+           <option value="${resno }">${resname }</option>
+         </c:forEach>
+       </select>
+     </div>
+     
+     
     </div>
 		 <div class="content_body_bottom" style="text-align: center;">
 		  <button type="submit" class="btn btn-primary btn-sm">등록</button>

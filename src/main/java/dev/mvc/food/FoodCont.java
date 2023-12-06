@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.customer.CustomerVO;
 import dev.mvc.manager.ManagerProcInter;
+import dev.mvc.manager.ManagerVO;
+import dev.mvc.res.ResProcInter;
+import dev.mvc.res.ResVO;
 
 
 @Controller
@@ -23,7 +27,11 @@ public class FoodCont {
   
   @Autowired
   @Qualifier("dev.mvc.manager.ManagerProc")   // "dev.mvc.admin.AdminProc"라고 명명된 클래스 (Qualifier->이름을 찾아와주는 역할)
-  private ManagerProcInter managerProc; 
+  private ManagerProcInter managerProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.res.ResProc")
+  private ResProcInter resProc;
   
   /**
   * 등록 폼
@@ -56,11 +64,20 @@ public class FoodCont {
   public ModelAndView list_all(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     
+    int managerno=0;
     if(this.managerProc.isManager(session)) {
       mav.setViewName("/food/list_all");// /WEB-INF/views/food/list_all.jsp
       
+      managerno = (int)session.getAttribute("managerno");
+      
       ArrayList<FoodVO> list = this.foodProc.list_all();
-      mav.addObject("list",list);
+      mav.addObject("list", list);
+      
+      ArrayList<ResVO> res_list = this.resProc.list_all();
+      mav.addObject("res_list", res_list);
+      
+      ManagerVO managerVO = this.managerProc.read(managerno);
+      mav.addObject("managerVO", managerVO);
     }
     else {
       mav.setViewName("/manager/login_need"); // /WEB-INF/views/manager/login_need.jsp

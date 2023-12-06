@@ -22,6 +22,10 @@ public class FoodVO {
   private String f_protein;
   /** 지방 */
   private String f_fat;
+  /** 관리자번호 FK */
+  private int managerno;
+  /** 식당번호 FK */
+  private int resno;
   
   public int getFoodno() {
     return foodno;
@@ -59,5 +63,16 @@ public class FoodVO {
   public void setF_fat(String f_fat) {
     this.f_fat = f_fat;
   }
-  
+  public int getManagerno() {
+    return managerno;
+  }
+  public void setManagerno(int managerno) {
+    this.managerno = managerno;
+  }
+  public int getResno() {
+    return resno;
+  }
+  public void setResno(int resno) {
+    this.resno = resno;
+  }
 }
