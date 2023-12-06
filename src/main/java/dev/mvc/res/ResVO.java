@@ -20,9 +20,16 @@ public class ResVO {
   private int  resstar;
   private int seqno;
   private String visible;
+  private int typenum;
   
   
-  public int getResno() {
+  public int getTypenum() {
+    return typenum;
+}
+public void setTypenum(int typenum) {
+    this.typenum = typenum;
+}
+public int getResno() {
     return resno;
   }
   public void setResno(int resno) {

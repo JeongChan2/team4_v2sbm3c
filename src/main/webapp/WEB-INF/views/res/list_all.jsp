@@ -26,29 +26,46 @@
 		
 		
 		<form name='frm' method='post' action='/res/create.do'>
-		  <div style="text-align: center;">
+		    <div style="text-align: center;">
 			  <label>식당 이름</label>
 			  <input type="text" name="resname" value="" required="required" autofocus="autofocus" 
 			          class="" style="width: 50%">
-		 </div>
-		 <div style="text-align: center;">
-			  <label>식당 주소</label>
-			  <input type="text" name="resaddress" value="" required="required" autofocus="autofocus" 
-			          class="" style="width: 50%">
-		 </div>
-		 <div style="text-align: center;">
-			  <label>식당 번호</label>
-			  <input type="text" name="resphone" value="" required="required" autofocus="autofocus" 
-			          class="" style="width: 50%">
-		 </div>
-		 <div style="text-align: center;">
-			  <label>영업 시간</label>
-			  <input type="text" name="restime" value="" required="required" autofocus="autofocus" 
-			          class="" style="width: 50%">
-		 </div>
-		 <div class="content_body_bottom" style="text-align: center;">
-		  <button type="submit" class="btn btn-primary btn-sm">등록</button>
-      <button type="button" onclick="location.href='./list_all.do'" class="btn btn-primary btn-sm">목록</button> 
+  		    </div>
+            <div style="text-align: center;">
+                  <label for="lang">식당 음식 분류</label>
+                  <select name="typenum" id="lang">
+                    <option value="1">족발, 보쌈</option>
+                    <option value="2">짬, 탕, 찌개</option>
+                    <option value="3">돈까스, 회, 일식</option>
+                    <option value="4">피자, 치킨</option>
+                    <option value="5">고기</option>
+                    <option value="6">양식</option>
+                    <option value="7">중식</option>
+                    <option value="8">백반, 죽, 국수</option>
+                    <option value="9">도시락</option>
+                    <option value="10">분식</option>
+                    <option value="11">카페, 디저트</option>
+                    <option value="12">패스트푸드</option>
+                  </select>
+             </div>
+    		 <div style="text-align: center;">
+    			  <label>식당 주소</label>
+    			  <input type="text" name="resaddress" value="" required="required" autofocus="autofocus" 
+    			          class="" style="width: 50%">
+    		 </div>
+    		 <div style="text-align: center;">
+    			  <label>식당 번호</label>
+    			  <input type="text" name="resphone" value="" required="required" autofocus="autofocus" 
+    			          class="" style="width: 50%">
+    		 </div>
+    		 <div style="text-align: center;">
+    			  <label>영업 시간</label>
+    			  <input type="text" name="restime" value="" required="required" autofocus="autofocus" 
+    			          class="" style="width: 50%">
+    		 </div>
+    		 <div class="content_body_bottom" style="text-align: center;">
+  		  <button type="submit" class="btn btn-primary btn-sm">등록</button>
+        <button type="button" onclick="location.href='./list_all.do'" class="btn btn-primary btn-sm">목록</button> 
 		 </div>
 		</form>
 
@@ -56,14 +73,16 @@
  <colgroup>
    <col style='width: 10%;'/>
    <col style='width: 40%;'/>
-   <col style='width: 15%;'/>    
-   <col style='width: 20%;'/>
+   <col style='width: 10%;'/>
+   <col style='width: 10%;'/>    
+   <col style='width: 15%;'/>
    <col style='width: 15%;'/>
   </colgroup>
   <thead>
     <tr>
      <th class="th_bs">순서</th>
      <th class="th_bs">식당 이름</th>
+     <th class="th_bs">식당 음식 분류</th>
      <th class="th_bs">식당 번호</th>
      <th class="th_bs">영업 시간</th>
      <th class="th_bs">기타</th>
@@ -75,6 +94,44 @@
 		    <tr>
 		      <td class="td_bs">${info.count }</td>
 		      <td><a href="./read.do?resno=${resno }" style="display: block;">${resVO.resname }</a></td>
+              <td class="td_bs">
+                    <c:if test="${resVO.typenum == 1}">
+                      족발, 보쌈
+                    </c:if>
+                    <c:if test="${resVO.typenum == 2}">
+                      짬, 탕, 찌개
+                    </c:if>
+                    <c:if test="${resVO.typenum == 3}">
+                      돈까스, 회, 일식
+                    </c:if>
+                    <c:if test="${resVO.typenum == 4}">
+                      피자, 치킨
+                    </c:if>
+                    <c:if test="${resVO.typenum == 5}">
+                      고기
+                    </c:if>
+                    <c:if test="${resVO.typenum == 6}">
+                      양식
+                    </c:if>
+                    <c:if test="${resVO.typenum == 7}">
+                      중식
+                    </c:if>
+                    <c:if test="${resVO.typenum == 8}">
+                      백반, 죽, 국수
+                    </c:if>
+                    <c:if test="${resVO.typenum == 9}">
+                      도시락
+                    </c:if>
+                    <c:if test="${resVO.typenum == 10}">
+                      분식
+                    </c:if>
+                    <c:if test="${resVO.typenum == 11}">
+                      카페, 디저트
+                    </c:if>
+                    <c:if test="${resVO.typenum == 12}">
+                      패스트푸드
+                    </c:if>
+              </td>
 		      <td class="td_bs">${resVO.resphone }</td>
 		      <td class="td_bs">${resVO.restime }</td>
 		      <td class="td_bs">

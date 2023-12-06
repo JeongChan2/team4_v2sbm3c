@@ -10,7 +10,12 @@
 <title>http://localhost:9092/res/list_all.do</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
+<script type="text/javascript">
+  window.onload = function(){
+  	document.getElementById('lang').value=${resVO.typenum};
+  }
 
+</script>
 
 </head>
 <body>
@@ -32,6 +37,25 @@
       <label>식당 이름</label>
       <input type="text" name="resname" value="${resVO.resname }" required="required" autofocus="autofocus" 
                  class="" style="width: 50%">
+    </div>
+    <div style="text-align: center;">
+    
+        <label for="lang">식당 음식 분류</label>
+        <select name="typenum" id="lang">
+          <option value="1">족발, 보쌈</option>
+          <option value="2">짬, 탕, 찌개</option>
+          <option value="3">돈까스, 회, 일식</option>
+          <option value="4">피자, 치킨</option>
+          <option value="5">고기</option>
+          <option value="6">양식</option>
+          <option value="7">중식</option>
+          <option value="8">백반, 죽, 국수</option>
+          <option value="9">도시락</option>
+          <option value="10">분식</option>
+          <option value="11">카페, 디저트</option>
+          <option value="12">패스트푸드</option>
+        </select>
+
     </div>
     <div>
       <label>식당 주소</label>
@@ -55,20 +79,22 @@
 </form>
 
 <table class="table table-hover">
-  <colgroup>
-      <col style='width: 10%;'/>
-      <col style='width: 40%;'/>
-      <col style='width: 15%;'/>    
-      <col style='width: 20%;'/>
-      <col style='width: 15%;'/>
+   <colgroup>
+       <col style='width: 10%;'/>
+       <col style='width: 40%;'/>
+       <col style='width: 10%;'/>
+       <col style='width: 10%;'/>    
+       <col style='width: 15%;'/>
+       <col style='width: 15%;'/>
     </colgroup>
     <thead>
       <tr>
-       <th class="th_bs">순서</th>
-       <th class="th_bs">식당 이름</th>
-       <th class="th_bs">식당 번호</th>
-       <th class="th_bs">영업 시간</th>
-       <th class="th_bs">기타</th>
+         <th class="th_bs">순서</th>
+         <th class="th_bs">식당 이름</th>
+         <th class="th_bs">식당 음식 분류</th>
+         <th class="th_bs">식당 번호</th>
+         <th class="th_bs">영업 시간</th>
+         <th class="th_bs">기타</th>
       </tr>
     </thead>
     <tbody>
@@ -78,6 +104,44 @@
         <tr>
           <td class="td_bs">${info.count }</td>
           <td><a href="./read.do?resno=${resno }" style="display: block;">${resVO.resname }</a></td>
+          <td class="td_bs">
+                    <c:if test="${resVO.typenum == 1}">
+                      족발, 보쌈
+                    </c:if>
+                    <c:if test="${resVO.typenum == 2}">
+                      짬, 탕, 찌개
+                    </c:if>
+                    <c:if test="${resVO.typenum == 3}">
+                      돈까스, 회, 일식
+                    </c:if>
+                    <c:if test="${resVO.typenum == 4}">
+                      피자, 치킨
+                    </c:if>
+                    <c:if test="${resVO.typenum == 5}">
+                      고기
+                    </c:if>
+                    <c:if test="${resVO.typenum == 6}">
+                      양식
+                    </c:if>
+                    <c:if test="${resVO.typenum == 7}">
+                      중식
+                    </c:if>
+                    <c:if test="${resVO.typenum == 8}">
+                      백반, 죽, 국수
+                    </c:if>
+                    <c:if test="${resVO.typenum == 9}">
+                      도시락
+                    </c:if>
+                    <c:if test="${resVO.typenum == 10}">
+                      분식
+                    </c:if>
+                    <c:if test="${resVO.typenum == 11}">
+                      카페, 디저트
+                    </c:if>
+                    <c:if test="${resVO.typenum == 12}">
+                      패스트푸드
+                    </c:if>
+          </td>
           <td class="td_bs">${resVO.resphone }</td>
           <td class="td_bs">${resVO.restime }</td>
           <td class="td_bs">
