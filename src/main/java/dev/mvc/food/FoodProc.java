@@ -49,5 +49,11 @@ public class FoodProc implements FoodProcInter {
     ArrayList<FoodVO> list = this.foodDAO.list_all_res(resno);
     return list;
   }
+  
+  @Override
+  public ArrayList<Food_JoinVO> list_all_resname() {
+    ArrayList<Food_JoinVO> list = this.foodDAO.list_all_resname();
+    return list;
+  }
 
 }

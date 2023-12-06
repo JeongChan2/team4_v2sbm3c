@@ -42,4 +42,10 @@ public interface FoodProcInter {
    * @return
    */
   public ArrayList<FoodVO> list_all_res(int resno);
+  
+  /**
+   * 전체 목록 resname까지 출력
+   * @return
+   */
+  public ArrayList<Food_JoinVO> list_all_resname();
 }

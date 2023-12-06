@@ -73,12 +73,13 @@
 <table class="table table-hover">
  <colgroup>
    <col style='width: 15%;'/>
-   <col style='width: 20%;'/>
+   <col style='width: 15%;'/>
    <col style='width: 15%;'/>    
    <col style='width: 10%;'/>
    <col style='width: 10%;'/>
    <col style='width: 10%;'/>
-   <col style='width: 20%;'/>
+   <col style='width: 10%;'/>
+   <col style='width: 15%;'/>
   </colgroup>
   <thead>
     <tr>
@@ -88,11 +89,12 @@
      <th class="th_bs">탄수화물</th>
      <th class="th_bs">단백질</th>
      <th class="th_bs">지방</th>
+     <th class="th_bs">식당이름</th>
      <th class="th_bs">기타</th>
       </tr>
   </thead>
   <tbody>
-    <c:forEach var="foodVO" items="${list }" varStatus="info">
+    <c:forEach var="foodVO" items="${resname_list }" varStatus="info">
       <c:set var="foodno" value="${foodVO.foodno }"/>
 		    <tr>
 		      <td class="td_bs">${info.count }</td>
@@ -101,6 +103,7 @@
 		      <td class="td_bs">${foodVO.f_carbohydrates }g</td>
 		      <td class="td_bs">${foodVO.f_protein }g</td>
 		      <td class="td_bs">${foodVO.f_fat }g</td>
+		      <td class="td_bs">${foodVO.resname }</td>
 		      <td class="td_bs">
 		        <a href="./update.do?foodno=${foodno }"><img src="/res/images/update.png" class="icon"></a>
 		        <a href="./delete.do?foodno=${foodno }"><img src="/res/images/delete.png" class="icon"></a>
