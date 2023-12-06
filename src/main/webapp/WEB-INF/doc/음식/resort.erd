@@ -1636,8 +1636,8 @@
                               <constraint>
                                 <height>-1</height>
                                 <width>-1</width>
-                                <x>1638</x>
-                                <y>1586</y>
+                                <x>1652</x>
+                                <y>1698</y>
                               </constraint>
                               <sourceConnections>
                                 <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
@@ -1650,7 +1650,7 @@
                               <description></description>
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>
-                                  <columnName>NO</columnName>
+                                  <columnName>CHATTINGNO</columnName>
                                   <logicalName>챗봇번호</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
@@ -1658,15 +1658,15 @@
                                     <supportSize>true</supportSize>
                                     <type>2</type>
                                   </columnType>
-                                  <size>10</size>
-                                  <notNull>false</notNull>
+                                  <size>8</size>
+                                  <notNull>true</notNull>
                                   <primaryKey>false</primaryKey>
                                   <description></description>
                                   <autoIncrement>false</autoIncrement>
                                   <defaultValue></defaultValue>
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
-                                  <columnName>record</columnName>
+                                  <columnName>MSG</columnName>
                                   <logicalName>챗봇기록</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>VARCHAR2</name>
@@ -1674,8 +1674,8 @@
                                     <supportSize>true</supportSize>
                                     <type>12</type>
                                   </columnType>
-                                  <size>500</size>
-                                  <notNull>false</notNull>
+                                  <size>300</size>
+                                  <notNull>true</notNull>
                                   <primaryKey>false</primaryKey>
                                   <description></description>
                                   <autoIncrement>false</autoIncrement>
@@ -1687,6 +1687,22 @@
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/references/entry/net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                   <size>10</size>
                                   <notNull>false</notNull>
+                                  <primaryKey>false</primaryKey>
+                                  <description></description>
+                                  <autoIncrement>false</autoIncrement>
+                                  <defaultValue></defaultValue>
+                                </net.java.amateras.db.visual.model.ColumnModel>
+                                <net.java.amateras.db.visual.model.ColumnModel>
+                                  <columnName>RDATE</columnName>
+                                  <logicalName>챗봇날짜</logicalName>
+                                  <columnType class="net.java.amateras.db.dialect.ColumnType">
+                                    <name>DATE</name>
+                                    <logicalName>Date</logicalName>
+                                    <supportSize>false</supportSize>
+                                    <type>91</type>
+                                  </columnType>
+                                  <size>10</size>
+                                  <notNull>true</notNull>
                                   <primaryKey>false</primaryKey>
                                   <description></description>
                                   <autoIncrement>false</autoIncrement>
