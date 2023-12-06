@@ -6,8 +6,8 @@
 <mapper namespace="dev.mvc.res.ResDAOInter">
  <!-- return : 등록한 레코드 갯수를 1을 리턴, parameterType: 전달받는 데이터-->
  <insert id="create" parameterType="dev.mvc.res.ResVO">
-    INSERT INTO RESTAURANT(resno, resname, resaddress, resphone, restime, resstar, typenum) 
-    VALUES(restaurant_seq.nextval, #{resname}, #{resaddress}, #{resphone}, #{restime}, 0, #{typenum})
+    INSERT INTO RESTAURANT(resno, resname, resaddress, resphone, restime, resstar, typenum, managerno) 
+    VALUES(restaurant_seq.nextval, #{resname}, #{resaddress}, #{resphone}, #{restime}, 0, #{typenum}, #{managerno})
  </insert>
  
  <!-- 전체 목록, SQL -> ResVO -> ArrayList<ResVO> return -->

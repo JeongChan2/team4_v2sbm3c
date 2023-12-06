@@ -28,6 +28,7 @@
 		<form name='frm' method='post' action='/res/create.do'>
 		    <div style="text-align: center;">
 			  <label>식당 이름</label>
+			  <input type="hidden" name="managerno" value="${managerno }">
 			  <input type="text" name="resname" value="" required="required" autofocus="autofocus" 
 			          class="" style="width: 50%">
   		    </div>

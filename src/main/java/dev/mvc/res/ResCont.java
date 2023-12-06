@@ -86,6 +86,9 @@ public class ResCont {
     if(this.managerProc.isManager(session)) {
       mav.setViewName("/res/list_all");// /WEB-INF/views/res/list_all.jsp
       
+      int managerno = (int)session.getAttribute("managerno");
+      mav.addObject("managerno", managerno);
+      
       ArrayList<ResVO> list = this.resProc.list_all();
       mav.addObject("list",list);
     }

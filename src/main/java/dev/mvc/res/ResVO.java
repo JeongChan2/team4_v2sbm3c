@@ -21,15 +21,16 @@ public class ResVO {
   private int seqno;
   private String visible;
   private int typenum;
+  private int managerno;
   
   
   public int getTypenum() {
     return typenum;
-}
-public void setTypenum(int typenum) {
+  }
+  public void setTypenum(int typenum) {
     this.typenum = typenum;
-}
-public int getResno() {
+  }
+  public int getResno() {
     return resno;
   }
   public void setResno(int resno) {
@@ -77,7 +78,12 @@ public int getResno() {
   public void setVisible(String visible) {
     this.visible = visible;
   }
-  
+  public int getManagerno() {
+    return managerno;
+  }
+  public void setManagerno(int managerno) {
+    this.managerno = managerno;
+  }
   @Override
   public String toString() {
     return "ResVO [resno=" + resno + ", resname=" + resname + ", resaddress=" + resaddress + ", resphone=" + resphone
