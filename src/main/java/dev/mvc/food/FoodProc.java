@@ -43,5 +43,11 @@ public class FoodProc implements FoodProcInter {
     int cnt = this.foodDAO.delete(foodno);
     return cnt;
   }
+  
+  @Override
+  public ArrayList<FoodVO> list_all_res(int resno) {
+    ArrayList<FoodVO> list = this.foodDAO.list_all_res(resno);
+    return list;
+  }
 
 }

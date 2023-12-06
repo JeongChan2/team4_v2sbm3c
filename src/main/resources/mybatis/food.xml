@@ -33,5 +33,12 @@
    <delete id="delete" parameterType="int">
       DELETE FROM food where foodno = #{foodno}
    </delete>
+   
+   <select id="list_all_res" resultType="dev.mvc.food.FoodVO">
+      SELECT foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat
+      FROM food
+      WHERE resno = #{resno}
+      ORDER BY foodno ASC
+   </select>
 
 </mapper> 

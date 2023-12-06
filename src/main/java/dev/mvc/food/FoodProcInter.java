@@ -36,4 +36,10 @@ public interface FoodProcInter {
    * @param 삭제할 레코드 PK 번호
    */
   public int delete(int foodno);
+  
+  /**
+   * 전체 목록 res
+   * @return
+   */
+  public ArrayList<FoodVO> list_all_res(int resno);
 }

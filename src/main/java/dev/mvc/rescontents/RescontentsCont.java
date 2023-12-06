@@ -72,7 +72,7 @@ public class RescontentsCont {
     ResVO resVO = this.resProc.read(resno); // create.jsp에 카테고리 정보를 출력하기위한 목적
     mav.addObject("resVO", resVO);
     
-    ArrayList<FoodVO> list = this.foodProc.list_all();  // 음식 리스트를 받아옴
+    ArrayList<FoodVO> list = this.foodProc.list_all_res(resno);  // 음식 리스트를 받아옴
     mav.addObject("list", list);
     
 //    request.setAttribute("resVO", resVO);
