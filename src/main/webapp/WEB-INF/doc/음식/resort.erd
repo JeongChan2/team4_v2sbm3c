@@ -23,8 +23,8 @@
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>1801</x>
-        <y>1585</y>
+        <x>1824</x>
+        <y>1586</y>
       </constraint>
       <sourceConnections/>
       <targetConnections/>
@@ -1532,7 +1532,7 @@
                               <constraint>
                                 <height>-1</height>
                                 <width>-1</width>
-                                <x>1438</x>
+                                <x>1429</x>
                                 <y>1572</y>
                               </constraint>
                               <sourceConnections>
@@ -1636,8 +1636,8 @@
                               <constraint>
                                 <height>-1</height>
                                 <width>-1</width>
-                                <x>1652</x>
-                                <y>1698</y>
+                                <x>1623</x>
+                                <y>1570</y>
                               </constraint>
                               <sourceConnections>
                                 <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
@@ -2279,7 +2279,7 @@
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>1799</x>
+        <x>1830</x>
         <y>1550</y>
       </constraint>
       <sourceConnections/>
@@ -2878,7 +2878,7 @@
   </children>
   <dommains/>
   <dialectName>Oracle</dialectName>
-  <logicalMode>true</logicalMode>
+  <logicalMode>false</logicalMode>
   <jarFile>C:\kd\setup\ojdbc8.jar</jarFile>
   <jdbcDriver>oracle.jdbc.driver.OracleDriver</jdbcDriver>
   <jdbcUrl>jdbc:oracle:thin:@localhost:1521:XE</jdbcUrl>
