@@ -1,8 +1,14 @@
 # team4_v2sbm3c
 <h2>프로젝트 소개</h2>
+<ul style='list-style-type: square;'>
+  <li>
+    <h3>음식점 업주 가게 관리 웹사이트 - 부가기능 '영양정보제공'</h3>
+    <hr>
+  </li>
+</ul>
 <ul>
   <li>
-    신체 정보에 대한 정보를 받아, 필요한 영양소를 계산해서 하루 동안 섭취해야 될 영양소를 관리해주는 사이트
+    신체 정보에 대한 정보를 받아, 필요한 영양소를 계산해서 하루 동안 섭취해야 될 영양소를 관리
   </li>
   <li>
     현재 남은 섭취 영양소를 고려해서 메뉴를 추천해줍니다.
@@ -37,8 +43,10 @@
   </tbody>
 </table>
 <h3>논리적 모델링</h3>
-<img src="https://github.com/JeongChan2/team4_v2sbm3c/assets/108655272/bfa2cbcb-bd70-44fc-804f-516e02072a03"/><hr>
+<img src="https://github.com/JeongChan2/team4_v2sbm3c/assets/108655272/1b1c40cd-e775-430f-bac0-61601a59534f"/><hr>
 <h3>물리적 모델링</h3>
-<img src="https://github.com/JeongChan2/team4_v2sbm3c/assets/108655272/88a7390f-3d7c-4873-9529-575c00c11078"/>
+<img src="https://github.com/JeongChan2/team4_v2sbm3c/assets/108655272/083de880-3067-4086-8606-583b4c549b59"/>
+
+
 
 
