@@ -10,7 +10,9 @@ CREATE TABLE EXPENSE(
 		SUPPLIERNO                    		NUMBER(10)		 NULL ,
 		MANAGERNO                     		NUMBER(10)		 NULL ,
 		RESNO                         		NUMBER(10)		 NULL,
-        FOREIGN KEY (resno) REFERENCES restaurant (resno)
+        FOREIGN KEY (resno) REFERENCES restaurant (resno),
+        FOREIGN KEY (managerno) REFERENCES manager (managerno),
+        FOREIGN KEY (supplierno) REFERENCES supplier (supplierno)
 );
 
 DROP SEQUENCE EXPENSE_SEQ;
@@ -33,23 +35,26 @@ COMMENT ON COLUMN EXPENSE.MANAGERNO is '관리자 번호';
 COMMENT ON COLUMN EXPENSE.RESNO is '식당번호';
 
 1. 등록
-INSERT INTO food(foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat)
-VALUES (food_seq.nextval, '싸이버거', '594', '60', '28', '27');
+INSERT INTO expense(expenseno, name, cnt, price, rdate, supplierno, managerno, resno)
+VALUES (expense_seq.nextval, '빗자루', 5, 30000, sysdate, 1, 1, 1);
 
-2. 목록
-SELECT foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat
-FROM food
-ORDER BY foodno ASC;
+2. 관리자별 목록
+SELECT expenseno, name, cnt, price, rdate, supplierno, managerno, resno
+FROM expense
+WHERE managerno = 1
+ORDER BY expenseno ASC;
 
-3. 조회
-SELECT foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat
-FROM food
-WHERE foodname = '싸이버거';
+3. 조회 X
+SELECT expenseno, name, cnt, price, rdate, supplierno, managerno, resno
+FROM expense
+WHERE expenseno = 1;
 
 4. 수정
-UPDATE food 
-SET foodname='불싸이버거', f_calories = 543, f_carbohydrates = 76, f_protein = 28, f_fat =7
-WHERE foodname='싸이버거';
+UPDATE expense 
+SET name = '과자', cnt = 6, price = 25000, supplierno =1
+WHERE expenseno=1;
 
 5. 삭제
-DELETE FROM food where foodno = 3;
+DELETE FROM expense where expenseno = 1;
+
+commit;

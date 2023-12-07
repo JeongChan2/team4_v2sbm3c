@@ -25,7 +25,9 @@ import com.zaxxer.hikari.HikariDataSource;
                            "dev.mvc.requirement",
                            "dev.mvc.take",
                            "dev.mvc.food",
-                           "dev.mvc.login"})
+                           "dev.mvc.login",
+                           "dev.mvc.expense",
+                           "dev.mvc.supplier"})
 public class DatabaseConfiguration {
     
     @Autowired

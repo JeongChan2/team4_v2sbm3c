@@ -108,6 +108,7 @@
                     <a class="dropdown-item" href='/res/list_all.do'>카테고리 목록</a>
                     <a class="dropdown-item" href='/food/list_all.do'>음식 목록</a>
                     <a class="dropdown-item" href='/customer/list.do'>회원 목록</a>
+                    <a class="dropdown-item" href='/supplier/list_all_managerno.do'>공급업체 목록</a>
                     <a class="dropdown-item" href='/manager/logout.do'>관리자 ${sessionScope.manager_id } 로그아웃</a>
                   </div>
                 </li>
