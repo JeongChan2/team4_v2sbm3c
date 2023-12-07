@@ -68,7 +68,7 @@ SELECT e.expenseno, e.name, e.cnt, e.price, e.rdate, s.name AS supplier_name, r.
 FROM expense e
 INNER JOIN restaurant r ON e.resno = r.resno
 INNER JOIN supplier s ON e.supplierno = s.supplierno
-WHERE e.managerno = 1
+WHERE e.managerno = 1 and e.resno = 1
 ORDER BY expenseno ASC;
 
 commit;
