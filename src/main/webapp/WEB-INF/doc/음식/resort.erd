@@ -1102,9 +1102,9 @@
                   </columns>
                   <indices/>
                   <backgroundColor>
-                    <red>255</red>
+                    <red>128</red>
                     <green>255</green>
-                    <blue>206</blue>
+                    <blue>255</blue>
                   </backgroundColor>
                   <sql></sql>
                 </source>
@@ -1136,8 +1136,8 @@
                   <constraint>
                     <height>-1</height>
                     <width>-1</width>
-                    <x>727</x>
-                    <y>570</y>
+                    <x>581</x>
+                    <y>567</y>
                   </constraint>
                   <sourceConnections>
                     <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
@@ -1878,9 +1878,9 @@
                               </columns>
                               <indices/>
                               <backgroundColor>
-                                <red>255</red>
+                                <red>198</red>
                                 <green>255</green>
-                                <blue>206</blue>
+                                <blue>198</blue>
                               </backgroundColor>
                               <sql></sql>
                             </source>
@@ -2355,8 +2355,8 @@
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>824</x>
-        <y>824</y>
+        <x>850</x>
+        <y>820</y>
       </constraint>
       <sourceConnections/>
       <targetConnections/>
@@ -2387,8 +2387,8 @@
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>875</x>
-        <y>823</y>
+        <x>899</x>
+        <y>819</y>
       </constraint>
       <sourceConnections/>
       <targetConnections/>
@@ -2415,8 +2415,8 @@
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>927</x>
-        <y>823</y>
+        <x>950</x>
+        <y>819</y>
       </constraint>
       <sourceConnections/>
       <targetConnections/>
@@ -2480,7 +2480,7 @@
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>988</x>
+        <x>1025</x>
         <y>822</y>
       </constraint>
       <sourceConnections/>

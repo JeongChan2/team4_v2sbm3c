@@ -2,14 +2,14 @@ package dev.mvc.expense;
 
 public class ExpenseVO {
 //  CREATE TABLE EXPENSE(
-//      EXPENSENO                         NUMBER(10)     NOT NULL       PRIMARY KEY,
-//      NAME                              VARCHAR2(50)     NOT NULL,
-//      CNT                               NUMBER(5)    DEFAULT 0     NOT NULL,
-//      PRICE                             NUMBER(10)     NOT NULL,
-//      RDATE                             DATE     NOT NULL,
-//      SUPPLIERNO                        NUMBER(10)     NULL ,
-//      MANAGERNO                         NUMBER(10)     NULL ,
-//      RESNO                             NUMBER(10)     NULL,
+//      EXPENSENO                         NUMBER(10)      NOT NULL    PRIMARY KEY,
+//      NAME                              VARCHAR2(50)    NOT NULL,
+//      CNT                               NUMBER(5)       DEFAULT 0   NOT NULL,
+//      PRICE                             NUMBER(10)      NOT NULL,
+//      RDATE                             DATE            NOT NULL,
+//      SUPPLIERNO                        NUMBER(10)      NOT NULL,
+//      MANAGERNO                         NUMBER(10)      NOT NULL,
+//      RESNO                             NUMBER(10)      NOT NULL,
 //      FOREIGN KEY (resno) REFERENCES restaurant (resno),
 //      FOREIGN KEY (managerno) REFERENCES manager (managerno),
 //      FOREIGN KEY (supplierno) REFERENCES supplier (supplierno)
@@ -20,13 +20,13 @@ public class ExpenseVO {
   /** 이름 */
   private String name;
   /** 개수 */
-  private String cnt;
+  private int cnt;
   /** 지출금액 */
-  private String price;
+  private int price;
   /** 지출날짜 */
   private String rdate;
   /** 업체번호 */
-  private String supplierno;
+  private int supplierno;
   /** 관리자번호 FK */
   private int managerno;
   /** 식당번호 FK */
@@ -44,16 +44,16 @@ public class ExpenseVO {
   public void setName(String name) {
     this.name = name;
   }
-  public String getCnt() {
+  public int getCnt() {
     return cnt;
   }
-  public void setCnt(String cnt) {
+  public void setCnt(int cnt) {
     this.cnt = cnt;
   }
-  public String getPrice() {
+  public int getPrice() {
     return price;
   }
-  public void setPrice(String price) {
+  public void setPrice(int price) {
     this.price = price;
   }
   public String getRdate() {
@@ -62,10 +62,10 @@ public class ExpenseVO {
   public void setRdate(String rdate) {
     this.rdate = rdate;
   }
-  public String getSupplierno() {
+  public int getSupplierno() {
     return supplierno;
   }
-  public void setSupplierno(String supplierno) {
+  public void setSupplierno(int supplierno) {
     this.supplierno = supplierno;
   }
   public int getManagerno() {

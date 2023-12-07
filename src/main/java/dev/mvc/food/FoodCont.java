@@ -73,7 +73,7 @@ public class FoodCont {
       ArrayList<FoodVO> list = this.foodProc.list_all();
       mav.addObject("list", list);
       
-      ArrayList<Food_JoinVO> resname_list = this.foodProc.list_all_resname();
+      ArrayList<Food_JoinVO> resname_list = this.foodProc.list_all_resname(managerno);
       mav.addObject("resname_list", resname_list);
       
       ArrayList<ResVO> res_list = this.resProc.list_all();

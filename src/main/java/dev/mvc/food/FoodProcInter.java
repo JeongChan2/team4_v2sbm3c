@@ -47,5 +47,5 @@ public interface FoodProcInter {
    * 전체 목록 resname까지 출력
    * @return
    */
-  public ArrayList<Food_JoinVO> list_all_resname();
+  public ArrayList<Food_JoinVO> list_all_resname(int managerno);
 }

@@ -1,11 +1,12 @@
 /**********************************/
 /* Table Name: 공급업체 */
 /**********************************/
+DROP TABLE SUPPLIER
 CREATE TABLE SUPPLIER(
-		SUPPLIERNO                    		NUMBER(10)		 NOT NULL   PRIMARY KEY,
-		NAME                          		VARCHAR2(50)		 NOT NULL,
-		RDATE                         		DATE		 NOT NULL,
-		MANAGERNO                     		NUMBER(10)		 NULL,
+		SUPPLIERNO                    		NUMBER(10)		NOT NULL   PRIMARY KEY,
+		NAME                          		VARCHAR2(50)	NOT NULL,
+		RDATE                         		DATE		    NOT NULL,
+		MANAGERNO                     		NUMBER(10)		NOT NULL,
         FOREIGN KEY (MANAGERNO) REFERENCES manager (MANAGERNO)
 );
 
@@ -46,6 +47,6 @@ FROM supplier
 WHERE supplierno = 1;
 
 4. 삭제
-DELETE FROM supplier where supplierno = 1;
+DELETE FROM supplier where supplierno = 4;
 
 commit;

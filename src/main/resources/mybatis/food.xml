@@ -47,6 +47,7 @@
       SELECT food.foodno, food.foodname, food.f_calories, food.f_carbohydrates, food.f_protein, food.f_fat, restaurant.resname
       FROM food
       INNER JOIN restaurant ON food.resno = restaurant.resno
+      WHERE food.managerno = #{managerno}
    </select>
 
 </mapper> 

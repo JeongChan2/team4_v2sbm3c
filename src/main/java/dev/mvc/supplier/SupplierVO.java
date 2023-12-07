@@ -2,11 +2,10 @@ package dev.mvc.supplier;
 
 public class SupplierVO {
 //  CREATE TABLE SUPPLIER(
-//      SUPPLIERNO                        NUMBER(10)     NOT NULL   PRIMARY KEY,
-//      NAME                              VARCHAR2(50)     NOT NULL,
-//      RDATE                             DATE     NOT NULL,
-//      MANAGERNO                         NUMBER(10)     NULL,
-//  
+//      SUPPLIERNO                        NUMBER(10)    NOT NULL   PRIMARY KEY,
+//      NAME                              VARCHAR2(50)  NOT NULL,
+//      RDATE                             DATE          NOT NULL,
+//      MANAGERNO                         NUMBER(10)    NOT NULL,
 //      FOREIGN KEY (MANAGERNO) REFERENCES manager (MANAGERNO)
 //  );
   /** 번호 */

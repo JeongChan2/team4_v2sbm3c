@@ -39,7 +39,7 @@ INSERT INTO food(foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat
 VALUES (food_seq.nextval, '제육볶음', '572', '31', '40', '33');
 
 2. 목록
-SELECT foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat
+SELECT foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat, resno
 FROM food
 ORDER BY foodno ASC;
 
@@ -59,5 +59,11 @@ WHERE foodname='싸이버거';
 
 5. 삭제
 DELETE FROM food where foodno = 3;
+
+6. 관리자 번호로 전체목록
+SELECT food.foodno, food.foodname, food.f_calories, food.f_carbohydrates, food.f_protein, food.f_fat, restaurant.resname
+FROM food
+INNER JOIN restaurant ON food.resno = restaurant.resno
+WHERE food.managerno = 1
 
 COMMIT;
