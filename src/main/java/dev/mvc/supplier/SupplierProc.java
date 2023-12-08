@@ -38,4 +38,10 @@ public class SupplierProc implements SupplierProcInter {
     int cnt = this.supplierDAO.delete(supplierno);
     return cnt;
   }
+  
+  @Override
+  public int update(SupplierVO supplierVO) {
+    int cnt = this.supplierDAO.update(supplierVO);
+    return cnt;
+  }
 }

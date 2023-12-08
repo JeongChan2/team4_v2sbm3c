@@ -25,6 +25,12 @@ public class ResProc implements ResProcInter {
     
     return list;
   }
+  
+  @Override
+  public ArrayList<ResVO> list_all_managerno(int managerno) {
+    ArrayList<ResVO> list = this.resDAO.list_all_managerno(managerno);
+    return list;
+  }
 
   @Override
   public ResVO read(int resno) {

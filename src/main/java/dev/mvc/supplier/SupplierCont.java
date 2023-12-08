@@ -116,4 +116,52 @@ public class SupplierCont {
     mav.addObject("cnt",cnt); // request.setAttribute("cnt",cnt); 와 같은 기능을 해준다.
     return mav;
   }
+  
+  /**
+   * 수정
+   * http://localhost:9093/supplier/update.do?supplierno=2
+   * @return
+   */
+  @RequestMapping(value="/supplier/update.do",method = RequestMethod.GET)
+  public ModelAndView update(HttpSession session,int supplierno) {  // int resno = (int)request.getParameter("resno"); 이걸 spring이 자동으로 해준다.
+    ModelAndView mav = new ModelAndView();
+    
+    int managerno = 0;
+    if(this.managerProc.isManager(session)) {
+      mav.setViewName("/supplier/list_all_update");// /WEB-INF/views/res/update.jsp
+      
+      SupplierVO supplierVO = this.supplierProc.read(supplierno);
+      mav.addObject("supplierVO", supplierVO);
+      
+      managerno = (int)session.getAttribute("managerno");
+
+      ArrayList<SupplierVO> list = this.supplierProc.list_all_managerno(managerno);
+      mav.addObject("list",list);
+    }
+    else {
+      mav.setViewName("/manager/login_need");
+    }
+    
+    return mav;
+  }
+  
+  // FORM 데이터 처리 http://localhost:9093/supplier/update.do
+  @RequestMapping(value="/supplier/update.do",method = RequestMethod.POST)
+  public ModelAndView update(SupplierVO supplierVO) { // 자동으로 FoodDAO 객체가 생성되고 Form의 값이 할당됨
+    ModelAndView mav = new ModelAndView();
+        
+    int cnt = this.supplierProc.update(supplierVO); // 수정 처리
+    System.out.println("-> cnt:"+cnt);
+    
+    if(cnt == 1) {
+      mav.setViewName("redirect:/supplier/list_all_managerno.do"); 
+    }
+    else {
+      mav.addObject("code","update_fail");     
+      mav.setViewName("/supplier/msg");  // /WEB-INF/views/res/msg.jsp
+    }
+    
+    mav.addObject("cnt",cnt); // request.setAttribute("cnt",cnt); 와 같은 기능을 해준다.
+    return mav;
+  }
 }

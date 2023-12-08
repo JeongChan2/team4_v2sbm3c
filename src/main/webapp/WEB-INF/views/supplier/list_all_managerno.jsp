@@ -64,6 +64,7 @@
 		      <td class="td_bs">${supplierVO.name }</a></td>
 		      <td class="td_bs">${supplierVO.rdate }</td>
 		      <td class="td_bs">
+		        <a href="./update.do?supplierno=${supplierno }"><img src="/res/images/update.png" class="icon"></a>
 		        <a href="./delete.do?supplierno=${supplierno }"><img src="/res/images/delete.png" class="icon"></a>
 		      </td>
 		    </tr>

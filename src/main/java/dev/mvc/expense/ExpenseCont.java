@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.res.ResProcInter;
+import dev.mvc.res.ResVO;
 import dev.mvc.supplier.SupplierProcInter;
 import dev.mvc.supplier.SupplierVO;
 
@@ -75,6 +76,9 @@ public class ExpenseCont {
        ArrayList<SupplierVO> supplier_list = this.supplierProc.list_all_managerno(managerno);
        mav.addObject("supplier_list", supplier_list);
        
+       ArrayList<ResVO> res_list = this.resProc.list_all_managerno(managerno);
+       mav.addObject("res_list", res_list);
+       
        ArrayList<Expense_JoinVO> list = this.expenseProc.list_all_names(managerno);
        mav.addObject("list", list);
      }
@@ -102,6 +106,9 @@ public class ExpenseCont {
        
        managerno = (int)session.getAttribute("managerno");
        mav.addObject("managerno", managerno);
+       
+       ArrayList<ResVO> res_list = this.resProc.list_all_managerno(managerno);
+       mav.addObject("res_list", res_list);
        
        ArrayList<SupplierVO> supplier_list = this.supplierProc.list_all_managerno(managerno);
        mav.addObject("supplier_list", supplier_list);

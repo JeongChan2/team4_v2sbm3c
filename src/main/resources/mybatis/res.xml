@@ -28,6 +28,14 @@
     FROM RESTAURANT ORDER BY seqno ASC
  </select>
  
+  <!-- 관리자 번호를 통해 출력 모드 적용 -->
+  <select id="list_all_managerno" resultType="dev.mvc.res.ResVO">
+    SELECT resno, resname, resaddress, resphone, restime, resstar, seqno, visible, typenum, managerno
+    FROM RESTAURANT
+    WHERE managerno = #{managerno}
+    ORDER BY seqno ASC
+ </select>
+ 
      <!-- 비회원/회원 SELECTE LIST -->
   <select id="list_all_y" resultType="dev.mvc.res.ResVO">
     SELECT resno, resname, resaddress, resphone, restime, resstar, seqno, visible, typenum

@@ -31,4 +31,11 @@ public interface SupplierDAOInter {
    * @return 삭제한 레코드 갯수
    */
   public int delete(int supplierno);
+  
+  /**
+   * 수정
+   * @param SupplierVO
+   * @return
+   */
+  public int update(SupplierVO supplierVO);
 }

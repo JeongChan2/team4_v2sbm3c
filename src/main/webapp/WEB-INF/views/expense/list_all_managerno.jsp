@@ -41,7 +41,17 @@
      </div>
 
      <input type="hidden" name="managerno" value="${managerno }">
-     <input type="hidden" name="resno" value="${managerno }"> <!-- resno = managerno -->
+     
+     <div style="text-align: center;">
+       <label for="resno">식당 분류</label>
+       <select name="resno" id="resno">
+         <c:forEach var="resVO" items="${res_list }" varStatus="info">
+           <c:set var="resno" value="${resVO.resno }"/>
+           <c:set var="resname" value="${resVO.resname }"/>
+           <option value="${resno }">${resname }</option>
+         </c:forEach>
+       </select>
+     </div>
      
      <div style="text-align: center;">
        <label for="supplierno">공급업체 분류</label>

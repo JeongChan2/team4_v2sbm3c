@@ -19,6 +19,12 @@ public interface ResDAOInter {
   public ArrayList<ResVO> list_all();
   
   /**
+   * 관리자별 전체 목록
+   * @return
+   */
+  public ArrayList<ResVO> list_all_managerno(int managerno);
+  
+  /**
    * 조회
    * @param resno
    * @return

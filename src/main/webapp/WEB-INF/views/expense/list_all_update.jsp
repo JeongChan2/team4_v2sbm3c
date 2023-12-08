@@ -18,7 +18,7 @@
     <div class='title_line'>지출내역 수정 목록</div>
 
 		<aside class="aside_right">
-		  <a href="#">등록</a>
+		  <a href="./list_all_managerno.do">등록</a>
 		  <span class='menu_divide' >│</span>
 		  <a href="javascript:location.reload();">새로고침</a>
 		</aside>
@@ -40,6 +40,17 @@
 	        <input type="text" class="form-control form-control-sm" name="price" value="${expenseVO.price }" required="required" placeholder="지출금액" autofocus="autofocus" 
 	                class="" style="width: 50%">
 		    </div>
+		    
+		    <div style="text-align: center;">
+         <label for="resno">식당 분류</label>
+         <select name="resno" id="resno">
+           <c:forEach var="resVO" items="${res_list }" varStatus="info">
+             <c:set var="resno" value="${resVO.resno }"/>
+             <c:set var="resname" value="${resVO.resname }"/>
+             <option value="${resno }">${resname }</option>
+           </c:forEach>
+         </select>
+       </div>
 		    
 		    <div style="text-align: center;">
        <label for="supplierno">공급업체 분류</label>

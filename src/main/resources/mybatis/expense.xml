@@ -25,7 +25,7 @@
   <!-- return : 수정한 레코드 갯수를 1을 리턴, parameterType: 수정할 레코드 정보-->
   <update id="update" parameterType="dev.mvc.expense.ExpenseVO">
     UPDATE expense 
-    SET name = #{name}, cnt = #{cnt}, price = #{price}, supplierno = #{supplierno}
+    SET name = #{name}, cnt = #{cnt}, price = #{price}, supplierno = #{supplierno}, resno = #{resno}
     WHERE expenseno=#{expenseno}
   </update>
   
@@ -40,7 +40,7 @@
       FROM expense e
       INNER JOIN restaurant r ON e.resno = r.resno
       INNER JOIN supplier s ON e.supplierno = s.supplierno
-      WHERE e.managerno = #{managerno} AND e.resno = #{managerno}
+      WHERE e.managerno = #{managerno}
       ORDER BY expenseno ASC
    </select>
 
