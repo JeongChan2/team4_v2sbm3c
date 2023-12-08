@@ -36,10 +36,10 @@ public class HomeCont {
     System.out.println("->home()");
     
     ModelAndView mav = new ModelAndView();
-    mav.setViewName("/index");// WEB-INF/views/index.jsp
+    //mav.setViewName("/index");// WEB-INF/views/index.jsp
     // spring.mvc.view.prefix=/WEB-INF/views/
     // spring.mvc.view.suffix=.jsp
-//    mav.setViewName("/rescontents/list_all_gallery"); // /WEB-INF/views/rescontents/list_all_gallery.jsp
+    mav.setViewName("/rescontents/list_all_gallery"); // /WEB-INF/views/rescontents/list_all_gallery.jsp
     
     ArrayList<RescontentsVO> list = this.rescontentsProc.list_all();
     mav.addObject("list", list);

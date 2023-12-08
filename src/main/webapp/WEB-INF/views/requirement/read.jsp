@@ -14,6 +14,9 @@
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
 <script type="text/javascript">
+  window.onload = function(){
+    document.getElementById('lang').value=${recommnedVO.typenum};
+  }
 
   function send() { // 섭취 영양소 갱신
     document.getElementById('frm').submit(); // required="required" 작동 안됨.
@@ -68,6 +71,38 @@
 	      </div>
 
 
+          <div style='margin-top: 10px; text-align: center;'>
+            <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
+              <label>
+                <input type='text' class="input_form" name='calories' id='calories' value='' required="required" placeholder="칼로리" autofocus="autofocus">
+              </label>
+            </div>
+            
+            <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
+              <label>
+                <input type='text' class="input_form" name='carbohydrates' id='carbohydrates' value='' required="required" placeholder="탄수화물" autofocus="autofocus">
+              </label>
+            </div>
+            
+            <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
+              <label>
+                <input type='text' class="input_form" name='protein' id='protein' value='' required="required" placeholder="단백질" autofocus="autofocus">
+              </label>
+            </div>
+            
+            <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
+              <label>
+                <input type='text' class="input_form" name='fat' id='fat' value='' required="required" placeholder="지방" autofocus="autofocus">
+              </label>
+            </div>
+            
+            <div style='margin-bottom: 20px;'>
+              <button type="button" id='btn_send' onclick="send()" class="input_button_form input_submit">추가</button>
+              <button type="button" onclick="history.back()" class="input_button_form input_submit">취소</button>
+            </div> 
+          </div>
+
+
 	      <div class='box basic-drop-shadow' style='margin-top:20px ; margin-right: 300px;'>
 	        <div style='width: 150px; text-align: center; margin-bottom: 10px'>
             <label><b>현재 섭취량</b></label>
@@ -93,40 +128,33 @@
 	      
       </div>
       
-      <div style='margin-top: 100px; text-align: center;'>
-        <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
-          <label>
-            <input type='text' class="input_form" name='calories' id='calories' value='' required="required" placeholder="칼로리" autofocus="autofocus">
-          </label>
-        </div>
-        
-        <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
-          <label>
-            <input type='text' class="input_form" name='carbohydrates' id='carbohydrates' value='' required="required" placeholder="탄수화물" autofocus="autofocus">
-          </label>
-        </div>
-        
-        <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
-          <label>
-            <input type='text' class="input_form" name='protein' id='protein' value='' required="required" placeholder="단백질" autofocus="autofocus">
-          </label>
-        </div>
-        
-        <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
-          <label>
-            <input type='text' class="input_form" name='fat' id='fat' value='' required="required" placeholder="지방" autofocus="autofocus">
-          </label>
-        </div>
-        
-        <div style='margin-bottom: 20px;'>
-          <button type="button" id='btn_send' onclick="send()" class="input_button_form input_submit">추가</button>
-          <button type="button" onclick="history.back()" class="input_button_form input_submit">취소</button>
-        </div> 
-      </div>
+      
       
   </form>
   </div>
- 
+  <br>
+  <div style="width: 100%; margin: 0px auto; float: left">
+    <div style="text-align: center;">
+    
+        <label>${sessionScope.cname} 님의 메뉴 추천 항목 :</label>
+        <select name="typenum" id="lang" disabled>
+          <option value="1">족발, 보쌈</option>
+          <option value="2">짬, 탕, 찌개</option>
+          <option value="3">돈까스, 회, 일식</option>
+          <option value="4">피자, 치킨</option>
+          <option value="5">고기</option>
+          <option value="6">양식</option>
+          <option value="7">중식</option>
+          <option value="8">백반, 죽, 국수</option>
+          <option value="9">도시락</option>
+          <option value="10">분식</option>
+          <option value="11">카페, 디저트</option>
+          <option value="12">패스트푸드</option>
+        </select>
+
+    </div>
+    <br><br>
+  </div>
   <table class="table table-hover">
     <colgroup>
       <col style="width: 10%;"></col>

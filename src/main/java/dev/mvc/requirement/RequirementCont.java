@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.customer.CustomerProcInter;
 import dev.mvc.customer.CustomerVO;
 import dev.mvc.manager.ManagerProcInter;
+import dev.mvc.recommend.RecommendProcInter;
+import dev.mvc.recommend.RecommendVO;
 import dev.mvc.res.ResProcInter;
 import dev.mvc.res.ResVO;
 import dev.mvc.rescontents.JoinVO;
@@ -32,6 +34,10 @@ public class RequirementCont {
   @Autowired
   @Qualifier("dev.mvc.requirement.RequirementProc") // @Component("dev.mvc.requirement.RequirementProc")
   private RequirementProcInter requirementProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.recommend.RecommendProc") // @Component("dev.mvc.requirement.RequirementProc")
+  private RecommendProcInter recommendProc;
   
   @Autowired
   @Qualifier("dev.mvc.customer.CustomerProc")
@@ -193,6 +199,10 @@ public class RequirementCont {
        
        RequirementVO requirementVO = this.requirementProc.read(customerno);
        mav.addObject("requirementVO", requirementVO);
+       RecommendVO recommnedVO = this.recommendProc.read(customerno);
+       mav.addObject("recommnedVO", recommnedVO);
+       
+       
        mav.setViewName("/requirement/read"); // /requirement/read.jsp
        
      } else {
@@ -246,5 +256,14 @@ public class RequirementCont {
      mav.setViewName(url); // forward
      
      return mav; // forward
+   }
+   
+   public ModelAndView delete(HttpSession session, HttpServletRequest request, int customerno) {
+       ModelAndView mav = new ModelAndView();
+       
+       mav.setViewName("/requirement/read"); // forward
+       
+       return mav; // forward
+       
    }
 }
