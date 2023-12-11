@@ -25,6 +25,15 @@ public class Food_JoinVO {
   private String f_fat;
   /** 식당이름 FK */
   private String resname;
+  /** 가격 */
+  private int price;
+  
+  public int getPrice() {
+    return price;
+  }
+  public void setPrice(int price) {
+    this.price = price;
+  }
   public int getFoodno() {
     return foodno;
   }
