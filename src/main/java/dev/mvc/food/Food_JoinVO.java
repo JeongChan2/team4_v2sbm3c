@@ -27,7 +27,16 @@ public class Food_JoinVO {
   private String resname;
   /** 가격 */
   private int price;
+  /** 가격 */
+  private int resno;
   
+  
+  public int getResno() {
+    return resno;
+  }
+  public void setResno(int resno) {
+    this.resno = resno;
+  }
   public int getPrice() {
     return price;
   }
