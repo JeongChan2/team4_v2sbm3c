@@ -44,7 +44,7 @@
    
    <!-- 식당이름까지 같이 가져오는 list_all-->
    <select id="list_all_resname" resultType="dev.mvc.food.Food_JoinVO">
-      SELECT food.foodno, food.foodname, food.f_calories, food.f_carbohydrates, food.f_protein, food.f_fat, restaurant.resname, price
+      SELECT food.foodno, food.foodname, food.f_calories, food.f_carbohydrates, food.f_protein, food.f_fat, restaurant.resname, food.price, food.resno
       FROM food
       INNER JOIN restaurant ON food.resno = restaurant.resno
       WHERE food.managerno = #{managerno}
