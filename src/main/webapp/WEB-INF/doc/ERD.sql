@@ -33,21 +33,21 @@ INSERT INTO SCORE(SCORENO, SCORE, RDATE, RESCONTENTSNO, CUSTOMERNO)
 VALUES(SCORE_SEQ.nextval, 3, sysdate, 2,2);
 
 -- READ; LIST
-SELECT * FROM RESTAURANT;
-SELECT resno, resname, resaddress, resphone, restime, resstar, seqno FROM RESTAURANT ORDER BY resno ASC;
+SELECT * FROM SCORE;
+SELECT SCORENO, SCORE, RDATE, RESCONTENTSNO, CUSTOMERNO FROM SCORE ORDER BY SCORENO ASC;
 
 -- SELECT 조회
-SELECT resno, resname, resaddress, resphone, restime, resstar 
-FROM RESTAURANT
-WHERE resno = 1;
+SELECT SCORENO, SCORE, RDATE, RESCONTENTSNO, CUSTOMERNO 
+FROM SCORE
+WHERE CUSTOMERNO = 2;
 
 -- DELETE
-DELETE FROM RESTAURANT WHERE resno = 3;
+DELETE FROM SCORE WHERE CUSTOMERNO = 2;
 
 -- UPDATE
-UPDATE RESTAURANT 
-SET resname = '테스트 성공', resaddress = '테스트 성공', resphone = '테스트 성공', restime = '테스트 성공'
-WHERE resno = 7;
+UPDATE SCORE 
+SET SCORE = '테스트 성공', resaddress = '테스트 성공', resphone = '테스트 성공', restime = '테스트 성공'
+WHERE RESCONTENTSNO = 2 and CUSTOMERNO = 2;
 
 
 
