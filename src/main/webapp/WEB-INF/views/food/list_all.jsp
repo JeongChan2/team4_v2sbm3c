@@ -32,6 +32,10 @@
 			          class="" style="width: 50%">
 		 </div>
 		 <div style="text-align: center;">
+        <input type="text" class="form-control form-control-sm" name="price" value="" required="required" placeholder="가격" autofocus="autofocus" 
+                class="" style="width: 50%">
+     </div>
+		 <div style="text-align: center;">
 			  <input type="text" class="form-control form-control-sm" name="f_calories" value="" required="required" placeholder="칼로리" autofocus="autofocus" 
 			          class="" style="width: 50%">
 		 </div>
@@ -72,9 +76,10 @@
 
 <table class="table table-hover">
  <colgroup>
+   <col style='width: 10%;'/>
    <col style='width: 15%;'/>
-   <col style='width: 15%;'/>
-   <col style='width: 15%;'/>    
+   <col style='width: 10%;'/>
+   <col style='width: 10%;'/>    
    <col style='width: 10%;'/>
    <col style='width: 10%;'/>
    <col style='width: 10%;'/>
@@ -85,6 +90,7 @@
     <tr>
      <th class="th_bs">번호</th>
      <th class="th_bs">음식 이름</th>
+     <th class="th_bs">가격</th>
      <th class="th_bs">칼로리</th>
      <th class="th_bs">탄수화물</th>
      <th class="th_bs">단백질</th>
@@ -98,7 +104,8 @@
       <c:set var="foodno" value="${foodVO.foodno }"/>
 		    <tr>
 		      <td class="td_bs">${info.count }</td>
-		      <td class="td_bs">${foodVO.foodname }</a></td>
+		      <td class="td_bs">${foodVO.foodname }</td>
+		      <td class="td_bs">${foodVO.price }</td>
 		      <td class="td_bs">${foodVO.f_calories }kcal</td>
 		      <td class="td_bs">${foodVO.f_carbohydrates }g</td>
 		      <td class="td_bs">${foodVO.f_protein }g</td>

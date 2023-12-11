@@ -26,7 +26,16 @@ public class FoodVO {
   private int managerno;
   /** 식당번호 FK */
   private int resno;
+  /** 가격 FK */
+  private int price;
   
+  
+  public int getPrice() {
+    return price;
+  }
+  public void setPrice(int price) {
+    this.price = price;
+  }
   public int getFoodno() {
     return foodno;
   }
