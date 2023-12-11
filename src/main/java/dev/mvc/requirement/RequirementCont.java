@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.customer.CustomerProcInter;
 import dev.mvc.customer.CustomerVO;
+import dev.mvc.food.FoodVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.recommend.RecommendProcInter;
 import dev.mvc.recommend.RecommendVO;
@@ -258,12 +259,38 @@ public class RequirementCont {
      return mav; // forward
    }
    
-   public ModelAndView delete(HttpSession session, HttpServletRequest request, int customerno) {
-       ModelAndView mav = new ModelAndView();
-       
-       mav.setViewName("/requirement/read"); // forward
-       
-       return mav; // forward
-       
+   @RequestMapping(value="/requirement/delete.do", method=RequestMethod.GET)
+   public ModelAndView delete(HttpSession session, HttpServletRequest request, int customerno) { // 자동으로 FoodDAO 객체가 생성되고 Form의 값이 할당됨
+     ModelAndView mav = new ModelAndView();
+
+     if (this.customerProc.isCustomer(session)) { // 회원으로 로그인
+         mav.setViewName("/requirement/read_delete");
+         
+         RecommendVO recommnedVO = this.recommendProc.read(customerno);
+         mav.addObject("recommnedVO", recommnedVO);
+     }else {
+         mav.setViewName("/customer/login_need"); // /webapp/WEB-INF/views/customer/login_need.jsp
+     }
+     return mav;
    }
+  
+  @RequestMapping(value="/requirement/delete.do", method=RequestMethod.POST)
+  public ModelAndView delete(int customerno) { // 자동으로 FoodDAO 객체가 생성되고 Form의 값이 할당됨
+    ModelAndView mav = new ModelAndView();
+
+    int cnt = this.recommendProc.delete(customerno);
+    System.out.println("-> cnt:"+cnt);
+    if (cnt == 1) {
+        mav.setViewName("redirect:/requirement/read.do");       // 자동 주소 이동, Spring 재호출
+        
+      } else {
+        mav.addObject("code", "delete_fail");
+        mav.addObject("url", "/requirement/msg");
+        mav.setViewName("redirect:/requirement/msg.do"); // /WEB-INF/views/res/msg.jsp
+      }
+      
+      mav.addObject("cnt", cnt);
+    return mav;
+  }
+   
 }

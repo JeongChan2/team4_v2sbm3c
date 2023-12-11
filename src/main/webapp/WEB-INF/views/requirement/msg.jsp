@@ -57,7 +57,11 @@
             <span class="span_fail">${param.cname }님(${param.id }) 회원 정보 수정에 실패했습니다.</span>
           </li>                                                                      
         </c:when>
-        
+        <c:when test="${param.code == 'delete_fail'}"> <%-- Java if --%>
+          <li class='li_none'>
+            <span class="span_fail">${param.cname }님(${param.id }) 회원 정보 삭제에 실패했습니다.</span>
+          </li>                                                                      
+        </c:when>
         
       </c:choose>
       <li class='li_none'>
