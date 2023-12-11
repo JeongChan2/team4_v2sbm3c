@@ -14,8 +14,8 @@
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
 <script type="text/javascript">
-  window.onload = function(){
-    document.getElementById('lang').value=${recommnedVO.typenum};
+window.onload = function(){
+      document.getElementById('lang').value=${recommnedVO.typenum}; 
   }
 
   function send() { // 섭취 영양소 갱신
@@ -134,25 +134,26 @@
   </div>
   <br>
   <div style="width: 100%; margin: 0px auto; float: left">
-    <div style="text-align: center;">
-    
-        <label>${sessionScope.cname} 님의 메뉴 추천 항목 :</label>
-        <select name="typenum" id="lang" disabled>
-          <option value="1">족발, 보쌈</option>
-          <option value="2">짬, 탕, 찌개</option>
-          <option value="3">돈까스, 회, 일식</option>
-          <option value="4">피자, 치킨</option>
-          <option value="5">고기</option>
-          <option value="6">양식</option>
-          <option value="7">중식</option>
-          <option value="8">백반, 죽, 국수</option>
-          <option value="9">도시락</option>
-          <option value="10">분식</option>
-          <option value="11">카페, 디저트</option>
-          <option value="12">패스트푸드</option>
-        </select>
-
-    </div>
+      <div style="text-align: center;">
+      <input type="hidden" name="customerno" value="${requirementVO.customerno }">
+          <label>${sessionScope.cname} 님의 메뉴 추천 항목 :</label>
+          <select name="typenum" id="lang" disabled>
+          <option value="0">미선택</option>
+            <option value="1">족발, 보쌈</option>
+            <option value="2">짬, 탕, 찌개</option>
+            <option value="3">돈까스, 회, 일식</option>
+            <option value="4">피자, 치킨</option>
+            <option value="5">고기</option>
+            <option value="6">양식</option>
+            <option value="7">중식</option>
+            <option value="8">백반, 죽, 국수</option>
+            <option value="9">도시락</option>
+            <option value="10">분식</option>
+            <option value="11">카페, 디저트</option>
+            <option value="12">패스트푸드</option>
+          </select>
+          <button type="button" onclick="location.href='./delete.do?customerno=${requirementVO.customerno }'" class="input_button_form input_submit">초기화</button>
+      </div>
     <br><br>
   </div>
   <table class="table table-hover">
