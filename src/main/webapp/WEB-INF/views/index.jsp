@@ -15,7 +15,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh; /* 화면 전체 높이를 채우도록 설정 */
+      height: 100vh; /* 화면 전체 높이를 설정 */
       margin: 0; /* body의 기본 마진 제거 */
     }
 
@@ -36,7 +36,7 @@
  
  
 <div class="image-container" id="imageContainer">
-  <img src="/images/성규2.jpg" style="width:40%">
+  <img src="/images/성규.jpg" style="width:40%">
   <img src="/images/성규.jpg" style="width:40%; display: none">
 </div>
 

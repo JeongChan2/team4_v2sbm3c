@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "dev.mvc.score.ScoreDAOInter">
+  <!-- 평점 추가 -->
+  <insert id="create" parameterType="dev.mvc.score.ScoreVO">
+    INSERT INTO score(scoreno, score, rdate, rescontentsno, customerno) 
+    VALUES(score_seq.nextval, #{score}, sysdate, #{rescontentsno},#{customerno})
+  </insert>
+  
+  <!-- 나의 평점 -->
+  <select id="list_by_me" resultType="dev.mvc.score.ScoreVO" parameterType="int">
+    SELECT scoreno, score, rdate, rescontentsno, customerno
+    FROM score 
+    WHERE customerno = #{customerno}
+  </select> 
+  
+    <!-- 해당 컨텐츠의 평점 -->
+  <select id="list_contents" resultType="int" parameterType="int">
+    SELECT AVG(score)
+    FROM score
+    WHERE rescontentsno = #{rescontentsno}
+  </select>
+  
+   <!-- 나의 평점 수정 -->
+  <update id="update" parameterType="dev.mvc.score.ScoreVO">
+    UPDATE score 
+    SET score=#{score}
+    WHERE customerno=#{customerno} AND rescontentsno = #{rescontentsno}
+  </update>
+  
+    <!-- update와 delete는 모두 처리된 레코드 갯수를 리턴한다. -->
+    <!-- 나의 평점 삭제 -->
+  <delete id="delete" parameterType="HashMap">
+    DELETE FROM score
+    WHERE customerno=#{customerno} AND rescontentsno = #{rescontentsno}
+  </delete>
+</mapper> 
