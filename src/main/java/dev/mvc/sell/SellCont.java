@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -40,22 +42,35 @@ public class SellCont {
   private FoodProcInter foodProc;
   
   /**
-   * FoodList 반환
+   * 음식점 목록(식당)
+   * http://localhost:9093/sell/select_menu_fetch.do?resno=3
    * @return
    */
-//   @ResponseBody
-   @RequestMapping(value="/sell/menu_by_res.do", method=RequestMethod.GET )
-   public ArrayList<FoodVO> getFoodList(int resno) {
-//     ModelAndView mav = new ModelAndView();
-     
-     ArrayList<FoodVO> food_list = this.foodProc.list_all_res(resno);
-     for(int i=0; i< food_list.size(); i++) {
-       System.out.println(food_list.get(i).getFoodname());
-     }
-//     mav.addObject("food_list", food_list);
-     
-     return food_list;
-   }
+  @RequestMapping(value="/sell/select_menu_fetch.do", method = RequestMethod.GET)
+  @ResponseBody
+  public String select_menu_fetch(int resno) {
+//    System.out.println("-> foodno: " + foodno);
+//    try {
+//      Thread.sleep(3000); // 3초
+//    } catch(Exception e) {
+//      e.printStackTrace();
+//    }
+    
+    ArrayList<FoodVO> food_list = this.foodProc.list_all_res(resno);
+    
+    JSONArray array = new JSONArray();
+    JSONObject json = null;
+    
+    for (FoodVO foodVO : food_list) {
+      json = new JSONObject();
+      json.put("foodno", foodVO.getFoodno());
+      json.put("foodname", foodVO.getFoodname());
+      json.put("price", foodVO.getPrice());
+      array.put(json);
+    }
+//    System.out.println(array.toString());
+    return array.toString();
+  }
   
   /**
    * 등록 폼
