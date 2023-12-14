@@ -132,6 +132,12 @@
             <a href='/download?dir=/rescontents/storage&filename=${file1saved}&downname=${file1}'><img src="/rescontents/images/download.png"></a>
           </c:if>
         </DIV>
+      </li>
+      <li class="li_none" style="clear: both;">
+        <DIV style='text-decoration: none;'>
+          <br>
+          검색어(키워드): ${word }
+        </DIV>
       </li>   
     </ul>
   </fieldset>

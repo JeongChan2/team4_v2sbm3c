@@ -44,7 +44,7 @@ public class RescontentsCont {
   
   @Autowired
   @Qualifier("dev.mvc.score.ScoreProc") // @Component("dev.mvc.score.ScoreProc")
-  private ScoreProcInter ScoreProc;
+  private ScoreProcInter scoreProc;
   
   public RescontentsCont () {
     System.out.println("-> RescontentsCont created.");
@@ -406,8 +406,9 @@ public class RescontentsCont {
     
     rescontentsVO.setTitle(title);
     rescontentsVO.setRescontent(content);  
-    
+    int avgScore = this.scoreProc.list_contents(rescontentsno);
     mav.addObject("rescontentsVO", rescontentsVO);
+    mav.addObject("avgScore", avgScore);
     
     return mav;
   }
