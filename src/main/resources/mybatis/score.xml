@@ -16,7 +16,7 @@
   </select> 
   
     <!-- 해당 컨텐츠의 평점 -->
-  <select id="list_contents" resultType="int" parameterType="int">
+  <select id="list_contents" resultType="Integer" parameterType="int">
     SELECT AVG(score)
     FROM score
     WHERE rescontentsno = #{rescontentsno}

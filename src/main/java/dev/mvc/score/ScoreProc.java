@@ -27,8 +27,9 @@ public class ScoreProc implements ScoreProcInter {
     }
 
     @Override
-    public int list_contents(int rescontentsno) {
-        int cnt = this.scoreDAO.list_contents(rescontentsno);
+    public Integer list_contents(int rescontentsno) {
+        Integer cnt = 0;
+        cnt = this.scoreDAO.list_contents(rescontentsno);
         return cnt;
     }
 

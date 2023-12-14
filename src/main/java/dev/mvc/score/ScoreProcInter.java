@@ -20,7 +20,7 @@ public interface ScoreProcInter {
      * @param rescontentsno
      * @return
      */
-    public int list_contents(int rescontentsno);
+    public Integer list_contents(int rescontentsno);
     /**
      * 내 평점 수정
      * @param scoreVO

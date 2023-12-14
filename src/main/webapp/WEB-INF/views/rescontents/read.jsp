@@ -136,7 +136,8 @@
       <li class="li_none" style="clear: both;">
         <DIV style='text-decoration: none;'>
           <br>
-          검색어(키워드): ${word }
+            평점 : ${ avgScore }
+    
         </DIV>
       </li>   
     </ul>
