@@ -134,6 +134,19 @@
         </DIV>
       </li>
       <li class="li_none" style="clear: both;">
+        <div class="star-ratings">
+            <div 
+            class="star-ratings-fill space-x-2 text-lg"
+            :style="{ width: ratingToPercent + '%' }"
+            >
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <div class="star-ratings-base space-x-2 text-lg">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+        </div>
+      
+      
         <DIV style='text-decoration: none;'>
           <br>
             평점 : ${ avgScore }
