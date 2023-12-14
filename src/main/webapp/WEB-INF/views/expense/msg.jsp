@@ -13,7 +13,7 @@
 </head> 
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
-
+  
 <%
 String code = (String)request.getAttribute("code");
 int cnt = (int)request.getAttribute("cnt");
