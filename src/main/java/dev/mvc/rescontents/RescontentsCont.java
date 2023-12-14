@@ -20,6 +20,7 @@ import dev.mvc.food.FoodVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.res.ResProcInter;
 import dev.mvc.res.ResVO;
+import dev.mvc.score.ScoreProcInter;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -40,6 +41,10 @@ public class RescontentsCont {
   @Autowired
   @Qualifier("dev.mvc.food.FoodProc") // @Component("dev.mvc.food.FoodProc")
   private FoodProcInter foodProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.score.ScoreProc") // @Component("dev.mvc.score.ScoreProc")
+  private ScoreProcInter ScoreProc;
   
   public RescontentsCont () {
     System.out.println("-> RescontentsCont created.");
