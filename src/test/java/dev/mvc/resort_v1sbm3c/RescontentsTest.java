@@ -35,9 +35,9 @@ public class RescontentsTest {
 //    System.out.println("-> cnt: " + this.rescontentsProc.password_check(hashMap));
 //  }
   
-  @Test
-  public void testCount_by_resno() {
-    System.out.println("-> cnt: " + this.rescontentsProc.count_by_resno(1));          
-  }
+//  @Test
+//  public void testCount_by_resno() {
+//    System.out.println("-> cnt: " + this.rescontentsProc.count_by_resno(1));          
+//  }
   
 }

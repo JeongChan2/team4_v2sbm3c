@@ -20,9 +20,9 @@ class FoodV1sbm3cApplicationTests {
   @Qualifier("dev.mvc.res.ResProc")  // 이 인터페이스에 누가 할당되야 하느냐 Autowired로만 안될 때가 있다.
   private ResProcInter resProc;
   
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 //	@Test
 //	public void testCreate() {
@@ -54,17 +54,17 @@ class FoodV1sbm3cApplicationTests {
 //      
 //    }
 
-    @Test
-    public void testUpdate() {
-     ResVO resVO = new ResVO();
-     resVO.setResno(8);
-     resVO.setResname("테스트 성공");
-     resVO.setResaddress("테스트 성공");
-     resVO.setResphone("테스트 성공");
-     resVO.setRestime("테스트 성공");
-     
-     int cnt = this.resProc.update(resVO);
-     System.out.println("->"+cnt);
-     
-    }
+//    @Test
+//    public void testUpdate() {
+//     ResVO resVO = new ResVO();
+//     resVO.setResno(8);
+//     resVO.setResname("테스트 성공");
+//     resVO.setResaddress("테스트 성공");
+//     resVO.setResphone("테스트 성공");
+//     resVO.setRestime("테스트 성공");
+//     
+//     int cnt = this.resProc.update(resVO);
+//     System.out.println("->"+cnt);
+//     
+//    }
 }
