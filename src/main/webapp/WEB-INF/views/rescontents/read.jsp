@@ -133,18 +133,16 @@
           </c:if>
         </DIV>
       </li>
-      <li class="li_none" style="clear: both;">
-        <div class="star-ratings">
-            <div 
-            class="star-ratings-fill space-x-2 text-lg"
-            :style="{ width: ratingToPercent + '%' }"
-            >
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <div class="star-ratings-base space-x-2 text-lg">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-        </div>
+      <li class="li_none" style="clear: both; float:left">
+      평점 : <div class="star-ratings" style="float:right">     
+                  <div class="star-ratings-fill" style="width: ${ avgScore*20 }%">
+                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  </div>
+                  <div class="star-ratings-base">
+                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  </div>
+              </div>
+        
       
       
         <DIV style='text-decoration: none;'>

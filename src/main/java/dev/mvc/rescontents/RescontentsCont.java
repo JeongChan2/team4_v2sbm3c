@@ -406,9 +406,9 @@ public class RescontentsCont {
     
     rescontentsVO.setTitle(title);
     rescontentsVO.setRescontent(content);  
-    Integer avgScore = this.scoreProc.list_contents(rescontentsno);
+    Double avgScore = this.scoreProc.list_contents(rescontentsno);
     if(avgScore == null) {
-        avgScore = 0;
+        avgScore = 0.0;
     }
     mav.addObject("rescontentsVO", rescontentsVO);
     mav.addObject("avgScore", avgScore);
