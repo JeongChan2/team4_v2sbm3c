@@ -35,7 +35,7 @@ public class LoginCont {
   public LoginCont(){
     System.out.println("-> LoginCont created.");
   }
-  
+ 
   /**
    * 로그인 내역
    * // FORM 데이터 처리 http://localhost:9093/login/login_list.do
