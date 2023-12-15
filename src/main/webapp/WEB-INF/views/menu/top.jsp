@@ -82,7 +82,7 @@
                     <a class="dropdown-item" href="#">비밀번호 찾기</a>
                   </c:when>
                   <c:otherwise>
-                    <a class="dropdown-item" href="http://localhost:8000/ais/recommend_form/?customerno=${sessionScope.customerno }">관심분야 등록하고 추천받기</a>
+                    <a class="dropdown-item" href="http://3.38.81.88:8000/ais/recommend_form/?customerno=${sessionScope.customerno }">관심분야 등록하고 추천받기</a>
                     <a class="dropdown-item" href="/requirement/read.do">마이페이지</a>
                     <a class="dropdown-item" href="/requirement/create.do">영양정보 관리</a>
                     <a class="dropdown-item" href="/customer/read_info.do">가입 정보</a>
