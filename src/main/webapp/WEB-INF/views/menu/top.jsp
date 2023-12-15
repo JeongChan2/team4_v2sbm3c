@@ -43,7 +43,7 @@
         </c:when>
         <c:otherwise>
             <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href='/customer/logout.do'>${sessionScope.cname } 로그아웃</a>
-            <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href="http://localhost:5000/chatbot?customerno=${sessionScope.customerno }">챗봇|</a>
+            <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href="http://13.124.220.250:5000/chatbot?customerno=${sessionScope.customerno }">챗봇|</a>
         </c:otherwise>
     </c:choose>   
   </div>
