@@ -1433,8 +1433,8 @@
                                     <constraint>
                                       <height>-1</height>
                                       <width>-1</width>
-                                      <x>333</x>
-                                      <y>856</y>
+                                      <x>672</x>
+                                      <y>1011</y>
                                     </constraint>
                                     <sourceConnections>
                                       <net.java.amateras.db.visual.model.ForeignKeyModel>
@@ -1509,6 +1509,33 @@
                                         <defaultValue></defaultValue>
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                       <net.java.amateras.db.visual.model.ColumnModel>
+                                        <columnName>RESERV_NAME</columnName>
+                                        <logicalName>예약자성함</logicalName>
+                                        <columnType class="net.java.amateras.db.dialect.ColumnType">
+                                          <name>VARCHAR2</name>
+                                          <logicalName>String</logicalName>
+                                          <supportSize>true</supportSize>
+                                          <type>12</type>
+                                        </columnType>
+                                        <size>30</size>
+                                        <notNull>true</notNull>
+                                        <primaryKey>false</primaryKey>
+                                        <description></description>
+                                        <autoIncrement>false</autoIncrement>
+                                        <defaultValue></defaultValue>
+                                      </net.java.amateras.db.visual.model.ColumnModel>
+                                      <net.java.amateras.db.visual.model.ColumnModel>
+                                        <columnName>RESERV_PHONE</columnName>
+                                        <logicalName>예약자휴대폰번호</logicalName>
+                                        <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
+                                        <size>14</size>
+                                        <notNull>false</notNull>
+                                        <primaryKey>false</primaryKey>
+                                        <description></description>
+                                        <autoIncrement>false</autoIncrement>
+                                        <defaultValue></defaultValue>
+                                      </net.java.amateras.db.visual.model.ColumnModel>
+                                      <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>CNT</columnName>
                                         <logicalName>인원</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
@@ -1570,7 +1597,7 @@
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>RESNO</columnName>
                                         <logicalName>식당번호</logicalName>
-                                        <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
+                                        <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[8]/columnType"/>
                                         <size>10</size>
                                         <notNull>false</notNull>
                                         <primaryKey>false</primaryKey>
@@ -1581,9 +1608,9 @@
                                     </columns>
                                     <indices/>
                                     <backgroundColor>
-                                      <red>255</red>
+                                      <red>128</red>
                                       <green>255</green>
-                                      <blue>206</blue>
+                                      <blue>255</blue>
                                     </backgroundColor>
                                     <sql></sql>
                                   </source>
@@ -2946,8 +2973,8 @@
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>539</x>
-        <y>1089</y>
+        <x>2214</x>
+        <y>525</y>
       </constraint>
       <sourceConnections/>
       <targetConnections/>
@@ -3457,17 +3484,15 @@
         </java.beans.PropertyChangeSupport>
       </listeners>
       <constraint>
-        <height>85</height>
-        <width>180</width>
-        <x>191</x>
-        <y>1035</y>
+        <height>39</height>
+        <width>239</width>
+        <x>673</x>
+        <y>969</y>
       </constraint>
       <sourceConnections/>
       <targetConnections/>
-      <content>관리자가 조회할때를 위한 정보&#xd;
-&#xd;
-예약자성함&#xd;
-예약자휴대폰번호</content>
+      <content>회원도 비회원도 전화로 예약 할 수 있음&#xd;
+관리자가 입력</content>
     </net.java.amateras.db.visual.model.NoteModel>
     <net.java.amateras.db.visual.model.NoteModel>
       <listeners serialization="custom">
@@ -3482,8 +3507,8 @@
       <constraint>
         <height>95</height>
         <width>193</width>
-        <x>200</x>
-        <y>712</y>
+        <x>674</x>
+        <y>869</y>
       </constraint>
       <sourceConnections/>
       <targetConnections/>
