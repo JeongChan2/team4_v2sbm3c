@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "dev.mvc.take.TakeDAOInter">
+  <!-- 이미 영양 정보가 있는지 확인 -->
+  <select id="check" resultType="int" parameterType="int">
+    SELECT COUNT(customerno) as cnt
+    FROM n_take
+    WHERE customerno=#{customerno} AND ndate = TO_CHAR(SYSDATE, 'yyyy mm dd')
+  </select>
+
+  <!-- 하루 섭취량 생성 (등록)-->
+  <insert id="create" parameterType="int">
+		INSERT INTO n_take(takeno, customerno, calories, carbohydrates, protein, fat, ndate)
+		VALUES (n_take_seq.nextval, #{customerno}, '0', '0', '0', '0', TO_CHAR(SYSDATE, 'yyyy mm dd'))
+  </insert>
+ 
+  <!-- 마이페이지에 하루 섭취량 읽어오기 -->
+  <select id="read" resultType="dev.mvc.take.TakeVO" parameterType="int">
+		SELECT takeno, customerno, calories, carbohydrates, protein, fat, ndate
+		FROM n_take
+		WHERE customerno = #{customerno} AND ndate = TO_CHAR(SYSDATE, 'yyyy mm dd')
+  </select> 
+  
+  <!-- 로그인한 회원이 이미 하루 섭취량이 있다면 새롭게 저장이 아닌 갱신 -->
+  <update id="update" parameterType="dev.mvc.take.TakeVO">
+		UPDATE n_take 
+		SET calories = calories+#{calories}, carbohydrates = carbohydrates+#{carbohydrates}, protein = protein+#{protein}, fat = fat+#{fat}
+		WHERE customerno=#{customerno} AND ndate = TO_CHAR(SYSDATE, 'yyyy mm dd')
+  </update>
+  
+</mapper> 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "dev.mvc.expense.ExpenseDAOInter">
+
+  <insert id="create" parameterType="dev.mvc.expense.ExpenseVO">
+    INSERT INTO expense(expenseno, name, cnt, price, rdate, supplierno, managerno, resno)
+    VALUES (expense_seq.nextval, #{name}, #{cnt}, #{price}, sysdate, #{supplierno}, #{managerno}, #{resno})
+  </insert>
+
+  <select id="list_all_managerno" resultType="dev.mvc.expense.ExpenseVO" parameterType="int">
+    SELECT expenseno, name, cnt, price, rdate, supplierno, managerno, resno
+    FROM expense
+    WHERE managerno = #{managerno}
+    ORDER BY expenseno ASC
+  </select>
+
+  <!-- 읽기, SQL -> SupplierVO return -->
+  <select id="read" resultType="dev.mvc.expense.ExpenseVO" parameterType="int">
+    SELECT expenseno, name, cnt, price, rdate, supplierno, managerno, resno
+    FROM expense
+    WHERE expenseno = #{expenseno}
+  </select>
+ 
+  <!-- return : 수정한 레코드 갯수를 1을 리턴, parameterType: 수정할 레코드 정보-->
+  <update id="update" parameterType="dev.mvc.expense.ExpenseVO">
+    UPDATE expense 
+    SET name = #{name}, cnt = #{cnt}, price = #{price}, supplierno = #{supplierno}, resno = #{resno}
+    WHERE expenseno=#{expenseno}
+  </update>
+  
+  <!-- return : 삭제한 레코드 갯수를 리턴, parameterType: 수정할 레코드 정보-->
+  <delete id="delete" parameterType="int">
+    DELETE FROM expense where expenseno = #{expenseno}
+  </delete>
+  
+  <!-- 식당이름까지 같이 가져오는 list_all-->
+   <select id="list_all_names" resultType="dev.mvc.expense.Expense_JoinVO">
+      SELECT e.expenseno, e.name, e.cnt, e.price, e.rdate, s.name AS supplier_name, r.resname
+      FROM expense e
+      INNER JOIN restaurant r ON e.resno = r.resno
+      INNER JOIN supplier s ON e.supplierno = s.supplierno
+      WHERE e.managerno = #{managerno}
+      ORDER BY expenseno ASC
+   </select>
+
+</mapper> 

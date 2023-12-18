@@ -1,0 +1,85 @@
+[33mcommit 4ca2111a6926bfb33a7b04e424b0406eaa2fac73[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Gyuhyeon12 <jtfoo3915@naver.com>
+Date:   Mon Nov 27 10:29:31 2023 +0900
+
+    로그인 내역 sql저장
+
+[33mcommit c750cb8fc9a38787fa24c147de055efaa5af1cb5[m
+Author: IM <imseongkyu12@gmail.com>
+Date:   Thu Nov 23 18:33:30 2023 +0900
+
+    test
+
+[33mcommit e84a6f452ebb56a1164b595e2adf8973128a4c72[m
+Author: JeongChan2 <jcstar55@gmail.com>
+Date:   Thu Nov 23 18:08:46 2023 +0900
+
+    들여쓰기 수정
+
+[33mcommit 641208405a9e21a06f7149e63741ab1d6df97155[m
+Author: JeongChan2 <jcstar55@gmail.com>
+Date:   Thu Nov 23 17:43:36 2023 +0900
+
+    키고 pull and push
+
+[33mcommit 307ff4ecd3a36c63162515a664287f73e05a434f[m
+Author: Gyuhyeon12 <jtfoo3915@naver.com>
+Date:   Thu Nov 23 17:25:18 2023 +0900
+
+    로그인 내역 수정중 - 2
+
+[33mcommit e18a52259c23d9167c0e267658fbc5d064162bd3[m
+Merge: 54abcb6 ca78e0e
+Author: IM <imseongkyu12@gmail.com>
+Date:   Thu Nov 23 15:23:59 2023 +0900
+
+    2차
+
+[33mcommit 54abcb618f7c9e59980ad8d38a7f7a83a62e549c[m
+Author: ImSeongKyu <yelook@naver.com>
+Date:   Thu Nov 23 14:53:45 2023 +0900
+
+    메일 프로그램 추가
+
+[33mcommit ca78e0e8924ddd731d75e6d942b9f69ca57bc77a[m
+Author: Gyuhyeon12 <jtfoo3915@naver.com>
+Date:   Thu Nov 23 13:08:11 2023 +0900
+
+    로그인 내역 수정중 - 1
+
+[33mcommit d8a78f3fa4ef2d4c9253572c5a28dc01224fa7b6[m
+Author: JeongChan2 <jcstar55@gmail.com>
+Date:   Thu Nov 9 20:01:25 2023 +0900
+
+    application.properties 변경
+    local -> AWS
+
+[33mcommit b41bcbd49195c8f5a82354a8f9af679cfee14d04[m
+Author: Gyuhyeon12 <jtfoo3915@naver.com>
+Date:   Thu Nov 9 15:39:41 2023 +0900
+
+    두번째 커밋
+
+[33mcommit 9ec0b7798e24242b650198fd19e9dc8aeb7aa567[m
+Author: Gyuhyeon12 <jtfoo3915@naver.com>
+Date:   Thu Nov 9 15:33:49 2023 +0900
+
+    첫번째 커밋
+
+[33mcommit 4613bebd76897d99d9c9916c7175da99696bae89[m
+Author: JeongChan2 <jcstar55@gmail.com>
+Date:   Thu Nov 9 15:08:58 2023 +0900
+
+    Update README.md
+
+[33mcommit 498e3e77c4c589f466020ffaab257ff6aadc6fa2[m
+Author: JeongChan2 <jcstar55@gmail.com>
+Date:   Thu Nov 9 14:07:38 2023 +0900
+
+    Create README.md
+
+[33mcommit 7687600f1beb16d71d99ae4f9e28cd3064e2410f[m
+Author: JeongChan2 <jcstar55@gmail.com>
+Date:   Thu Nov 9 14:07:04 2023 +0900
+
+    first commit

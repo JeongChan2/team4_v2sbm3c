@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "dev.mvc.customer.CustomerDAOInter">
+  <select id="checkID" resultType="int" parameterType="String">
+    SELECT COUNT(id) as cnt
+    FROM n_customer
+    WHERE id=#{id}
+  </select>
+  
+  <insert id="create" parameterType="dev.mvc.customer.CustomerVO">
+    INSERT INTO n_customer(customerno, id, passwd, cname, age, gender, height, weight, tel, zipcode, address1, address2, cdate, grade)
+    VALUES (n_customer_seq.nextval, #{id}, #{passwd}, #{cname}, #{age}, #{gender}, #{height}, #{weight}, #{tel}, #{zipcode}, 
+                 #{address1}, #{address2}, sysdate, #{grade})
+  </insert>
+
+  <select id="list" resultType="dev.mvc.customer.CustomerVO">
+    SELECT customerno, id, passwd, cname, age, gender, height, weight, tel, zipcode, address1, address2, cdate, grade
+    FROM n_customer
+    ORDER BY grade ASC, id ASC
+  </select>
+  
+  <!-- customerno로 회원 정보 조회 -->
+  <select id="read" resultType="dev.mvc.customer.CustomerVO" parameterType="int">
+    SELECT customerno, id, passwd, cname, age, gender, height, weight, tel, zipcode, address1, address2, cdate, grade
+    FROM n_customer
+    WHERE customerno = #{customerno}
+  </select>  
+
+  <!-- id(이메일)로 회원 정보 조회 -->
+  <select id="readById" resultType="dev.mvc.customer.CustomerVO" parameterType="String">
+    SELECT customerno, id, passwd, cname, age, gender, height, weight, tel, zipcode, address1, address2, cdate, grade
+    FROM n_customer
+    WHERE id = #{id}
+  </select>  
+      
+  <update id="update" parameterType="dev.mvc.customer.CustomerVO">
+    UPDATE n_customer 
+    SET id=#{id}, cname=#{cname}, age=#{age}, gender=#{gender}, height=#{height}, weight=#{weight}, tel=#{tel}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2}
+    WHERE customerno=#{customerno}
+  </update>
+  
+  <!-- update와 delete는 모두 처리된 레코드 갯수를 리턴한다. -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM n_customer
+    WHERE customerno=#{customerno}
+  </delete>
+  
+    <!-- 로그인 -->
+  <select id="login" resultType="int" parameterType="HashMap">
+    SELECT COUNT(customerno) as cnt
+    FROM n_customer
+    WHERE id=#{id} AND passwd=#{passwd}
+  </select>
+  
+  <!--  현재 패스워드 검사 -->
+  <select id="passwd_check" parameterType="HashMap" resultType="int">
+    SELECT COUNT(customerno) as cnt
+    FROM n_customer
+    WHERE customerno=#{customerno} AND passwd=#{passwd}
+  </select>
+  
+  <!-- 패스워드 변경 -->
+  <update id="passwd_update" parameterType="HashMap">
+    UPDATE n_customer
+    SET passwd=#{passwd}
+    WHERE customerno=#{customerno}
+  </update>
+  
+</mapper> 

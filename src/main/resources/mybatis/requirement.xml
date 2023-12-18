@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "dev.mvc.requirement.RequirementDAOInter">
+  <!-- 이미 영양 정보가 있는지 확인 -->
+  <select id="check" resultType="int" parameterType="int">
+    SELECT COUNT(customerno) as cnt
+    FROM n_requirement
+    WHERE customerno=#{customerno}
+  </select>
+
+  <!-- 하루 섭취량 생성 -->
+  <insert id="create" parameterType="dev.mvc.requirement.RequirementVO">
+		INSERT INTO n_requirement(requirementno, customerno, calories, carbohydrates, protein, fat)
+		VALUES (n_requirement_seq.nextval, #{customerno}, #{calories}, #{carbohydrates}, #{protein}, #{fat})
+  </insert>
+ 
+  <!-- 마이페이지에 하루 섭취량 읽어오기 -->
+  <select id="read" resultType="dev.mvc.requirement.RequirementVO" parameterType="int">
+		SELECT requirementno, customerno, calories, carbohydrates, protein, fat
+		FROM n_requirement
+		WHERE customerno = #{customerno}
+  </select> 
+  
+  <!-- 로그인한 회원이 이미 하루 섭취량이 있다면 새롭게 저장이 아닌 갱신 -->
+  <update id="update" parameterType="dev.mvc.requirement.RequirementVO">
+		UPDATE n_requirement 
+		SET calories = #{calories}, carbohydrates = #{carbohydrates}, protein = #{protein}, fat = #{fat}
+		WHERE customerno=#{customerno}
+  </update>
+  
+</mapper> 
