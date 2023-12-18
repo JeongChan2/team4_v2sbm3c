@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "dev.mvc.reservation.ReservationDAOInter">
+
+  <insert id="create" parameterType="dev.mvc.reservation.ReservationVO">
+    INSERT INTO reservation(reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate, managerno, resno, customerno)
+    VALUES (reservation_seq.nextval, #{res_name}, #{reserv_name}, #{reserv_phone}, #{cnt}, #{rdate}, #{managerno}, #{resno}, #{customerno})
+  </insert>
+  
+  <!-- 비회원 예약 -->
+  <insert id="non_mem_create" parameterType="dev.mvc.reservation.ReservationVO">
+    INSERT INTO reservation(reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate, managerno, resno)
+    VALUES (reservation_seq.nextval, #{res_name}, #{reserv_name}, #{reserv_phone}, #{cnt}, #{rdate}, #{managerno}, #{resno})
+  </insert>
+
+  <select id="list_all_managerno" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
+    SELECT reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate, managerno, resno, customerno
+    FROM reservation
+    WHERE managerno = #{managerno}
+    ORDER BY reserv_no ASC
+  </select>
+  
+  <select id="list_all_customerno" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
+    SELECT reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate, managerno, resno, customerno
+    FROM reservation
+    WHERE customerno = #{customerno}
+    ORDER BY reserv_no ASC
+  </select>
+
+  <!-- 읽기, SQL -> SupplierVO return -->
+  <select id="read" resultType="dev.mvc.reservation.ReservationVO" parameterType="int">
+    SELECT reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate, managerno, resno, customerno
+    FROM reservation
+    WHERE reserv_no = #{reserv_no}
+  </select>
+ 
+  <!-- return : 수정한 레코드 갯수를 1을 리턴, parameterType: 수정할 레코드 정보-->
+  <update id="update" parameterType="dev.mvc.reservation.ReservationVO">
+    UPDATE reservation 
+    SET reserv_name = #{reserv_name}, reserv_phone=#{reserv_phone}, cnt = #{cnt}, rdate=#{rdate}
+    WHERE reserv_no=#{reserv_no}
+  </update>
+  
+  <!-- return : 삭제한 레코드 갯수를 리턴, parameterType: 수정할 레코드 정보-->
+  <delete id="delete" parameterType="int">
+    DELETE FROM reservation where reserv_no = #{reserv_no}
+  </delete>
+
+</mapper> 
