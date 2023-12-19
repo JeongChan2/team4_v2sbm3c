@@ -1550,12 +1550,12 @@
                                         <columnName>RDATE</columnName>
                                         <logicalName>날짜</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType">
-                                          <name>DATE</name>
-                                          <logicalName>Date</logicalName>
-                                          <supportSize>false</supportSize>
-                                          <type>91</type>
+                                          <name>VARCHAR2</name>
+                                          <logicalName>String</logicalName>
+                                          <supportSize>true</supportSize>
+                                          <type>12</type>
                                         </columnType>
-                                        <size>10</size>
+                                        <size>50</size>
                                         <notNull>true</notNull>
                                         <primaryKey>false</primaryKey>
                                         <description></description>
@@ -3505,8 +3505,8 @@
         </java.beans.PropertyChangeSupport>
       </listeners>
       <constraint>
-        <height>95</height>
-        <width>193</width>
+        <height>103</height>
+        <width>203</width>
         <x>674</x>
         <y>869</y>
       </constraint>
@@ -3517,6 +3517,7 @@
 식당주소&#xd;
 식당영업시간&#xd;
 식당전화번호&#xd;
+회원도 예약할 수 있게 구현예정&#xd;
 </content>
     </net.java.amateras.db.visual.model.NoteModel>
   </children>

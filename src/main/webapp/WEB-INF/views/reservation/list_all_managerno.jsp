@@ -60,7 +60,7 @@
      
      <div style="text-align: center;">
         <label>예약날짜, 시간</label>
-        <input type="datetime-local" name="rdate">
+        <input type="datetime-local" id="rdate" name="rdate">
      </div>
 
      <input type="hidden" name="managerno" value="${managerno }">
@@ -68,6 +68,7 @@
      <div style="text-align: center;">
        <label for="resno">식당</label>
        <select name="resno" id="resno">
+        <option value="0">식당을 선택해주세요.</option>
          <c:forEach var="resVO" items="${res_list }" varStatus="info">
            <c:set var="resno" value="${resVO.resno }"/>
            <c:set var="resname" value="${resVO.resname }"/>

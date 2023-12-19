@@ -1,5 +1,6 @@
 package dev.mvc.reservation;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -35,7 +36,7 @@ public class ReservationCont {
   private CustomerProcInter customerProc;
   
   /**
-   * 등록 폼
+   * 관리자 예약 등록 폼 ( 전화예약으로 관리자가 직접 예약 입력 )
    * @return
    */
    @RequestMapping(value="/reservation/create.do", method=RequestMethod.POST )
@@ -43,7 +44,11 @@ public class ReservationCont {
      ModelAndView mav = new ModelAndView();
      mav.setViewName("/reservation/msg");
      
-     reservationVO.setCustomerno(1);
+     String tmp = reservationVO.getRdate();
+     tmp = tmp.replaceAll("T", " ");
+     reservationVO.setRdate(tmp);
+     
+     reservationVO.setCustomerno(99999); // 비회원 + 전화예약
      int cnt = this.reservationProc.create(reservationVO);
      
      if(cnt == 1) {
@@ -66,7 +71,7 @@ public class ReservationCont {
    public ModelAndView list_all(HttpSession session) {
      ModelAndView mav = new ModelAndView();
      
-     int managerno=0;
+     int managerno = 0;
      if(this.managerProc.isManager(session)) {
        mav.setViewName("/reservation/list_all_managerno");// /WEB-INF/views/reservation/list_all_managerno.jsp
        
@@ -88,7 +93,7 @@ public class ReservationCont {
    
    /**
     * 수정
-    * http://localhost:9093/reservation/update.do?reservationno=2
+    * http://localhost:9093/reservation/update.do?reserv_no=2
     * @return
     */
    @RequestMapping(value="/reservation/update.do",method = RequestMethod.GET)
@@ -97,16 +102,19 @@ public class ReservationCont {
      
      int managerno = 0;
      if(this.managerProc.isManager(session)) {
-       mav.setViewName("/reservation/list_all_update");// /WEB-INF/views/res/update.jsp
+       mav.setViewName("/reservation/list_all_update");// /WEB-INF/views/reservation/update.jsp
        
        ReservationVO reservationVO = this.reservationProc.read(reserv_no);
-       mav.addObject("reservationVO",reservationVO);
+       mav.addObject("reservationVO", reservationVO);
        
        managerno = (int)session.getAttribute("managerno");
        mav.addObject("managerno", managerno);
        
        ArrayList<ResVO> res_list = this.resProc.list_all_managerno(managerno);
        mav.addObject("res_list", res_list);
+       
+       ArrayList<ReservationVO> list = this.reservationProc.list_all_managerno(managerno);
+       mav.addObject("list", list);
        
      }
      else {
@@ -120,6 +128,10 @@ public class ReservationCont {
    @RequestMapping(value="/reservation/update.do",method = RequestMethod.POST)
    public ModelAndView update(ReservationVO reservationVO) { // 자동으로 FoodDAO 객체가 생성되고 Form의 값이 할당됨
      ModelAndView mav = new ModelAndView();
+     
+     String tmp = reservationVO.getRdate();
+     tmp = tmp.replaceAll("T", " ");
+     reservationVO.setRdate(tmp);
          
      int cnt = this.reservationProc.update(reservationVO); // 수정 처리
      System.out.println("-> cnt:"+ cnt);
@@ -148,7 +160,7 @@ public class ReservationCont {
        managerno = (int)session.getAttribute("managerno");
        
        ReservationVO reservationVO = this.reservationProc.read(reserv_no);
-       mav.addObject("reservationVO",reservationVO);
+       mav.addObject("reservationVO", reservationVO);
        
        ArrayList<ReservationVO> list = this.reservationProc.list_all_managerno(managerno);
        mav.addObject("list", list);

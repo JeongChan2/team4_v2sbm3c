@@ -52,27 +52,25 @@
      <th class="th_bs">번호</th>
      <th class="th_bs">이름</th>
      <th class="th_bs">개수</th>
-     <th class="th_bs">지출금액</th>
+     <th class="th_bs">판매금액</th>
      <th class="th_bs">지출날짜</th>
-     <th class="th_bs">업체이름</th>
      <th class="th_bs">식당이름</th>
      <th class="th_bs">기타</th>
       </tr>
   </thead>
   <tbody>
-    <c:forEach var="expense_JoinVO" items="${list }" varStatus="info">
-      <c:set var="expenseno" value="${expense_JoinVO.expenseno }"/>
+    <c:forEach var="Sell_JoinVO" items="${list }" varStatus="info">
+      <c:set var="sellno" value="${Sell_JoinVO.sellno }"/>
         <tr>
           <td class="td_bs">${info.count }</td>
-          <td class="td_bs">${expense_JoinVO.name }</td>
-          <td class="td_bs">${expense_JoinVO.cnt }</td>
-          <td class="td_bs">${expense_JoinVO.price }</td>
-          <td class="td_bs">${expense_JoinVO.rdate }</td>
-          <td class="td_bs">${expense_JoinVO.supplier_name }</td>
-          <td class="td_bs">${expense_JoinVO.resname }</td>
+          <td class="td_bs">${Sell_JoinVO.name }</td>
+          <td class="td_bs">${Sell_JoinVO.cnt }</td>
+          <td class="td_bs">${Sell_JoinVO.price }</td>
+          <td class="td_bs">${Sell_JoinVO.rdate }</td>
+          <td class="td_bs">${Sell_JoinVO.resname }</td>
           <td class="td_bs">
-            <a href="./update.do?expenseno=${expenseno }"><img src="/res/images/update.png" class="icon"></a>
-            <a href="./delete.do?expenseno=${expenseno }"><img src="/res/images/delete.png" class="icon"></a>
+            <a href="./update.do?sellno=${sellno }"><img src="/res/images/update.png" class="icon"></a>
+            <a href="./delete.do?sellno=${sellno }"><img src="/res/images/delete.png" class="icon"></a>
           </td>
         </tr>
     </c:forEach>

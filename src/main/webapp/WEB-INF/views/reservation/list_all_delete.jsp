@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9093/supplier/delete.do</title>
+<title>http://localhost:9093/reservation/delete.do</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 
@@ -25,10 +25,10 @@
 		<div class="menu_line"></div> 
 		
 		
-		<form name='frm' method='post' action='/expense/delete.do'>
-		  <input type="hidden" name="expenseno" value="${param.expenseno }">
+		<form name='frm' method='post' action='/reservation/delete.do'>
+		  <input type="hidden" name="reserv_no" value="${param.reserv_no }">
 		    <div class="msg_warning">
-            지출내역 <<${expenseVO.name }>> 삭제하시겠습니까?
+            예약내역 <<${reservationVO.reserv_name }>> 삭제하시겠습니까?
           </div>
 		 <div class="content_body_bottom" style="text-align: center;">
 		  <button type="submit" id='submit' class='btn btn-warning btn-sm' style='height: 28px; margin-bottom: 5px;'>삭제</button>
@@ -40,39 +40,36 @@
   <colgroup>
    <col style='width: 10%;'/>
    <col style='width: 20%;'/>
-   <col style='width: 10%;'/>    
+   <col style='width: 20%;'/>    
+   <col style='width: 10%;'/>
+   <col style='width: 20%;'/>
    <col style='width: 15%;'/>
-   <col style='width: 15%;'/>
-   <col style='width: 10%;'/>
-   <col style='width: 10%;'/>
-   <col style='width: 10%;'/>
+   <col style='width: 5%;'/>
   </colgroup>
   <thead>
     <tr>
      <th class="th_bs">번호</th>
-     <th class="th_bs">이름</th>
-     <th class="th_bs">개수</th>
-     <th class="th_bs">지출금액</th>
-     <th class="th_bs">지출날짜</th>
-     <th class="th_bs">업체이름</th>
+     <th class="th_bs">예약자 성함</th>
+     <th class="th_bs">예약자 휴대폰 번호</th>
+     <th class="th_bs">인원</th>
+     <th class="th_bs">예약 날짜</th>
      <th class="th_bs">식당이름</th>
      <th class="th_bs">기타</th>
       </tr>
   </thead>
   <tbody>
-    <c:forEach var="expense_JoinVO" items="${list }" varStatus="info">
-      <c:set var="expenseno" value="${expense_JoinVO.expenseno }"/>
+    <c:forEach var="reservationVO" items="${list }" varStatus="info">
+      <c:set var="reserv_no" value="${reservationVO.reserv_no }"/>
         <tr>
           <td class="td_bs">${info.count }</td>
-          <td class="td_bs">${expense_JoinVO.name }</td>
-          <td class="td_bs">${expense_JoinVO.cnt }</td>
-          <td class="td_bs">${expense_JoinVO.price }</td>
-          <td class="td_bs">${expense_JoinVO.rdate }</td>
-          <td class="td_bs">${expense_JoinVO.supplier_name }</td>
-          <td class="td_bs">${expense_JoinVO.resname }</td>
+          <td class="td_bs">${reservationVO.reserv_name }</td>
+          <td class="td_bs">${reservationVO.reserv_phone }</td>
+          <td class="td_bs">${reservationVO.cnt }</td>
+          <td class="td_bs">${reservationVO.rdate }</td>
+          <td class="td_bs">${reservationVO.res_name }</td>
           <td class="td_bs">
-            <a href="./update.do?expenseno=${expenseno }"><img src="/res/images/update.png" class="icon"></a>
-            <a href="./delete.do?expenseno=${expenseno }"><img src="/res/images/delete.png" class="icon"></a>
+            <a href="./update.do?reserv_no=${reserv_no }"><img src="/res/images/update.png" class="icon"></a>
+            <a href="./delete.do?reserv_no=${reserv_no }"><img src="/res/images/delete.png" class="icon"></a>
           </td>
         </tr>
     </c:forEach>
