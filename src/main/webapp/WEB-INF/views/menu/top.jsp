@@ -111,6 +111,7 @@
                     <a class="dropdown-item" href='/supplier/list_all_managerno.do'>공급업체 목록</a>
                     <a class="dropdown-item" href='/expense/list_all_managerno.do'>지출내역 목록</a>
                     <a class="dropdown-item" href='/sell/list_all_managerno.do'>판매내역 목록</a>
+                    <a class="dropdown-item" href='/reservation/list_all_managerno.do'>예약 내역</a>
                     <a class="dropdown-item" href='/manager/logout.do'>관리자 ${sessionScope.manager_id } 로그아웃</a>
                   </div>
                 </li>

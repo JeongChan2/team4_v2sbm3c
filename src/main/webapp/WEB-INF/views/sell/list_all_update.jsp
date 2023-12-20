@@ -7,10 +7,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9093/expense/update.do</title>
+<title>http://localhost:9093/sell/update.do</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 
+<script type="text/javascript">
+
+  window.onload = function() { // 자동 실행
+    // select 태그의 변경 이벤트를 감지하고 선택된 항목의 레이블을 출력하는 함수
+    document.getElementById("resno").addEventListener("change", function() {
+    	document.getElementById("name").value = ""
+      document.getElementById("cnt").value = 0
+      document.getElementById("price").value = 0
+      // 선택된 항목의 값을 가져옴
+      let resno = document.getElementById("resno").value; // foodno
+      //if (resno==0) {
+      //  document.getElementById('progress').innerHTML='음식점(식당)을 선택하세요.';
+      //  document.getElementById('progress').style.display=""; // show
+      //  return; // 함수 종료
+      //}
+      // 선택된 항목의 레이블을 가져옴
+      // let selectedLabel = document.querySelector('option[value="' + selectedValue + '"]').innerHTML;
+     
+      // 결과를 출력
+      // document.getElementById("selectedFruitLabel").textContent = "선택한 과일: " + selectedLabel;
+      const url = './select_menu_fetch.do?resno=' + resno; // http://localhost:9091/javascript/select_menu_fetch.do
+      console.log('-> url: ' + url);
+      // const dataToSend = {foodno};
+ 
+      fetch(url, {
+        method: 'GET', // HTTP GET or POST 요청
+        // headers: {
+        //   'Content-Type': 'application/json' // JSON 형식으로 데이터 전송을 알림
+        // },
+        // body: JSON.stringify({foodno}) // 보내는 데이터, {"foodno":foodno}, object -> json
+      })
+      .then((response) => response.json())  // response.json() or response.text()
+      .then((rdata) => {// 서버 응답 처리
+        // console.log('-> 서버 응답옴 rdata: ' + rdata);
+        // document.getElementById('progress').style.display="none"; // hide
+        let foodno = document.getElementById('foodno'); // <select>
+        
+        // 기존에 등록된 메뉴 삭제 - 최상단 제외
+        while (foodno.options.length > 1) {
+          foodno.remove(1);
+        }
+
+        for (let menu of rdata) { // Spring -> Js
+          // console.log('-> menu.menuno:' + menu.menuno);
+          // <option value="1" data-price="4000">라면</option>
+          let option = document.createElement("option");
+          option.text = menu.foodname; // 옵션 텍스트
+          option.value = menu.foodno; // 옵션 값
+          option.setAttribute("data-price", menu.price);
+          foodno.appendChild(option);
+        }
+        foodno.focus();
+      })
+      .catch(error => { // 오류 처리
+        console.log('-> error:' + error);
+        // document.getElementById('progress').style.display="none"; // hide
+      });
+ 
+      // document.getElementById('progress').innerHTML = '<img src="/images/progress.gif" style="width: 5%;">'; // static 기준
+      // document.getElementById('progress').style.display=""; // show
+  });
+
+
+  document.getElementById("foodno").addEventListener("change", function() {
+	  document.getElementById("cnt").value = 0
+    document.getElementById("price").value = 0
+    let menu = document.getElementById('foodno');
+    var selectedIndex = menu.selectedIndex; // 선택된 옵션의 인덱스
+    var selectedOption = menu.options[selectedIndex];
+
+    let menuno = selectedOption.value; // menuno
+    let name = selectedOption.textContent;
+    let price = selectedOption.getAttribute("data-price");
+
+    document.getElementById('name').value = name;
+    document.getElementById('data-price').value = price;
+
+    document.getElementById("cnt").value = 0
+    document.getElementById("price").value = 0
+    //console.log('-> menuno: ' + menuno);
+    //console.log('-> name: ' + name);
+    //console.log('-> price: ' + price);
+  });
+
+  document.getElementById("cnt").addEventListener("change", function() {
+      // id가 "cnt"인 input 요소의 값을 가져오기
+      var cntValue = document.getElementById("cnt").value;
+      console.log('-> cnt' + cntValue);
+      // 숫자인지 확인하고, 숫자이면 가격 계산
+      if (!isNaN(cntValue) && cntValue !== "") {
+        var totalPrice = cntValue * document.getElementById('data-price').value;
+        
+        // id가 "price"인 input 요소에 결과 반영
+        document.getElementById("price").value = totalPrice;
+      } else {
+        // 숫자가 아닌 경우 또는 빈 값인 경우 가격을 초기화
+        document.getElementById("price").value = "";
+      }
+    });
+
+  }
+
+</script>
 </head>
 <body>
 <c:import url="/menu/top.do" />
@@ -24,44 +127,44 @@
 		</aside>
 		<div class="menu_line"></div> 
 		
-		
-		<form name='frm' method='post' action='/expense/update.do'>
-		  <input type='hidden' name='expenseno' value='${expenseVO.expenseno }'>
+		<form name='frm' method='post' action='/sell/update.do'>
+		  <input type='hidden' name='sellno' value='${sellVO.sellno }'>
+		  <input type="hidden" name="data-price" id="data-price" value="">
+		  
+		  <div style="text-align: center; margin: 10px;">
+	      <label for="resno">식당 분류</label>
+	      <select name="resno" id="resno">
+	        <option value="0">식당을 선택해주세요.</option>
+	        <c:forEach var="resVO" items="${res_list}" varStatus="info">
+	          <c:set var="resno" value="${resVO.resno}"/>
+	          <c:set var="resname" value="${resVO.resname}"/>
+	          <option value="${resno}">${resname}</option>
+	        </c:forEach>
+	      </select>
+      </div>
+     
+	    <div style="text-align: center; margin: 10px;">
+	      <label for="foodno">음식 이름</label>
+	      <select name="foodno" id="foodno">
+	        <option value="0">메뉴를 선택해주세요.</option>
+	      </select>
+	    </div>
+		  
+		  
+		  
 		  <div style="margin-left:350px;">
 			  <div style="text-align: center;">
-        <input type="text" class="form-control form-control-sm" name="name" value="${expenseVO.name }" required="required" placeholder="지출내역 이름" autofocus="autofocus" 
+        <input type="text" class="form-control form-control-sm" id="name" name="name" value="${sellVO.name }" required="required" placeholder="판매내역 이름" autofocus="autofocus" 
                 class="" style="width: 50%">
         </div>
 				<div style="text-align: center;">
-	        <input type="text" class="form-control form-control-sm" name="cnt" value="${expenseVO.cnt }" required="required" placeholder="개수" autofocus="autofocus" 
+	        <input type="number" class="form-control form-control-sm" id="cnt" name="cnt" value="${sellVO.cnt }" required="required" placeholder="개수" autofocus="autofocus" 
 	                class="" style="width: 50%">
 	      </div>
 		    <div style="text-align: center;">
-	        <input type="text" class="form-control form-control-sm" name="price" value="${expenseVO.price }" required="required" placeholder="지출금액" autofocus="autofocus" 
-	                class="" style="width: 50%">
+	        <input type="text" class="form-control form-control-sm" id="price" name="price" value="${sellVO.price }" required="required" placeholder="판매금액" autofocus="autofocus" 
+	                class="" style="width: 50%" readonly>
 		    </div>
-		    
-		    <div style="text-align: center;">
-         <label for="resno">식당 분류</label>
-         <select name="resno" id="resno">
-           <c:forEach var="resVO" items="${res_list }" varStatus="info">
-             <c:set var="resno" value="${resVO.resno }"/>
-             <c:set var="resname" value="${resVO.resname }"/>
-             <option value="${resno }">${resname }</option>
-           </c:forEach>
-         </select>
-       </div>
-		    
-		    <div style="text-align: center;">
-       <label for="supplierno">공급업체 분류</label>
-       <select name="supplierno" id="supplierno">
-         <c:forEach var="supplierVO" items="${supplier_list }" varStatus="info">
-           <c:set var="supplierno" value="${supplierVO.supplierno }"/>
-           <c:set var="supplier_name" value="${supplierVO.name }"/>
-           <option value="${supplierno }">${supplier_name }</option>
-         </c:forEach>
-       </select>
-     </div>
      
       </div>
 		 <div class="content_body_bottom" style="text-align: center;">
@@ -86,27 +189,26 @@
      <th class="th_bs">번호</th>
      <th class="th_bs">이름</th>
      <th class="th_bs">개수</th>
-     <th class="th_bs">지출금액</th>
+     <th class="th_bs">판매금액</th>
      <th class="th_bs">지출날짜</th>
-     <th class="th_bs">업체이름</th>
+
      <th class="th_bs">식당이름</th>
      <th class="th_bs">기타</th>
       </tr>
   </thead>
   <tbody>
-    <c:forEach var="expense_JoinVO" items="${list }" varStatus="info">
-      <c:set var="expenseno" value="${expense_JoinVO.expenseno }"/>
+    <c:forEach var="Sell_JoinVO" items="${list }" varStatus="info">
+      <c:set var="sellno" value="${Sell_JoinVO.sellno }"/>
         <tr>
           <td class="td_bs">${info.count }</td>
-          <td class="td_bs">${expense_JoinVO.name }</td>
-          <td class="td_bs">${expense_JoinVO.cnt }</td>
-          <td class="td_bs">${expense_JoinVO.price }</td>
-          <td class="td_bs">${expense_JoinVO.rdate }</td>
-          <td class="td_bs">${expense_JoinVO.supplier_name }</td>
-          <td class="td_bs">${expense_JoinVO.resname }</td>
+          <td class="td_bs">${Sell_JoinVO.name }</td>
+          <td class="td_bs">${Sell_JoinVO.cnt }</td>
+          <td class="td_bs">${Sell_JoinVO.price }</td>
+          <td class="td_bs">${Sell_JoinVO.rdate }</td>
+          <td class="td_bs">${Sell_JoinVO.resname }</td>
           <td class="td_bs">
-            <a href="./update.do?expenseno=${expenseno }"><img src="/res/images/update.png" class="icon"></a>
-            <a href="./delete.do?expenseno=${expenseno }"><img src="/res/images/delete.png" class="icon"></a>
+            <a href="./update.do?sellno=${sellno }"><img src="/res/images/update.png" class="icon"></a>
+            <a href="./delete.do?sellno=${sellno }"><img src="/res/images/delete.png" class="icon"></a>
           </td>
         </tr>
     </c:forEach>

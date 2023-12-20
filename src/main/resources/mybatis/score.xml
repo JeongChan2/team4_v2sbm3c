@@ -47,4 +47,5 @@
     DELETE FROM score
     WHERE rescontentsno = #{rescontentsno}
   </delete>
+
 </mapper> 

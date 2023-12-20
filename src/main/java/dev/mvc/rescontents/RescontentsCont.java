@@ -47,7 +47,7 @@ public class RescontentsCont {
   @Autowired
   @Qualifier("dev.mvc.score.ScoreProc") // @Component("dev.mvc.score.ScoreProc")
   private ScoreProcInter scoreProc;
-  
+
   @Autowired
   @Qualifier("dev.mvc.customer.CustomerProc") // @Component("dev.mvc.score.ScoreProc")
   private CustomerProcInter customerProc;
@@ -216,8 +216,6 @@ public class RescontentsCont {
     
     return mav;
   }
-  
-  
   
 //  // @RequestMapping(value="/rescontents/list_by_resno.do", method = RequestMethod.GET)은
 //  // value에 있는 "list_by_resno.do"란 파일은 실제 존재하는 파일이 아니고 그냥 이런 url을 줄 때 이 함수를 호출하게 끔 연결만
@@ -438,6 +436,7 @@ public class RescontentsCont {
     return mav;
   }
 
+
   // FORM 데이터 처리 http://localhost:9092/res/create.do
   @RequestMapping(value="/rescontents/score.do",method = RequestMethod.GET)
   public ModelAndView score(ScoreVO scoreVO, ResVO resVO) { // 자동으로 ResDAO 객체가 생성되고 Form의 값이 할당됨
@@ -491,9 +490,7 @@ public class RescontentsCont {
     return mav;
   }
   
-  
-  
-  
+
   /**
    * 맵 등록/수정/삭제 폼
    * http://localhost:9092/rescontents/map.do?rescontentsno=1
@@ -846,7 +843,7 @@ public class RescontentsCont {
       }
     }
     // -------------------------------------------------------------------------------------
-    
+
     mav.addObject("resno", rescontentsVO.getResno());
     mav.addObject("now_page", now_page);
     mav.setViewName("redirect:/rescontents/list_by_resno.do"); 

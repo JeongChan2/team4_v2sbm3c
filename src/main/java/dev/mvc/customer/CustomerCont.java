@@ -128,6 +128,7 @@ public class CustomerCont {
     ModelAndView mav = new ModelAndView();
 
     mav.setViewName(url); // forward
+    //mav.setViewName("/customer/msg");
     
     return mav; // forward
   }

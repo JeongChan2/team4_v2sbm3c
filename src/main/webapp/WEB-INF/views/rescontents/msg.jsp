@@ -41,7 +41,7 @@
             <span class="span_fail">새로운 컨텐츠 등록에 실패했습니다.</span>
           </LI>                                                                      
         </c:when>
-        
+
         <c:when test="${code == 'score_success'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_success">평점 등록이 완료되었습니다.</span>
@@ -65,7 +65,7 @@
             <span class="span_fail">평점 삭제에 실패했습니다.</span>
           </LI>                                                                      
         </c:when>
-        
+
         <c:when test="${code == 'update_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_fail">컨텐츠 수정에 실패했습니다.</span>
@@ -106,7 +106,6 @@
         </c:choose>
         <button type='button' onclick="location.href='./list_by_resno.do?resno=${resno}'" class="btn btn-secondary btn-sm">목록</button>
         <button type='button' onclick="location.href='./list_by_resno_grid.do?resno=${resno}'" class="btn btn-secondary btn-sm">갤러리 목록</button>
-        
       </LI>
     </UL>
   </fieldset>

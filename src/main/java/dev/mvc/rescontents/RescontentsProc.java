@@ -295,7 +295,6 @@ public class RescontentsProc implements RescontentsProcInter {
       ArrayList<JoinVO> list = this.rescontentsDAO.food_list_all();
       return list;
     }
-    
-    
+
 
 }

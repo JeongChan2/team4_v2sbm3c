@@ -63,7 +63,10 @@
         <DIV style='text-align: center; width: 50%; float: left;'>
           <c:choose>
             <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-              <IMG src="/rescontents/storage/${file1saved }" style='width: 90%;'> 
+
+<%--               <IMG src="/rescontents/storage/${file1saved }" style='width: 90%;'>  --%>
+
+              <IMG src="/images/${file1saved }" style='width: 90%;'> 
             </c:when>
             <c:otherwise> <!-- 이미지가 없음 -->
                <IMG src="/rescontents/images/none1.png" style="width: 90%;"> 

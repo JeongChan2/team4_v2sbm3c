@@ -109,10 +109,17 @@ window.onload = function(){
           <c:choose>
             <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
               <%-- /static/rescontents/storage/ --%>
-              <img src="/rescontents/storage/${file1saved }" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
+
+<%--               <img src="/rescontents/storage/${file1saved }" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
             </c:when>
             <c:otherwise> <!-- 기본 이미지 출력 -->
-              <img src="/rescontents/images/none1.png" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
+              <img src="/rescontents/images/none1.png" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'>  --%>
+
+              <img src="/images/${thumb1 }" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
+            </c:when>
+            <c:otherwise> <!-- 기본 이미지 출력 -->
+              <img src="/images/none1.png" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
+
             </c:otherwise>
           </c:choose>
 
@@ -147,8 +154,13 @@ window.onload = function(){
       <li class="li_none">
         <DIV>
           <c:if test="${file1.trim().length() > 0 }">
-            첨부 파일: <a href='/download?dir=/rescontents/storage&filename=${file1saved}&downname=${file1}'>${file1}</a> (${size1_label}) 
+
+<%--             첨부 파일: <a href='/download?dir=/rescontents/storage&filename=${file1saved}&downname=${file1}'>${file1}</a> (${size1_label}) 
             <a href='/download?dir=/rescontents/storage&filename=${file1saved}&downname=${file1}'><img src="/rescontents/images/download.png"></a>
+ --%>
+            첨부 파일: <a href='/download?dir=/images&filename=${file1saved}&downname=${file1}'>${file1}</a> (${size1_label}) 
+            <a href='/download?dir=/images&filename=${file1saved}&downname=${file1}'><img src="/rescontents/images/download.png"></a>
+
           </c:if>
         </DIV>
       </li>

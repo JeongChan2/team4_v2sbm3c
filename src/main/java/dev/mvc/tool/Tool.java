@@ -387,16 +387,20 @@ public class Tool {
       String path = "";
       if (File.separator.equals("\\")) {
           // Windows 개발시 사용 폴더
-          // path="C:\\kd\\ws_java\\resort_v2sbm3c\\src\\main\\resources\\static";
+
+          //path="C:/kd/ws_java/team4_v2sbm3c/src/main/resources/static";
           
           // Windows 배포, 폴더 생성
-          path = "C:/kd/deploy/food_v3sbm3c";
+          path = "C:/kd/deploy/team4_v2sbm3c";
+
 
       } else {
           // Linux 배포
           // 기본 명령어
           // pwd: 현재 경로 확인, mkdir deploy: 폴더 생성, cd deploy: 폴더 이동, rmdir resort_v2sbm3c: 폴더 삭제, cd ..: 상위 폴더로 이동 
-          path = "/home/ubuntu/deploy/food_v3sbm3c";
+
+          path = "/home/ubuntu/deploy/team4_v2sbm3c";
+
       }
       // System.out.println("path: " + path);
       

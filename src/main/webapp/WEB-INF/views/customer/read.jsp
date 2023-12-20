@@ -198,8 +198,7 @@ window.onload = function() {
 	    document.getElementById('frm').submit(); // required="required" 작동 안됨.
 	  }  
 	</script>
-	</head>  
-</script>
+
 </head> 
 
 
