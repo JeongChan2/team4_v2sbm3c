@@ -13,7 +13,7 @@ package dev.mvc.score;
 public class ScoreVO {
 
     private int scoreno; //평점 번호
-    private int score; //평점
+    private Integer score; //평점
     private String rdate; //등록일
     private int rescontentsno; //컨텐츠 번호
     private int customerno;  //회원번호
@@ -23,10 +23,10 @@ public class ScoreVO {
     public void setScoreno(int scoreno) {
         this.scoreno = scoreno;
     }
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
     public String getRdate() {

@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.customer.CustomerProcInter;
 import dev.mvc.food.FoodProcInter;
 import dev.mvc.food.FoodVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.res.ResProcInter;
 import dev.mvc.res.ResVO;
 import dev.mvc.score.ScoreProcInter;
+import dev.mvc.score.ScoreVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -45,6 +47,10 @@ public class RescontentsCont {
   @Autowired
   @Qualifier("dev.mvc.score.ScoreProc") // @Component("dev.mvc.score.ScoreProc")
   private ScoreProcInter scoreProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.customer.CustomerProc") // @Component("dev.mvc.score.ScoreProc")
+  private CustomerProcInter customerProc;
   
   public RescontentsCont () {
     System.out.println("-> RescontentsCont created.");
@@ -210,6 +216,8 @@ public class RescontentsCont {
     
     return mav;
   }
+  
+  
   
 //  // @RequestMapping(value="/rescontents/list_by_resno.do", method = RequestMethod.GET)은
 //  // value에 있는 "list_by_resno.do"란 파일은 실제 존재하는 파일이 아니고 그냥 이런 url을 줄 때 이 함수를 호출하게 끔 연결만
@@ -392,7 +400,7 @@ public class RescontentsCont {
    * @return
    */
   @RequestMapping(value="/rescontents/read.do", method = RequestMethod.GET)
-  public ModelAndView read(int rescontentsno) { // int resno = (int)request.getParameter("resno");
+  public ModelAndView read(HttpSession session, int rescontentsno) { // int resno = (int)request.getParameter("resno");
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/rescontents/read"); // /WEB-INF/views/contents/read.jsp
     
@@ -405,7 +413,21 @@ public class RescontentsCont {
     content = Tool.convertChar(content); 
     
     rescontentsVO.setTitle(title);
-    rescontentsVO.setRescontent(content);  
+    rescontentsVO.setRescontent(content);
+    int customerno = 0;
+    if(customerProc.isCustomer(session)) {
+        customerno = (int)session.getAttribute("customerno");
+        HashMap<String, Object> hashMap = new HashMap<String, Object>();
+        hashMap.put("customerno", customerno);
+        hashMap.put("rescontentsno", rescontentsno);
+        Integer score = 0;
+        if(this.scoreProc.list_contents_me(hashMap) != null) {
+            score = this.scoreProc.list_contents_me(hashMap);
+        }
+        mav.addObject("score", score);
+        mav.addObject("customerno", customerno);
+    }
+    
     Double avgScore = this.scoreProc.list_contents(rescontentsno);
     if(avgScore == null) {
         avgScore = 0.0;
@@ -416,6 +438,62 @@ public class RescontentsCont {
     return mav;
   }
 
+  // FORM 데이터 처리 http://localhost:9092/res/create.do
+  @RequestMapping(value="/rescontents/score.do",method = RequestMethod.GET)
+  public ModelAndView score(ScoreVO scoreVO, ResVO resVO) { // 자동으로 ResDAO 객체가 생성되고 Form의 값이 할당됨
+    ModelAndView mav = new ModelAndView(); 
+    //mav.setViewName("/rescontents/msg"); // /WEB-INF/views/res/msg.jsp
+    
+    int cnt = this.scoreProc.update(scoreVO);
+    System.out.println("-> cnt:"+cnt);
+    
+    if(cnt == 1) {
+        mav.addObject("code","score_success"); // 키, 값
+        mav.addObject("resno",resVO.getResno()); // 카테고리 이름 jsp로 전송
+    }
+    else {
+        int cnt2 = this.scoreProc.create(scoreVO);
+        if(cnt2 == 1) {
+            mav.addObject("code","score_success"); // 키, 값
+        }else {
+            mav.addObject("code","score_fail");  
+        }
+    }
+    mav.addObject("cnt",cnt); // request.setAttribute("cnt",cnt); 와 같은 기능을 해준다.
+    mav.addObject("url", "/rescontents/msg"); // msg.jsp, redirect parameter 적용
+    mav.setViewName("redirect:/rescontents/msg.do"); // Post -> Get - param... 
+    return mav;
+  }
+  
+  // FORM 데이터 처리 http://localhost:9092/res/create.do
+  @RequestMapping(value="/rescontents/scoreDelete.do",method = RequestMethod.GET)
+  public ModelAndView scoreDelete(ScoreVO scoreVO, ResVO resVO) { // 자동으로 ResDAO 객체가 생성되고 Form의 값이 할당됨
+    ModelAndView mav = new ModelAndView(); 
+    //mav.setViewName("/rescontents/msg"); // /WEB-INF/views/res/msg.jsp
+    
+    HashMap<String, Object> hashMap = new HashMap<String, Object>();
+    hashMap.put("customerno", scoreVO.getCustomerno());
+    hashMap.put("rescontentsno", scoreVO.getRescontentsno());
+    
+    int cnt = this.scoreProc.delete(hashMap);
+    System.out.println("-> cnt:"+cnt);
+    
+    if(cnt == 1) {
+        mav.addObject("code","score_delete_success"); // 키, 값
+        mav.addObject("resno",resVO.getResno()); // 카테고리 이름 jsp로 전송
+    }
+    else {
+        mav.addObject("code","score_delete_fail");  
+    }
+    mav.addObject("cnt",cnt); // request.setAttribute("cnt",cnt); 와 같은 기능을 해준다.
+    mav.addObject("url", "/rescontents/msg"); // msg.jsp, redirect parameter 적용
+    mav.setViewName("redirect:/rescontents/msg.do"); // Post -> Get - param... 
+    return mav;
+  }
+  
+  
+  
+  
   /**
    * 맵 등록/수정/삭제 폼
    * http://localhost:9092/rescontents/map.do?rescontentsno=1
@@ -746,7 +824,7 @@ public class RescontentsCont {
     // -------------------------------------------------------------------
     // 파일 삭제 종료
     // -------------------------------------------------------------------
-        
+    this.scoreProc.delete_all(rescontentsVO.getRescontentsno()); //자식 DBMS(평점) 삭제
     this.rescontentsProc.delete(rescontentsVO.getRescontentsno()); // DBMS 삭제
         
     // -------------------------------------------------------------------------------------
@@ -768,7 +846,7 @@ public class RescontentsCont {
       }
     }
     // -------------------------------------------------------------------------------------
-
+    
     mav.addObject("resno", rescontentsVO.getResno());
     mav.addObject("now_page", now_page);
     mav.setViewName("redirect:/rescontents/list_by_resno.do"); 

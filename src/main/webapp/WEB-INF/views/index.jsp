@@ -36,8 +36,7 @@
  
  
 <div class="image-container" id="imageContainer">
-  <img src="/images/성규.jpg" style="width:40%">
-  <img src="/images/성규.jpg" style="width:40%; display: none">
+  <img src="/images/balanced-nutrition.jpg" style="width:40%">
 </div>
 
 <script>

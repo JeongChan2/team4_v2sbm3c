@@ -22,7 +22,7 @@
           class="form-control form-control-sm" style="width: 50%">
  </div>
  <br>
-  <div>
+<!--   <div>
   <label for="lang">식당 음식 분류</label>
   <select name="typenum" id="lang">
     <option value="1">족발, 보쌈</option>
@@ -38,7 +38,7 @@
     <option value="11">카페, 디저트</option>
     <option value="12">패스트푸드</option>
   </select>
- </div>
+ </div> -->
  <br>
  <div>
   <label>식당 주소</label>

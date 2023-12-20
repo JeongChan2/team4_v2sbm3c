@@ -25,7 +25,26 @@
 <title>Resort world</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
-
+<script type="text/javascript">
+window.onload = function(){
+  var ele = document.getElementsByName('score');
+    if(${score} == 5){
+    	ele[0].checked = true;
+    }else if(${score} == 4){
+    	ele[1].checked = true;
+    }
+    else if(${score} == 3){
+    	ele[2].checked = true;
+    }
+    else if(${score} == 2){
+    	ele[3].checked = true;
+    }
+    else if(${score} == 1){
+    	ele[4].checked = true;
+    }
+    
+  }
+</script>
 </head> 
  
 <body>
@@ -147,14 +166,49 @@
       
         <DIV style='text-decoration: none;'>
           <br>
-            평점 : ${ avgScore }
-    
+            평점 : ${ avgScore }<br>
+            
         </DIV>
+        <c:choose>
+        <c:when test="${sessionScope.id != null}">
+        ${sessionScope.cname }의 평점 : ${score}
+            <div style="text-align: center; vertical-align: middle;">
+            <form name='frm2' id='frm2' method='get'>
+                <input type="hidden" name="resno" value="${resno }" />
+                <input type="hidden" name="rescontentsno" value="${rescontentsno }" />
+                <input type="hidden" name="customerno" value="${customerno }" />
+                    <div class="star-rating">
+                      <input type="radio" id="5-stars" name="score" value="5" />
+                      <label for="5-stars" class="star">&#9733;</label>
+                      <input type="radio" id="4-stars" name="score" value="4" />
+                      <label for="4-stars" class="star">&#9733;</label>
+                      <input type="radio" id="3-stars" name="score" value="3" />
+                      <label for="3-stars" class="star">&#9733;</label>
+                      <input type="radio" id="2-stars" name="score" value="2" />
+                      <label for="2-stars" class="star">&#9733;</label>
+                      <input type="radio" id="1-star" name="score" value="1" />
+                      <label for="1-star" class="star">&#9733;</label>
+                    </div>
+                    <br>
+                    <button type="submit" formaction='./score.do' class="btn btn-primary btn-sm">등록</button>
+                    <c:choose>
+                        <c:when test="${score != 0}">
+                            <button type="submit" formaction='./scoreDelete.do' class="btn btn-danger btn-sm">삭제</button>
+                        </c:when>
+                    </c:choose>
+                    
+                    <button type="button" onclick="location.href='./list_by_resno.do?resno=${param.resno }&now_page=1'" class="btn btn-primary btn-sm">취소</button> 
+              </form>
+              </div>
+        </c:when>
+        <c:otherwise>
+        </c:otherwise>
+    </c:choose>
+        
       </li>   
     </ul>
   </fieldset>
-
-</DIV>
+  
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>

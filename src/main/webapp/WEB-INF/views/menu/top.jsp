@@ -52,7 +52,7 @@
   
 
   <nav class="navbar navbar-expand-md navbar-dark bg-light">
-      <a class="nav-link top_menu_link" style='margin-right: 10px;' href="#">추천 리스트</a>
+      <!-- <a class="nav-link top_menu_link" style='margin-right: 10px;' href="/rescontents/list_rec.do">추천 리스트</a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
         <span class="navbar-toggler-icon"></span>
       </button>    
@@ -82,7 +82,7 @@
                     <a class="dropdown-item" href="#">비밀번호 찾기</a>
                   </c:when>
                   <c:otherwise>
-                    <a class="dropdown-item" href="http://3.38.81.88:8000/ais/recommend_form/?customerno=${sessionScope.customerno }">관심분야 등록하고 추천받기</a>
+                    <a class="dropdown-item" href="http://3.38.81.88:8000/ais/recommend_form/?customerno=${sessionScope.customerno }">취향 음식 등록하고 추천받기</a>
                     <a class="dropdown-item" href="/requirement/read.do">마이페이지</a>
                     <a class="dropdown-item" href="/requirement/create.do">영양정보 관리</a>
                     <a class="dropdown-item" href="/customer/read_info.do">가입 정보</a>

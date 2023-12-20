@@ -12,12 +12,19 @@
   <select id="list_by_me" resultType="dev.mvc.score.ScoreVO" parameterType="int">
     SELECT scoreno, score, rdate, rescontentsno, customerno
     FROM score 
-    WHERE customerno = #{customerno}
+    WHERE customerno = #{customerno} 
+  </select> 
+  
+    <!-- 해당 컨텐츠에서의 나의 평점 -->
+  <select id="list_contents_me" resultType="Integer" parameterType="HashMap">
+    SELECT score
+    FROM score 
+    WHERE customerno = #{customerno} AND rescontentsno = #{rescontentsno}
   </select> 
   
     <!-- 해당 컨텐츠의 평점 -->
   <select id="list_contents" resultType="Double" parameterType="int">
-    SELECT AVG(score)
+    SELECT AVG(score) as score
     FROM score
     WHERE rescontentsno = #{rescontentsno}
   </select>
@@ -34,5 +41,10 @@
   <delete id="delete" parameterType="HashMap">
     DELETE FROM score
     WHERE customerno=#{customerno} AND rescontentsno = #{rescontentsno}
+  </delete>
+      <!-- 해당 컨텐츠의 평점 삭제 -->
+  <delete id="delete_all" parameterType="int">
+    DELETE FROM score
+    WHERE rescontentsno = #{rescontentsno}
   </delete>
 </mapper> 

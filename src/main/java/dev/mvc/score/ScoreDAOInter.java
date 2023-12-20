@@ -15,6 +15,13 @@ public interface ScoreDAOInter {
      * @return
      */
     public ScoreVO list_by_me(int customerno);
+    
+    /**
+     * 해당 컨텐츠의 나의 평점
+     * @param customerno
+     * @return
+     */
+    public Integer list_contents_me(HashMap<String, Object> map);
     /**
      * 해당 컨텐츠의 평점(평균)
      * @param rescontentsno
@@ -32,5 +39,11 @@ public interface ScoreDAOInter {
      * @param HashMap<Integer, Integer>
      * @return
      */
-    public int delete(HashMap<Integer, Integer> map);
+    public int delete(HashMap<String, Object> map);
+    /**
+     * 해당 컨텐츠의 평점 삭제
+     * @param HashMap<Integer, Integer>
+     * @return
+     */
+    public int delete_all(int rescontentsno);
 }

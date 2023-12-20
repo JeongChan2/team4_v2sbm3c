@@ -39,8 +39,20 @@ public class ScoreProc implements ScoreProcInter {
     }
 
     @Override
-    public int delete(HashMap<Integer, Integer> map) {
+    public int delete(HashMap<String, Object> map) {
         int cnt = this.scoreDAO.delete(map);
+        return cnt;
+    }
+
+    @Override
+    public Integer list_contents_me(HashMap<String, Object> map) {
+        Integer cnt = this.scoreDAO.list_contents_me(map);
+        return cnt;
+    }
+
+    @Override
+    public int delete_all(int rescontentsno) {
+        int cnt = this.scoreDAO.delete_all(rescontentsno);
         return cnt;
     }
     
