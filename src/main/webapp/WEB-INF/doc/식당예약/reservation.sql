@@ -9,7 +9,7 @@ CREATE TABLE RESERVATION(
 		RESERV_NAME                   		VARCHAR2(30)		 NOT NULL,
 		RESERV_PHONE                  		VARCHAR2(14)		 NOT NULL ,
 		CNT                           		NUMBER(3)		     NOT NULL,
-		RDATE                         		DATE		         NOT NULL,
+		RDATE                         		VARCHAR2(50)		 NOT NULL,
 		CUSTOMERNO                    		NUMBER(10)		     NULL ,
 		MANAGERNO                     		NUMBER(10)		     NOT NULL ,
 		RESNO                         		NUMBER(10)		     NOT NULL,
