@@ -19,14 +19,14 @@
   <select id="read" resultType="dev.mvc.take.TakeVO" parameterType="int">
 		SELECT takeno, customerno, calories, carbohydrates, protein, fat, ndate
 		FROM n_take
-		WHERE customerno = #{customerno} AND ndate = TO_CHAR(SYSDATE, 'yyyy mm dd')
+		WHERE customerno = #{customerno} AND TO_CHAR(ndate, 'yyyy mm dd') = TO_CHAR(SYSDATE, 'yyyy mm dd')
   </select> 
   
   <!-- 로그인한 회원이 이미 하루 섭취량이 있다면 새롭게 저장이 아닌 갱신 -->
   <update id="update" parameterType="dev.mvc.take.TakeVO">
 		UPDATE n_take 
 		SET calories = calories+#{calories}, carbohydrates = carbohydrates+#{carbohydrates}, protein = protein+#{protein}, fat = fat+#{fat}
-		WHERE customerno=#{customerno} AND ndate = TO_CHAR(SYSDATE, 'yyyy mm dd')
+		WHERE customerno=#{customerno} AND TO_CHAR(ndate, 'yyyy mm dd') = TO_CHAR(SYSDATE, 'yyyy mm dd')
   </update>
   
 </mapper> 
