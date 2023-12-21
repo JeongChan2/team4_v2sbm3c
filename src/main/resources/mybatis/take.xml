@@ -6,7 +6,7 @@
   <select id="check" resultType="int" parameterType="int">
     SELECT COUNT(customerno) as cnt
     FROM n_take
-    WHERE customerno=3 AND TO_CHAR(ndate, 'yyyy mm dd') = TO_CHAR(SYSDATE, 'yyyy mm dd')
+    WHERE customerno=#{customerno} AND TO_CHAR(ndate, 'yyyy mm dd') = TO_CHAR(SYSDATE, 'yyyy mm dd')
   </select>
 
   <!-- 하루 섭취량 생성 (등록)-->
