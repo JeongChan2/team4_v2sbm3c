@@ -80,6 +80,7 @@ WHERE customerno=3  AND ndate = TO_CHAR(SYSDATE, 'yyyy mm dd');
 5. 영양 정보의 존재 유/무 확인
 SELECT COUNT(customerno) as cnt
 FROM n_take
-WHERE customerno=3 AND ndate = TO_CHAR(SYSDATE, 'yyyy mm dd');
+WHERE customerno=3 AND TO_CHAR(ndate, 'yyyy mm dd') = TO_CHAR(SYSDATE, 'yyyy mm dd');
+
 
 COMMIT;
