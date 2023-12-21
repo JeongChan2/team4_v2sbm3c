@@ -24,7 +24,7 @@
 <c:import url="/menu/top.do" />
 
 <div class="image-container" id="imageContainer">
-  <img src="/images/balanced-nutrition.jpg">
+  <img src="/images/balanced_nutrition.jpg">
 </div>
     <c:choose>
         <c:when test="${sessionScope.id == null}">
