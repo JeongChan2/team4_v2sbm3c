@@ -156,6 +156,7 @@ window.onload = function(){
       </div>
     <br><br>
   </div>
+  <div class='title_line'>평점을 새긴 컨텐츠 목록</DIV>
   <table class="table table-hover">
     <colgroup>
       <col style="width: 10%;"></col>
