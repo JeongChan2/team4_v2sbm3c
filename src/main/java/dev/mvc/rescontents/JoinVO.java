@@ -118,7 +118,37 @@ public class JoinVO {
   private String f_protein;
   /** 지방 */
   private String f_fat;
-  public int getRescontentsno() {
+  
+  
+//================================================================================
+//score 관련 변수
+  private int scoreno; //평점 번호
+  private Integer score; //평점
+  private int customerno;  //회원번호
+  
+  
+  
+  
+  
+  public int getScoreno() {
+    return scoreno;
+    }
+    public void setScoreno(int scoreno) {
+        this.scoreno = scoreno;
+    }
+    public Integer getScore() {
+        return score;
+    }
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+    public int getCustomerno() {
+        return customerno;
+    }
+    public void setCustomerno(int customerno) {
+        this.customerno = customerno;
+    }
+public int getRescontentsno() {
     return rescontentsno;
   }
   public void setRescontentsno(int rescontentsno) {

@@ -60,6 +60,21 @@ SELECT COUNT(*) as cnt
 
 COMMIT;
 
+SELECT r.rescontentsno, r.managerno, r.resno, r.title, r.rescontent, r.recom, r.cnt, r.replycnt, r.passwd,
+        r.word, r.rdate,r.file1, r.file1saved, r.thumb1, r.size1, r.foodno, 
+        s.scoreno, s.score, s.rescontentsno, s.customerno
+FROM rescontents r INNER JOIN score s ON r.rescontentsno = s.rescontentsno
+ORDER BY s.score DESC
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -296,5 +296,11 @@ public class RescontentsProc implements RescontentsProcInter {
       return list;
     }
 
+    @Override
+    public ArrayList<JoinVO> score_list_all() {
+        ArrayList<JoinVO> list = this.rescontentsDAO.score_list_all();
+        return list;
+    }
+
 
 }

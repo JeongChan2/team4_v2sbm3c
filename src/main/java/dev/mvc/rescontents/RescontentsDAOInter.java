@@ -26,6 +26,12 @@ public interface RescontentsDAOInter {
   public ArrayList<JoinVO> food_list_all();
   
   /**
+   * 평점 전체 목록
+   * @return
+   */
+  public ArrayList<JoinVO> score_list_all();
+  
+  /**
    * 식당 카테고리별 등록한 글 목록
    * @param rescontentsno
    * @return
