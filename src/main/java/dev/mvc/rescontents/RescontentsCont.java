@@ -205,15 +205,11 @@ public class RescontentsCont {
         
         rescontentsVO.setTitle(title);
         rescontentsVO.setRescontent(content);  
-
       }
-      mav.addObject("list", list);
-      
+      mav.addObject("list", list); 
     } else {
       mav.setViewName("/manager/login_need"); // /WEB-INF/views/manager/login_need.jsp
-      
     }
-    
     return mav;
   }
   

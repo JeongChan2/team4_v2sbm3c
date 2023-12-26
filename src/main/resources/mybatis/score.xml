@@ -48,4 +48,5 @@
     WHERE rescontentsno = #{rescontentsno}
   </delete>
 
+
 </mapper> 
