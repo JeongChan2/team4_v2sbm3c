@@ -88,4 +88,11 @@ public interface CustomerProcInter {
    * 로그인 처리
    */
   public int login(HashMap<String, Object> map);
+  
+  /**
+   * 회원 탈퇴
+   * @param customerno
+   * @return
+   */
+  public int user_withdrawal(int customerno);
 }

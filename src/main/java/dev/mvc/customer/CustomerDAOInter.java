@@ -29,7 +29,7 @@ public interface CustomerDAOInter {
    * @param memberno
    * @return
    */
-  public CustomerVO read(int memberno);
+  public CustomerVO read(int customerno);
   
   /**
    * id로 회원 정보 조회
@@ -43,7 +43,7 @@ public interface CustomerDAOInter {
    * @param memberVO
    * @return
    */
-  public int update(CustomerVO memberVO);
+  public int update(CustomerVO customerVO);
   
   /**
    * update와 delete는 모두 처리된 레코드 갯수를 리턴한다.
@@ -51,7 +51,7 @@ public interface CustomerDAOInter {
    * @param memberno
    * @return
    */
-  public int delete(int memberno);
+  public int delete(int customerno);
   
   /**
    * 현재 패스워드 검사
@@ -71,4 +71,11 @@ public interface CustomerDAOInter {
    * 로그인 처리
    */
   public int login(HashMap<String, Object> map);
+  
+  /**
+   * 회원 탈퇴
+   * @param customerno
+   * @return
+   */
+  public int user_withdrawal(int customerno);
 }

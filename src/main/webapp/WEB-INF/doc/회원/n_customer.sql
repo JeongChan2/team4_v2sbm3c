@@ -161,5 +161,21 @@ WHERE id='user1@gmail.com' AND passwd='1234';
  cnt
  ---
    0
- 
+
+-- 탈퇴회원의 경우 로그인 불가
+SELECT COUNT(customerno) as cnt
+FROM n_customer
+WHERE id='user1@gmail.com' AND passwd='1234' AND GRADE!=99;
+
+
+-- grade가 99일 시 탈퇴
+8. 회원탈퇴 기능
+UPDATE n_customer 
+SET grade=99
+WHERE customerno=3;
+
+9. 등급 변경
+UPDATE n_customer 
+SET grade=99
+WHERE customerno=15;
  

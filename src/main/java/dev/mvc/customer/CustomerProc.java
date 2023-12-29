@@ -117,4 +117,10 @@ public class CustomerProc implements CustomerProcInter {
     int cnt = this.customerDAO.login(map);
     return cnt;
   }
+
+  @Override
+  public int user_withdrawal(int customerno) {
+    int cnt = this.customerDAO.user_withdrawal(customerno);
+    return cnt;
+  }
 }

@@ -615,6 +615,46 @@ public class CustomerCont {
     
     return mav;
   }
+ 
+  /**
+   * 회원 탈퇴
+   * @param customerno
+   * @return
+   */
+  @RequestMapping(value="/customer/user_withdrawal.do", method=RequestMethod.GET)
+  public ModelAndView user_withdrawal(){
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/customer/user_withdrawal"); // user_withdrawal.jsp
+    
+    return mav;
+  }
   
+  /**
+   * 회원 탈퇴
+   * @param customerno 회원 번호
+   */
+  @RequestMapping(value="/customer/user_withdrawal.do", method=RequestMethod.POST)
+  public ModelAndView user_withdrawal(HttpSession session){
+    ModelAndView mav = new ModelAndView();
+    
+    int customerno = (int)session.getAttribute("customerno"); // 현재 로그인한 회원의 정보만 패스워드 변경 가능
+    //int customerno = 3; // 테스트
+    
+    int cnt = this.customerProc.user_withdrawal(customerno);
+    
+    if (cnt == 1) {
+      mav.addObject("code", "passwd_update_success"); // 탈퇴 성공
+    } else {
+      mav.addObject("code", "passwd_update_fail");       // 탈퇴 실패
+    }
+
+
+    mav.addObject("cnt", cnt); // 패스워드 일치 여부
+    mav.addObject("url", "/customer/msg");  // /customer/msg -> /customer/msg.jsp
+    
+    mav.setViewName("redirect:/customer/msg.do");
+    
+    return mav;
+  }
   
 }
