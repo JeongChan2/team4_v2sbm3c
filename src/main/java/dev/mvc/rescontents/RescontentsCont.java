@@ -461,6 +461,40 @@ public class RescontentsCont {
   }
   
   // FORM 데이터 처리 http://localhost:9092/res/create.do
+  @RequestMapping(value="/rescontents/score_list.do",method = RequestMethod.GET)
+  public ModelAndView score_list() { // 자동으로 ResDAO 객체가 생성되고 Form의 값이 할당됨
+    ModelAndView mav = new ModelAndView(); 
+    //mav.setViewName("redirect:/rescontents/list_rec.do");
+    mav.setViewName("redirect:/rescontents/list_rec.do"); 
+    
+    ArrayList<JoinVO> list = this.rescontentsProc.score_list_all();
+
+    // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
+    for (JoinVO vo : list) {
+      String title = vo.getTitle();
+      String content = vo.getRescontent();
+      
+      title = Tool.convertChar(title);  // 특수 문자 처리
+      content = Tool.convertChar(content); 
+      
+      vo.setTitle(title);
+      vo.setRescontent(content);  
+    }
+    mav.addObject("list", list);
+    
+//    ResVO resVO = resProc.read(rescontentsVO.getResno());
+//    mav.addObject("resVO", resVO);
+//    
+//    HashMap<String, Object> hashMap = new HashMap<String, Object>();
+//    hashMap.put("resno", rescontentsVO.getResno());
+//    hashMap.put("word", rescontentsVO.getWord());
+    
+    
+    return mav;
+  }
+  
+  
+  // FORM 데이터 처리 http://localhost:9092/res/create.do
   @RequestMapping(value="/rescontents/scoreDelete.do",method = RequestMethod.GET)
   public ModelAndView scoreDelete(ScoreVO scoreVO, ResVO resVO) { // 자동으로 ResDAO 객체가 생성되고 Form의 값이 할당됨
     ModelAndView mav = new ModelAndView(); 

@@ -31,11 +31,11 @@
   
         <!-- 모든 카테고리의 점수별 글목록 -->
   <select id="score_list_all" resultType="dev.mvc.rescontents.JoinVO">
-      SELECT r.rescontentsno, r.managerno, r.resno, r.title, r.rescontent, r.recom, r.cnt, r.replycnt, r.passwd,
-              r.word, r.rdate,r.file1, r.file1saved, r.thumb1, r.size1, r.foodno, 
-              s.scoreno, s.score, s.rescontentsno, s.customerno
-      FROM rescontents r INNER JOIN score s ON r.rescontentsno = s.rescontentsno
-      ORDER BY s.score DESC
+    SELECT r.rescontentsno, r.managerno, r.resno, r.title, r.rescontent, r.recom, r.cnt, r.replycnt, r.passwd,
+          r.word, r.rdate,r.file1, r.file1saved, r.thumb1, r.size1, r.foodno
+    FROM rescontents r
+    WHERE <![CDATA[ rownum<=5 ]]>
+    ORDER BY NVL((SELECT AVG(NVL(score,0)) FROM score WHERE rescontentsno = r.rescontentsno),0) DESC
   </select> 
   
     <!-- 특정 식당 카테고리의 등록된 글목록 -->

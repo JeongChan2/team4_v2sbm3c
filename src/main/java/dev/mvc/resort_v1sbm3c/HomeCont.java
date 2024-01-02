@@ -11,8 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.res.ResProcInter;
 import dev.mvc.res.ResVO;
+import dev.mvc.rescontents.JoinVO;
 import dev.mvc.rescontents.RescontentsProcInter;
 import dev.mvc.rescontents.RescontentsVO;
+import dev.mvc.tool.Tool;
 
 
 @Controller
@@ -41,7 +43,19 @@ public class HomeCont {
     // spring.mvc.view.suffix=.jsp
     mav.setViewName("/rescontents/list_rec"); // /WEB-INF/views/rescontents/list_all_gallery.jsp
     
-    ArrayList<RescontentsVO> list = this.rescontentsProc.list_all();
+    ArrayList<JoinVO> list = this.rescontentsProc.score_list_all();
+
+    // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
+    for (JoinVO vo : list) {
+      String title = vo.getTitle();
+      String content = vo.getRescontent();
+      
+      title = Tool.convertChar(title);  // 특수 문자 처리
+      content = Tool.convertChar(content); 
+      
+      vo.setTitle(title);
+      vo.setRescontent(content);  
+    }
     mav.addObject("list", list);
     
     return mav;

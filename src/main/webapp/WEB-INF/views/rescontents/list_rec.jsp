@@ -48,7 +48,7 @@
         
       <!-- 4기준 하나의 이미지, 24 * 4 = 96% -->
       <!-- 5기준 하나의 이미지, 19.2 * 5 = 96% -->
-      <div onclick="location.href='./read.do?rescontentsno=${rescontentsno}&word=${param.word}&now_page=${param.now_page == null ? 1 : param.now_page }&resno=${param.resno }'"
+      <div onclick="location.href='/rescontents/read.do?rescontentsno=${rescontentsno}&word=${param.word}&now_page=${param.now_page == null ? 1 : param.now_page }&resno=${rescontentsVO.resno }'"
       style='width: 19%; height: 200px; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: left; cursor: pointer;'>
         
         <c:choose> 
@@ -64,15 +64,11 @@
         
       </div>
       
-      <%-- 하나의 행에 이미지를 5개씩 출력후 행 변경, index는 0부터 시작 --%>
-      <c:if test="${status.count % 5 == 0 }"> 
-        <HR class='menu_line'> <%-- 줄바꿈 --%>
-      </c:if>
     </c:forEach>
   </div>
 
   <!-- 페이지 목록 출력 부분 시작 -->
-  <div class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
+  <%-- <div class='bottom_menu'>${paging }</DIV> --%> <%-- 페이지 리스트 --%>
   <!-- 페이지 목록 출력 부분 종료 -->
  </div>
 
