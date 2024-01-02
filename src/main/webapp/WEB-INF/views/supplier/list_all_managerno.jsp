@@ -15,14 +15,40 @@
 <body>
 <c:import url="/menu/top.do" />
 
-    <div class='title_line'>공급업체 목록</div>
+    <div class='title_line'>공급업체 목록
+	    <c:if test="${param.word.length() > 0 }">
+	      > 「${param.word }」 검색 ${search_count } 건
+	    </c:if>
+	  </div>
 
 		<aside class="aside_right">
-		  <a href="#">등록</a>
-		  <span class='menu_divide' >│</span>
+		  <c:if test="${sessionScope.manager_id != null }">
+			  <a href="#">등록</a>
+			  <span class='menu_divide' >│</span>
+		  </c:if>
 		  <a href="javascript:location.reload();">새로고침</a>
 		</aside>
 		<div class="menu_line"></div> 
+		
+		<%-- 동적 sql --%>
+   <div style="text-align: right; clear: both;">  
+    <form name='frm' id='frm' method='get' action='./list_all_managerno.do'> <%-- 자기자신한테 submit --%>
+      
+      <c:choose>
+        <c:when test="${param.word != '' }"> <%-- 검색하는 경우는 검색어를 출력 --%>
+          <input type='text' name='word' id='word' value='${param.word }' class='input_word'>
+        </c:when>
+        <c:otherwise> <%-- 검색하지 않는 경우 --%>
+          <input type='text' name='word' id='word' value='' class='input_word'>
+        </c:otherwise>
+      </c:choose>
+      <button type='submit' class='btn btn-secondary btn-sm'>검색</button>
+      <c:if test="${param.word.length() > 0 }"> <%-- 검색 상태라면 '검색 취소' 버튼을 출력한다 --%>
+        <button type='button' class='btn btn-secondary btn-sm' 
+                    onclick="location.href='./list_all_managerno.do?word='">검색 취소</button>  
+      </c:if>    
+    </form>
+  </div>
 		
 		
 		<form name='frm' method='post' action='/supplier/create.do'>
@@ -72,6 +98,10 @@
 
   </tbody>
 </table>
+
+<!-- 페이지 목록 출력 부분 시작 -->
+  <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
+<!-- 페이지 목록 출력 부분 종료 -->
  
 <jsp:include page="../menu/bottom.jsp" flush='false' /> 
 </body>

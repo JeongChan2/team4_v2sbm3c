@@ -1,6 +1,9 @@
 package dev.mvc.supplier;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import dev.mvc.rescontents.RescontentsVO;
 
 public interface SupplierDAOInter {
   
@@ -38,4 +41,18 @@ public interface SupplierDAOInter {
    * @return
    */
   public int update(SupplierVO supplierVO);
+  
+  /**
+   * 검색된 레코드 갯수
+   * @param map
+   * @return
+   */
+  public int search_count(HashMap<String, Object> hashMap);
+  
+  /**
+   * 매니저별 검색 목록 + 페이징
+   * @param SupplierVO
+   * @return
+   */
+  public ArrayList<SupplierVO> list_by_managerno_search_paging(SupplierVO supplierVO);
 }

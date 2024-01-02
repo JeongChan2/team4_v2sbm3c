@@ -1,6 +1,7 @@
 package dev.mvc.supplier;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -53,7 +54,7 @@ public class SupplierCont {
     * @return
     */
    @RequestMapping(value="/supplier/list_all_managerno.do",method = RequestMethod.GET)
-   public ModelAndView list_all(HttpSession session) {
+   public ModelAndView list_all(HttpSession session, SupplierVO supplierVO) {
      ModelAndView mav = new ModelAndView();
      
      int managerno=0;
@@ -63,8 +64,20 @@ public class SupplierCont {
        managerno = (int)session.getAttribute("managerno");
        mav.addObject("managerno", managerno);
        
-       ArrayList<SupplierVO> list = this.supplierProc.list_all_managerno(managerno);
+       supplierVO.setManagerno(managerno);
+       
+       ArrayList<SupplierVO> list = this.supplierProc.list_by_managerno_search_paging(supplierVO);
        mav.addObject("list", list);
+       
+       HashMap<String, Object> hashMap = new HashMap<String, Object>();
+       hashMap.put("managerno", managerno);
+       hashMap.put("word", supplierVO.getWord());
+       
+       int search_count = this.supplierProc.search_count(hashMap);  // 검색된 레코드 갯수 ->  전체 페이지 규모 파악
+       mav.addObject("search_count",search_count);
+       
+       String paging = supplierProc.pagingBox(supplierVO.getManagerno(), supplierVO.getNow_page(), supplierVO.getWord(), "list_all_managerno.do");
+       mav.addObject("paging", paging);
      }
      else {
        mav.setViewName("/manager/login_need"); // /WEB-INF/views/manager/login_need.jsp
