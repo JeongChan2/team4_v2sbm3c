@@ -39,6 +39,12 @@ public interface SellDAOInter {
   public int delete(int sellno);
   
   /**
+   * 삭제
+   * @param 삭제할 레코드 PK 번호
+   */
+  public int delete_resno(int resno);
+  
+  /**
    * 매니저별 전체 목록, 식당이름 같이 가져옴
    * @return
    */

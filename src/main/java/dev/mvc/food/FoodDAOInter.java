@@ -39,6 +39,12 @@ public interface FoodDAOInter {
   public int delete(int foodno);
   
   /**
+   * 삭제
+   * @param 삭제할 레코드 PK 번호
+   */
+  public int delete_resno(int resno);
+  
+  /**
    * 전체 목록 res
    * @return
    */

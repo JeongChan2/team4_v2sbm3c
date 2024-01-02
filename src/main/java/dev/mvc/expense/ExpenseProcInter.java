@@ -37,6 +37,12 @@ public interface ExpenseProcInter {
   public int delete(int expenseno);
   
   /**
+   * 삭제
+   * @param 삭제할 레코드 PK 번호
+   */
+  public int delete_resno(int resno);
+  
+  /**
    * 매니저별 전체 목록, 식당이름과 공급체이름까지 같이 가져옴
    * @return
    */

@@ -48,4 +48,10 @@ public interface ReservationProcInter {
    * @param 삭제할 레코드 PK 번호
    */
   public int delete(int reserv_no);
+  
+  /**
+   * 삭제
+   * @param 삭제할 레코드 PK 번호
+   */
+  public int delete_resno(int resno);
 }

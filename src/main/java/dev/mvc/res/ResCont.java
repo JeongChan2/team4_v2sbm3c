@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.expense.ExpenseProcInter;
+import dev.mvc.food.FoodProcInter;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.rescontents.Rescontents;
 import dev.mvc.rescontents.RescontentsProcInter;
 import dev.mvc.rescontents.RescontentsVO;
+import dev.mvc.reservation.ReservationProcInter;
+import dev.mvc.score.ScoreProcInter;
+import dev.mvc.sell.SellProcInter;
 import dev.mvc.tool.Tool;
 
 @Controller
@@ -31,6 +36,26 @@ public class ResCont {
   @Autowired
   @Qualifier("dev.mvc.manager.ManagerProc")   // "dev.mvc.admin.AdminProc"라고 명명된 클래스 (Qualifier->이름을 찾아와주는 역할)
   private ManagerProcInter managerProc; 
+  
+  @Autowired
+  @Qualifier("dev.mvc.sell.SellProc")   // "dev.mvc.admin.AdminProc"라고 명명된 클래스 (Qualifier->이름을 찾아와주는 역할)
+  private SellProcInter sellProc; 
+  
+  @Autowired
+  @Qualifier("dev.mvc.reservation.ReservationProc")   // "dev.mvc.admin.AdminProc"라고 명명된 클래스 (Qualifier->이름을 찾아와주는 역할)
+  private ReservationProcInter reservationProc; 
+  
+  @Autowired
+  @Qualifier("dev.mvc.expense.ExpenseProc")   // "dev.mvc.admin.AdminProc"라고 명명된 클래스 (Qualifier->이름을 찾아와주는 역할)
+  private ExpenseProcInter expenseProc; 
+  
+  @Autowired
+  @Qualifier("dev.mvc.food.FoodProc")   // "dev.mvc.admin.AdminProc"라고 명명된 클래스 (Qualifier->이름을 찾아와주는 역할)
+  private FoodProcInter foodProc; 
+  
+  @Autowired
+  @Qualifier("dev.mvc.score.ScoreProc")   // "dev.mvc.admin.AdminProc"라고 명명된 클래스 (Qualifier->이름을 찾아와주는 역할)
+  private ScoreProcInter scoreProc; 
   
   public ResCont() {
     System.out.println("-> ResCont created");
@@ -210,13 +235,23 @@ public class ResCont {
         String uploadDir = Rescontents.getUploadDir();
         Tool.deleteFile(uploadDir, file1saved);  // 실제 저장된 파일삭제
         Tool.deleteFile(uploadDir, thumb1);     // preview 이미지 삭제
+        int cnt = rescontentsVO.getRescontentsno();
+        this.scoreProc.delete_all(cnt);
+        
         // -------------------------------------------------------------------
         // 파일 삭제 종료
         // -------------------------------------------------------------------
       }
       
-      this.rescontentsProc.delete_by_resno(resno); // 자식 레코드 삭제     
-            
+      // 자식 레코드 삭제 ------------------------
+      
+      this.rescontentsProc.delete_by_resno(resno); 
+      this.sellProc.delete_resno(resno);
+      this.reservationProc.delete_resno(resno);
+      this.expenseProc.delete_resno(resno);
+      
+      this.foodProc.delete_resno(resno);
+      //-------------------------------------------------------------------------------------------
       int cnt = this.resProc.delete(resno); // 카테고리 삭제
       
       if (cnt == 1) {

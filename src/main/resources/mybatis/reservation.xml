@@ -46,5 +46,10 @@
   <delete id="delete" parameterType="int">
     DELETE FROM reservation where reserv_no = #{reserv_no}
   </delete>
+  
+    <!-- resno로 삭제 -->
+  <delete id="delete_resno" parameterType="int">
+    DELETE FROM reservation where resno = #{resno}
+  </delete>
 
 </mapper> 

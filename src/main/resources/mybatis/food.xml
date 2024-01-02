@@ -34,6 +34,11 @@
       DELETE FROM food where foodno = #{foodno}
    </delete>
    
+     <!-- return : 삭제한 레코드 갯수를 리턴, parameterType: 수정할 레코드 정보-->
+   <delete id="delete_resno" parameterType="int">
+      DELETE FROM food where resno = #{resno}
+   </delete>
+   
    <!-- 레스토랑의 음식만을 가져오는 list_all-->
    <select id="list_all_res" resultType="dev.mvc.food.FoodVO">
       SELECT foodno, foodname, f_calories, f_carbohydrates, f_protein, f_fat, price

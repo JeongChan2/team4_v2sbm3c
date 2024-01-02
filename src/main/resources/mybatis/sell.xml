@@ -34,6 +34,11 @@
     DELETE FROM sell where sellno = #{sellno}
   </delete>
   
+    <!-- resno로 삭제-->
+  <delete id="delete_resno" parameterType="int">
+    DELETE FROM sell where resno = #{resno}
+  </delete>
+  
   <!-- 식당이름까지 같이 가져오는 list_all-->
    <select id="list_all_names" resultType="dev.mvc.sell.Sell_JoinVO">
       SELECT s.sellno, s.name, s.cnt, s.price, s.rdate, r.resname

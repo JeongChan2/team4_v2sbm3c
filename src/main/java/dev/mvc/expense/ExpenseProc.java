@@ -49,4 +49,10 @@ public class ExpenseProc implements ExpenseProcInter {
     ArrayList<Expense_JoinVO> list = this.expenseDAO.list_all_names(managerno);
     return list;
   }
+
+@Override
+public int delete_resno(int resno) {
+    int cnt = this.expenseDAO.delete_resno(resno);
+    return cnt;
+}
 }

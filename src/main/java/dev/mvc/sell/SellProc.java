@@ -49,4 +49,10 @@ public class SellProc implements SellProcInter {
     ArrayList<Sell_JoinVO> list = this.sellDAO.list_all_names(managerno);
     return list;
   }
+
+@Override
+public int delete_resno(int resno) {
+    int cnt = this.sellDAO.delete_resno(resno);
+    return cnt;
+}
 }
