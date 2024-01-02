@@ -308,5 +308,11 @@ public class RescontentsProc implements RescontentsProcInter {
         return list;
     }
 
+    @Override
+    public ArrayList<RescontentsVO> score_select(int customerno) {
+        ArrayList<RescontentsVO> list = this.rescontentsDAO.score_select(customerno);
+        return list;
+    }
+
 
 }

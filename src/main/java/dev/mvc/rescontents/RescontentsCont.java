@@ -462,33 +462,47 @@ public class RescontentsCont {
   
   // FORM 데이터 처리 http://localhost:9092/res/create.do
   @RequestMapping(value="/rescontents/score_list.do",method = RequestMethod.GET)
-  public ModelAndView score_list() { // 자동으로 ResDAO 객체가 생성되고 Form의 값이 할당됨
+  public ModelAndView score_list(HttpSession session, HttpServletRequest request) { // 자동으로 ResDAO 객체가 생성되고 Form의 값이 할당됨
     ModelAndView mav = new ModelAndView(); 
     //mav.setViewName("redirect:/rescontents/list_rec.do");
     mav.setViewName("redirect:/rescontents/list_rec.do"); 
     
-    ArrayList<JoinVO> list = this.rescontentsProc.score_list_all();
+    int customerno = 0;
+    if (this.customerProc.isCustomer(session)) { // 회원으로 로그인
+        // session을 사용하여 현재 로그인한 사용자의 customerno 값만 읽음으로 다른 사용자의
+        // 정보를 조회할 수 없음
+        customerno = (int)session.getAttribute("customerno");
+        ArrayList<RescontentsVO> list = this.rescontentsProc.score_list_select(customerno);
+        for (RescontentsVO vo : list) {
+            String title = vo.getTitle();
+            String content = vo.getRescontent();
+            
+            title = Tool.convertChar(title);  // 특수 문자 처리
+            content = Tool.convertChar(content); 
+            
+            vo.setTitle(title);
+            vo.setRescontent(content);  
+          }
+          mav.addObject("list", list);
+        
+        
+      } else {
+          ArrayList<JoinVO> list = this.rescontentsProc.score_list_all();
 
-    // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
-    for (JoinVO vo : list) {
-      String title = vo.getTitle();
-      String content = vo.getRescontent();
-      
-      title = Tool.convertChar(title);  // 특수 문자 처리
-      content = Tool.convertChar(content); 
-      
-      vo.setTitle(title);
-      vo.setRescontent(content);  
-    }
-    mav.addObject("list", list);
-    
-//    ResVO resVO = resProc.read(rescontentsVO.getResno());
-//    mav.addObject("resVO", resVO);
-//    
-//    HashMap<String, Object> hashMap = new HashMap<String, Object>();
-//    hashMap.put("resno", rescontentsVO.getResno());
-//    hashMap.put("word", rescontentsVO.getWord());
-    
+          // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
+          for (JoinVO vo : list) {
+            String title = vo.getTitle();
+            String content = vo.getRescontent();
+            
+            title = Tool.convertChar(title);  // 특수 문자 처리
+            content = Tool.convertChar(content); 
+            
+            vo.setTitle(title);
+            vo.setRescontent(content);  
+          }
+          mav.addObject("list", list);
+        
+      }
     
     return mav;
   }

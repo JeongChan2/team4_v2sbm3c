@@ -156,7 +156,7 @@ window.onload = function(){
       </div>
     <br><br>
   </div>
-  <div class='title_line'>평점을 새긴 컨텐츠 목록</DIV>
+  <div class='title_line'>음식 영양소 목록</DIV>
   <table class="table table-hover">
     <colgroup>
       <col style="width: 10%;"></col>
@@ -215,6 +215,66 @@ window.onload = function(){
       </tbody>
       
   </table>
+<%--   
+  <div class='title_line'>평점을 새긴 컨텐츠 목록</DIV>
+  <table class="table table-hover">
+    <colgroup>
+      <col style="width: 10%;"></col>
+      <col style="width: 65%;"></col>
+      <col style="width: 10%;"></col>
+      <col style="width: 5%;"></col>
+      <col style="width: 5%;"></col>
+      <col style="width: 5%;"></col>
+      </colgroup>
+      <thead>
+        <tr>
+          <th style='text-align: center;'>파일</th>
+          <th style='text-align: center;'>제목</th>
+          <th class="th_bs">칼로리</th>
+          <th class="th_bs">탄</th>
+          <th class="th_bs">단</th>
+          <th class="th_bs">지</th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach var="joinVO" items="${list }" varStatus="info">
+          <c:set var="rescontentsno" value="${joinVO.rescontentsno }" />
+          <c:set var="thumb1" value="${joinVO.thumb1 }" />
+          
+    
+          <!-- <tr onclick="location.href='./read.do?rescontentsno=${rescontentsno}'" style="cursor: pointer;">  -->
+          <tr onclick="eat(${joinVO.f_calories}, ${joinVO.f_carbohydrates}, ${joinVO.f_protein}, ${joinVO.f_fat})" style="cursor: pointer;">
+            <td>
+            <c:choose>
+              <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}"> 이미지인지 검사
+                registry.addResourceHandler("/rescontents/storage/**").addResourceLocations("file:///" +  Contents.getUploadDir());
+                <img src="/rescontents/storage/${thumb1 }" style="width: 120px; height: 90px;">
+              </c:when>
+              <c:otherwise> <!-- 이미지가 없는 경우 기본 이미지 출력: /static/rescontents/images/none1.png -->
+                <img src="/rescontents/images/none1.png" style="width: 120px; height: 90px;">
+              </c:otherwise>
+            </c:choose></td>
+            <td class="td_bs_left">
+              <span style="font-weight:bold;">${joinVO.title }</span><br>
+              <c:choose>
+                <c:when test="${joinVO.rescontent.length() > 160 }">
+                  ${joinVO.rescontent.substring(0,160) }...
+                </c:when>
+                <c:otherwise>
+                  ${joinVO.rescontent }
+                </c:otherwise>
+              </c:choose>
+              ${joinVO.rdate.substring(0, 16) }
+            </td>
+            <td id="f_calories" class="td_bs">${joinVO.f_calories }kcal</td>
+            <td id="f_carbohydrates" class="td_bs">${joinVO.f_carbohydrates }g</td>
+            <td id="f_protein" class="td_bs">${joinVO.f_protein }g</td>
+            <td id="f_fat" class="td_bs">${joinVO.f_fat }g</td>
+          </tr>
+        </c:forEach>
+      </tbody>
+      
+  </table> --%>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>

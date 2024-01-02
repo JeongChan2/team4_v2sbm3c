@@ -184,6 +184,21 @@ public class RequirementCont {
          }
          mav.addObject("list", list);
          
+         ArrayList<RescontentsVO> list2 = this.rescontentsProc.score_select(customerno);
+         // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
+         for (RescontentsVO rescontentsVO : list2) {
+           String title = rescontentsVO.getTitle();
+           String content = rescontentsVO.getRescontent();
+           
+           title = Tool.convertChar(title);  // 특수 문자 처리
+           content = Tool.convertChar(content); 
+           
+           rescontentsVO.setTitle(title);
+           rescontentsVO.setRescontent(content);  
+
+         }
+         mav.addObject("list2", list2);
+         
        } else if (this.managerProc.isManager(session)) { // 관리자로 로그인
          // 관리자는 모든 회원의 정보를 조회할 수 있어야 함으로 parameter로 회원번호를 이용하여 조회
          customerno = Integer.parseInt(request.getParameter("customerno"));

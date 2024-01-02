@@ -31,6 +31,12 @@ public interface RescontentsProcInter {
   public ArrayList<JoinVO> score_list_all();
   
   /**
+   * 회원이 평점을 등록한 가게 목록
+   * @return
+   */
+  public ArrayList<RescontentsVO> score_select(int customerno);
+  
+  /**
    * 특정 회원의 추천 리스트의 목록
    * @return
    */
