@@ -38,6 +38,15 @@
     ORDER BY NVL((SELECT AVG(NVL(score,0)) FROM score WHERE rescontentsno = r.rescontentsno),0) DESC
   </select> 
   
+  <!-- 회원의 추천 카테고리의 점수별 글목록 -->
+  <select id="score_list_select" resultType="dev.mvc.rescontents.RescontentsVO" parameterType="int">
+    SELECT r.rescontentsno, r.managerno, r.resno, r.title, r.rescontent, r.recom, r.cnt, r.replycnt, r.passwd,
+          r.word, r.rdate,r.file1, r.file1saved, r.thumb1, r.size1, r.foodno
+    FROM rescontents r
+    WHERE <![CDATA[ rownum<=5 ]]> AND r.resno = (SELECT resno FROM restaurant WHERE typenum = (SELECT typenum FROM recommend WHERE customerno = #{customerno}))
+    ORDER BY NVL((SELECT AVG(NVL(score,0)) FROM score WHERE rescontentsno = r.rescontentsno),0) DESC
+  </select> 
+  
     <!-- 특정 식당 카테고리의 등록된 글목록 -->
   <select id="list_by_resno" resultType="dev.mvc.rescontents.RescontentsVO" parameterType="int">
     SELECT rescontentsno, managerno, resno, title, rescontent, recom, cnt, replycnt, rdate,
