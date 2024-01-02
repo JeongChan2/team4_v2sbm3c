@@ -33,5 +33,57 @@
     SET name = #{name}
     WHERE supplierno=#{supplierno}
   </update>
+  
+  
+  
+  
+  
+  
+  
+  <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM rescontents
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE resno=#{resno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE resno=#{resno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
+                                                  OR UPPER(rescontent) LIKE '%' || UPPER(#{word}) || '%' 
+                                                  OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
+      </otherwise>
+    </choose>
+  </select>  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <select id="list_by_managerno_search_paging" resultType="dev.mvc.supplier.SupplierVO" parameterType="dev.mvc.supplier.SupplierVO">
+    SELECT supplierno, name, rdate, managerno, r
+    FROM (
+      SELECT supplierno, name, rdate, managerno, rownum as r
+      FROM (
+        SELECT supplierno, name, rdate, managerno
+        FROM supplier
+        <choose>
+          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+            WHERE managerno=#{managerno}
+          </when>
+          <otherwise>
+            WHERE managerno=#{managerno} AND (UPPER(name) LIKE '%' || UPPER(#{word}) || '%' )
+            ORDER BY supplierno DESC
+          </otherwise>
+        </choose>
+      )          
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+  </select>
 
 </mapper> 

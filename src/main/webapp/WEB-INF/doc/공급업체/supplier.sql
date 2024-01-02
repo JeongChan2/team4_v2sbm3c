@@ -49,4 +49,17 @@ WHERE supplierno = 1;
 4. 삭제
 DELETE FROM supplier where supplierno = 4;
 
+5. 페이징
+SELECT supplierno, name, rdate, managerno, r
+FROM (
+           SELECT supplierno, name, rdate, managerno, rownum as r
+           FROM (
+                     SELECT supplierno, name, rdate, managerno
+                     FROM supplier
+                     WHERE managerno=1 AND (UPPER(name) LIKE '%' || UPPER('정찬') || '%' )
+                     ORDER BY supplierno DESC
+           )          
+)
+WHERE r >= 1 AND r <= 3;
+
 commit;
