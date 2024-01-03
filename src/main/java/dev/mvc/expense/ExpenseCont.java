@@ -1,6 +1,7 @@
 package dev.mvc.expense;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -63,7 +64,7 @@ public class ExpenseCont {
     * @return
     */
    @RequestMapping(value="/expense/list_all_managerno.do",method = RequestMethod.GET)
-   public ModelAndView list_all(HttpSession session) {
+   public ModelAndView list_all(HttpSession session, Expense_JoinVO expense_JoinVO) {
      ModelAndView mav = new ModelAndView();
      
      int managerno=0;
@@ -79,8 +80,23 @@ public class ExpenseCont {
        ArrayList<ResVO> res_list = this.resProc.list_all_managerno(managerno);
        mav.addObject("res_list", res_list);
        
-       ArrayList<Expense_JoinVO> list = this.expenseProc.list_all_names(managerno);
+       expense_JoinVO.setManagerno(managerno);
+       
+       ArrayList<Expense_JoinVO> list = this.expenseProc.list_by_managerno_search_paging(expense_JoinVO);
        mav.addObject("list", list);
+       
+       HashMap<String, Object> hashMap = new HashMap<String, Object>();
+       hashMap.put("managerno", managerno);
+       hashMap.put("word", expense_JoinVO.getWord());
+       
+       int search_count = this.expenseProc.search_count(hashMap);  // 검색된 레코드 갯수 ->  전체 페이지 규모 파악
+       mav.addObject("search_count",search_count);
+       
+       String paging = expenseProc.pagingBox(expense_JoinVO.getManagerno(), expense_JoinVO.getNow_page(), expense_JoinVO.getWord(), "list_all_managerno.do");
+       mav.addObject("paging", paging);
+       
+       int record_per_page = Expense.RECORD_PER_PAGE;   // 페이지가 바뀌어도 번호 증가 하기위함
+       mav.addObject("record_per_page", record_per_page);
      }
      else {
        mav.setViewName("/manager/login_need"); // /WEB-INF/views/manager/login_need.jsp

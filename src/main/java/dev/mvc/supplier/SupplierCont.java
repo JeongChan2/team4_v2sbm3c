@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.expense.Expense;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.manager.ManagerVO;
 
@@ -78,6 +79,9 @@ public class SupplierCont {
        
        String paging = supplierProc.pagingBox(supplierVO.getManagerno(), supplierVO.getNow_page(), supplierVO.getWord(), "list_all_managerno.do");
        mav.addObject("paging", paging);
+       
+       int record_per_page = Supplier.RECORD_PER_PAGE;  // 페이지가 바뀌어도 번호 증가 하기위함
+       mav.addObject("record_per_page", record_per_page);
      }
      else {
        mav.setViewName("/manager/login_need"); // /WEB-INF/views/manager/login_need.jsp

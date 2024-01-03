@@ -5,7 +5,7 @@
 DROP TABLE RESERVATION
 CREATE TABLE RESERVATION(
 		RESERV_NO                     		NUMBER(10)		     NOT NULL    PRIMARY KEY,
-		RES_NAME                          		VARCHAR2(30)		 NOT NULL,
+		RES_NAME                          	VARCHAR2(30)		 NOT NULL,
 		RESERV_NAME                   		VARCHAR2(30)		 NOT NULL,
 		RESERV_PHONE                  		VARCHAR2(14)		 NOT NULL ,
 		CNT                           		NUMBER(3)		     NOT NULL,
@@ -70,5 +70,26 @@ WHERE reserv_no=1;
 
 7. 삭제
 DELETE FROM reservation where reserv_no = 2;
+
+8. 페이징
+SELECT reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate, r
+FROM (
+           SELECT reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate, rownum as r
+           FROM (
+                     SELECT reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate
+                     FROM reservation
+                     WHERE managerno = 1 AND (UPPER(reserv_name) LIKE '%' || UPPER('멍멍이') || '%'
+                                              OR UPPER(reserv_phone) LIKE '%' || UPPER('멍멍이') || '%')
+                     ORDER BY reserv_no ASC
+           )          
+)
+WHERE r >= 1 AND r <= 3;
+
+9. 검색 레코드 갯수
+SELECT COUNT(*) as cnt
+    FROM reservation
+    -- WHERE managerno=#{managerno}
+    WHERE managerno = 1 AND (UPPER(reserv_name) LIKE '%' || UPPER('1111') || '%'
+                            OR UPPER(reserv_phone) LIKE '%' || UPPER('1111') || '%')
 
 commit;

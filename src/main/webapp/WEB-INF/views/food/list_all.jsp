@@ -58,6 +58,7 @@
      <div style="text-align: center;">
        <label for="resno">식당 음식 분류</label>
        <select name="resno" id="resno">
+         <option value="0">선택해주세요.</option>
          <c:forEach var="resVO" items="${res_list }" varStatus="info">
            <c:set var="resno" value="${resVO.resno }"/>
            <c:set var="resname" value="${resVO.resname }"/>

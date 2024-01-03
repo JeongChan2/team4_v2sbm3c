@@ -2,6 +2,7 @@ package dev.mvc.reservation;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,7 @@ import dev.mvc.customer.CustomerProcInter;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.res.ResProcInter;
 import dev.mvc.res.ResVO;
+import dev.mvc.sell.Sell;
 
 @Controller
 public class ReservationCont {
@@ -68,7 +70,7 @@ public class ReservationCont {
     * @return
     */
    @RequestMapping(value="/reservation/list_all_managerno.do",method = RequestMethod.GET)
-   public ModelAndView list_all(HttpSession session) {
+   public ModelAndView list_all(HttpSession session, ReservationVO reservationVO) {
      ModelAndView mav = new ModelAndView();
      
      int managerno = 0;
@@ -81,8 +83,23 @@ public class ReservationCont {
        ArrayList<ResVO> res_list = this.resProc.list_all_managerno(managerno);
        mav.addObject("res_list", res_list);
        
-       ArrayList<ReservationVO> list = this.reservationProc.list_all_managerno(managerno);
+       reservationVO.setManagerno(managerno);
+       
+       ArrayList<ReservationVO> list = this.reservationProc.list_by_managerno_search_paging(reservationVO);
        mav.addObject("list", list);
+       
+       HashMap<String, Object> hashMap = new HashMap<String, Object>();
+       hashMap.put("managerno", managerno);
+       hashMap.put("word", reservationVO.getWord());
+       
+       int search_count = this.reservationProc.search_count(hashMap);  // 검색된 레코드 갯수 ->  전체 페이지 규모 파악
+       mav.addObject("search_count",search_count);
+       
+       String paging = reservationProc.pagingBox(reservationVO.getManagerno(), reservationVO.getNow_page(), reservationVO.getWord(), "list_all_managerno.do");
+       mav.addObject("paging", paging);
+       
+       int record_per_page = Reservation.RECORD_PER_PAGE;   // 페이지가 바뀌어도 번호 증가 하기위함
+       mav.addObject("record_per_page", record_per_page);
        
      }
      else {

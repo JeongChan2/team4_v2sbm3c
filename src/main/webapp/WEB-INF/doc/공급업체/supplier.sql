@@ -62,4 +62,10 @@ FROM (
 )
 WHERE r >= 1 AND r <= 3;
 
+6. 검색 레코드 갯수
+SELECT COUNT(*) as cnt
+    FROM supplier
+        -- WHERE managerno=#{managerno}
+        WHERE managerno=1 AND (UPPER(name) LIKE '%' || UPPER('정찬') || '%')
+
 commit;

@@ -38,12 +38,13 @@
 	  <a class="top_icon_label" href="/">NBH Management</a>
 	  
     <c:choose>
-        <c:when test="${sessionScope.id == null}">
-            <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href="/customer/login.do">로그인</a>
+        <c:when test="${sessionScope.id == null and sessionScope.manager_id == null }">
+          <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href="/customer/create.do">회원가입</a><span style='float:right; font-size: 20px; margin-top: 15px; margin-right: 10px'> | </span>
+          <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px; margin-right: 10px' href="/customer/login.do">로그인</a>
         </c:when>
         <c:otherwise>
-            <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href='/customer/logout.do'>${sessionScope.cname } 로그아웃</a>
-            <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href="http://13.124.220.250:5000/chatbot?customerno=${sessionScope.customerno }">챗봇|</a>
+          <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href='/customer/logout.do'>${sessionScope.cname } 로그아웃</a>
+          <a class="nav-link top_menu_link" style='float:right; font-size: 20px; margin-top: 15px;' href="http://13.124.220.250:5000/chatbot?customerno=${sessionScope.customerno }">챗봇|</a>
         </c:otherwise>
     </c:choose>   
   </div>
@@ -77,6 +78,7 @@
               <div class="dropdown-menu">
                 <c:choose>
                   <c:when test="${sessionScope.id == null }">
+                  <a class="dropdown-item" href="/customer/login.do">로그인</a>
                     <a class="dropdown-item" href="/customer/create.do">회원 가입</a>
                     <a class="dropdown-item" href="/customer/find_id.do">아이디 찾기</a>
                     <a class="dropdown-item" href="#">비밀번호 찾기</a>
@@ -105,13 +107,13 @@
                 <li class="nav-item dropdown"> <%-- 관리자 서브 메뉴 --%>
                   <a class="nav-link top_menu_link dropdown-toggle" style='color: black;' data-bs-toggle="dropdown" href="#">관리자</a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href='/res/list_all.do'>카테고리 목록</a>
+                    <a class="dropdown-item" href='/res/list_all.do'>식당 목록</a>
                     <a class="dropdown-item" href='/food/list_all.do'>음식 목록</a>
                     <a class="dropdown-item" href='/customer/list.do'>회원 목록</a>
-                    <a class="dropdown-item" href='/supplier/list_all_managerno.do'>공급업체 목록</a>
-                    <a class="dropdown-item" href='/expense/list_all_managerno.do'>지출내역 목록</a>
-                    <a class="dropdown-item" href='/sell/list_all_managerno.do'>판매내역 목록</a>
-                    <a class="dropdown-item" href='/reservation/list_all_managerno.do'>예약 내역</a>
+                    <a class="dropdown-item" href='/supplier/list_all_managerno.do?word=&now_page=1'>공급업체 목록</a>
+                    <a class="dropdown-item" href='/expense/list_all_managerno.do?word=&now_page=1'>지출내역 목록</a>
+                    <a class="dropdown-item" href='/sell/list_all_managerno.do?word=&now_page=1'>판매내역 목록</a>
+                    <a class="dropdown-item" href='/reservation/list_all_managerno.do?word=&now_page=1'>예약 내역</a>
                     <a class="dropdown-item" href='/manager/logout.do'>관리자 ${sessionScope.manager_id } 로그아웃</a>
                   </div>
                 </li>

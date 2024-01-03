@@ -1,6 +1,7 @@
 package dev.mvc.sell;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import dev.mvc.food.FoodProcInter;
 import dev.mvc.food.FoodVO;
 import dev.mvc.food.Food_JoinVO;
 import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.res.ResProcInter;
 import dev.mvc.res.ResVO;
-import dev.mvc.supplier.SupplierProcInter;
-import dev.mvc.supplier.SupplierVO;
 
 @Controller
 public class SellCont {
@@ -100,7 +100,7 @@ public class SellCont {
     * @return
     */
    @RequestMapping(value="/sell/list_all_managerno.do",method = RequestMethod.GET)
-   public ModelAndView list_all(HttpSession session) {
+   public ModelAndView list_all(HttpSession session, Sell_JoinVO sell_JoinVO) {
      ModelAndView mav = new ModelAndView();
      
      int managerno=0;
@@ -116,8 +116,23 @@ public class SellCont {
        ArrayList<Food_JoinVO> food_list = this.foodProc.list_all_resname(managerno);
        mav.addObject("food_list", food_list);
        
-       ArrayList<Sell_JoinVO> list = this.sellProc.list_all_names(managerno);
+       sell_JoinVO.setManagerno(managerno);
+       
+       ArrayList<Sell_JoinVO> list = this.sellProc.list_by_managerno_search_paging(sell_JoinVO);
        mav.addObject("list", list);
+       
+       HashMap<String, Object> hashMap = new HashMap<String, Object>();
+       hashMap.put("managerno", managerno);
+       hashMap.put("word", sell_JoinVO.getWord());
+       
+       int search_count = this.sellProc.search_count(hashMap);  // 검색된 레코드 갯수 ->  전체 페이지 규모 파악
+       mav.addObject("search_count",search_count);
+       
+       String paging = sellProc.pagingBox(sell_JoinVO.getManagerno(), sell_JoinVO.getNow_page(), sell_JoinVO.getWord(), "list_all_managerno.do");
+       mav.addObject("paging", paging);
+       
+       int record_per_page = Sell.RECORD_PER_PAGE;   // 페이지가 바뀌어도 번호 증가 하기위함
+       mav.addObject("record_per_page", record_per_page);
      }
      else {
        mav.setViewName("/manager/login_need"); // /WEB-INF/views/manager/login_need.jsp

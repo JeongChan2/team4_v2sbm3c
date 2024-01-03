@@ -1,8 +1,10 @@
 package dev.mvc.reservation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dev.mvc.food.FoodVO;
+import dev.mvc.sell.Sell_JoinVO;
 
 public interface ReservationDAOInter {
   /**
@@ -56,5 +58,19 @@ public interface ReservationDAOInter {
    * @param 삭제할 레코드 PK 번호
    */
   public int delete_resno(int resno);
+  
+  /**
+   * 검색된 레코드 갯수
+   * @param map
+   * @return
+   */
+  public int search_count(HashMap<String, Object> hashMap);
+  
+  /**
+   * 매니저별 검색 목록 + 페이징
+   * @param ReservationVO
+   * @return
+   */
+  public ArrayList<ReservationVO> list_by_managerno_search_paging(ReservationVO reservationVO);
   
 }

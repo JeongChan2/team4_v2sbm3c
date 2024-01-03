@@ -1,8 +1,10 @@
 package dev.mvc.expense;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dev.mvc.food.FoodVO;
+import dev.mvc.supplier.SupplierVO;
 
 public interface ExpenseDAOInter {
   /**
@@ -49,4 +51,18 @@ public interface ExpenseDAOInter {
    * @return
    */
   public ArrayList<Expense_JoinVO> list_all_names(int managerno);
+  
+  /**
+   * 검색된 레코드 갯수
+   * @param map
+   * @return
+   */
+  public int search_count(HashMap<String, Object> hashMap);
+  
+  /**
+   * 매니저별 검색 목록 + 페이징
+   * @param Expense_JoinVO
+   * @return
+   */
+  public ArrayList<Expense_JoinVO> list_by_managerno_search_paging(Expense_JoinVO expense_JoinVO);
 }
