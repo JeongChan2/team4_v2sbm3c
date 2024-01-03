@@ -167,14 +167,18 @@ SELECT COUNT(customerno) as cnt
 FROM n_customer
 WHERE id='user1@gmail.com' AND passwd='1234' AND GRADE!=99;
 
+8. id 찾기
+SELECT id
+FROM n_customer
+WHERE cname='황규현' and TEL='010-1111-2333';
 
 -- grade가 99일 시 탈퇴
-8. 회원탈퇴 기능
+9. 회원탈퇴 기능
 UPDATE n_customer 
 SET grade=99
 WHERE customerno=3;
 
-9. 등급 변경
+10. 등급 변경
 UPDATE n_customer 
 SET grade=99
 WHERE customerno=15;

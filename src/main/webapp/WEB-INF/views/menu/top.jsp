@@ -78,7 +78,7 @@
                 <c:choose>
                   <c:when test="${sessionScope.id == null }">
                     <a class="dropdown-item" href="/customer/create.do">회원 가입</a>
-                    <a class="dropdown-item" href="#">아이디 찾기</a>
+                    <a class="dropdown-item" href="/customer/find_id.do">아이디 찾기</a>
                     <a class="dropdown-item" href="#">비밀번호 찾기</a>
                   </c:when>
                   <c:otherwise>

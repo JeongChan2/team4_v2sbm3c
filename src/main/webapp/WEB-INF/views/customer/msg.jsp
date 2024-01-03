@@ -92,11 +92,23 @@
           </li>                                                                     
         </c:when>   
         
-        <c:when test="${code == 'passwd_update_fail'}"> <%-- Java if --%>
+        <c:when test="${param.code == 'passwd_update_fail'}"> <%-- Java if --%>
           <li class='li_none'>
             <span class="span_fail">${param.cname }님(${param.id }) 패스워드 변경에 실패했습니다.</span>
           </li>                                                                      
         </c:when>  
+        
+        <c:when test="${param.code == 'find_id_fail_msg'}"> <%-- Java if --%>
+          <li class='li_none'>
+            <span class="span_fail">${param.cname }으로 가입된 정보가 없습니다.</span>
+          </li>                                                                      
+        </c:when> 
+        
+        <c:when test="${param.code == 'find_id_msg'}"> <%-- Java if --%>
+          <li class='li_none'>
+            <span class="span_success">${param.cname }님의 아이디 ${param.id }입니다.</span>
+          </li>                                                                      
+        </c:when> 
         
         <c:otherwise>
           <li class='li_none_left'>

@@ -657,4 +657,54 @@ public class CustomerCont {
     return mav;
   }
   
+  /**
+   * 아이디 찾기
+   * @return
+   */
+  // http://localhost:9092/customer/find_id.do 
+  @RequestMapping(value = "/customer/find_id.do", 
+                             method = RequestMethod.GET)
+  public ModelAndView find_id(HttpServletRequest request) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/customer/find_id"); // /customer/find_id.jsp
+    
+    return mav;
+  }
+  
+  /**
+   * 아이디 찾기
+   * @return
+   */
+  // http://localhost:9092/customer/find_id.do 
+  @RequestMapping(value = "/customer/find_id.do", 
+                             method = RequestMethod.POST)
+  public ModelAndView find_id(HttpServletRequest request, String cname, String tel) {
+    ModelAndView mav = new ModelAndView();
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("cname", cname);
+    map.put("tel", tel);
+    
+    System.out.println("-> cname:"+cname);
+    System.out.println("-> tel:"+tel);
+    
+    mav.addObject("cname", cname);
+    try {
+      String id = customerProc.find_id(map);
+      
+      System.out.println("-> id:"+id);
+      if (id.equals(null)) {
+      }else {
+        mav.addObject("code", "find_id_msg");
+        mav.addObject("id", id);
+      }
+    } catch(Exception e) {
+      mav.addObject("code", "find_id_fail_msg");
+    }
+    
+    mav.addObject("url", "/customer/msg");  // /customer/msg -> /customer/msg.jsp
+    mav.setViewName("redirect:/customer/msg.do"); 
+    
+    return mav;
+  }
+  
 }

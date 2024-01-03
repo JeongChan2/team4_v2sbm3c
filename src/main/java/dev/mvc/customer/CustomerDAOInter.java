@@ -78,4 +78,11 @@ public interface CustomerDAOInter {
    * @return
    */
   public int user_withdrawal(int customerno);
+  
+  /**
+   * 아이디 찾기
+   * @param map
+   * @return
+   */
+  public String find_id(HashMap<String, Object> map);
 }

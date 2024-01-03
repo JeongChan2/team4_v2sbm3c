@@ -123,4 +123,10 @@ public class CustomerProc implements CustomerProcInter {
     int cnt = this.customerDAO.user_withdrawal(customerno);
     return cnt;
   }
+
+  @Override
+  public String find_id(HashMap<String, Object> map) {
+    String id = this.customerDAO.find_id(map);
+    return id;
+  }
 }

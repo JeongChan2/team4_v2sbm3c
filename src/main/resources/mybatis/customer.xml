@@ -74,4 +74,11 @@
 	  WHERE customerno=#{customerno}
   </update>
   
+  <!-- 아이디 찾기 -->
+  <select id="find_id" resultType="String" parameterType="HashMap">
+	  SELECT id
+	  FROM n_customer
+	  WHERE cname=#{cname} and tel=#{tel}
+  </select>
+
 </mapper> 
