@@ -220,7 +220,45 @@ window.onload = function(){
       </li>   
     </ul>
   </fieldset>
-  
+  <!-- Comments section-->
+<div style="width:80%; margin: 0 auto;">
+  <section class="mb-5">
+      <div class="card bg-light">
+          <div class="card-body">
+              <!-- 댓글 입력 창 -->
+              <c:choose>
+                <c:when test="${sessionScope.id != null}"> <%-- 회원 로그인했을 경우 --%>
+                  <form class="mb-4" name='frm3' id='frm3' method='get' action='/res/create.do'>
+                        <textarea class="form-control" rows="3" placeholder="댓글 입력해주세요"></textarea>
+                  </form>
+                </c:when>
+              </c:choose>
+              
+              <!-- 작성된 댓글 표현 창 -->
+              <div style="width:100%">
+                  <c:forEach var="replyVO" items="${replylist }" varStatus="status">
+                    <c:set var="replyno" value="${replyVO.replyno }" />
+                    <c:set var="replycontents" value="${replyVO.replycontents }" />
+                    <c:set var="rdate" value="${replyVO.rdate }" />
+                    <c:set var="rescontentsno" value="${replyVO.rescontentsno }" />
+                    <c:set var="customerno" value="${replyVO.customerno }" />
+                    <c:set var="cname" value="${replyVO.cname }" />
+                     <div class="d-flex mb-4">
+                        <!-- Parent comment-->
+                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                        <div class="ms-3">
+                            <div class="fw-bold">${cname }        ${rdate }  </div>
+                            ${replycontents }
+
+                        </div>
+                    </div>
+                  </c:forEach>
+              </div>
+
+            </div>
+        </div>
+    </section>
+</div>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>

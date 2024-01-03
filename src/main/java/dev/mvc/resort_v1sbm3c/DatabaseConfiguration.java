@@ -31,6 +31,7 @@ import com.zaxxer.hikari.HikariDataSource;
                            "dev.mvc.supplier",
                            "dev.mvc.score",
                            "dev.mvc.sell",
+                           "dev.mvc.reply",
                            "dev.mvc.reservation"})
 public class DatabaseConfiguration {
     

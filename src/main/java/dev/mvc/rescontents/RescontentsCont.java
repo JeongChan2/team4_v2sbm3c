@@ -19,6 +19,8 @@ import dev.mvc.customer.CustomerProcInter;
 import dev.mvc.food.FoodProcInter;
 import dev.mvc.food.FoodVO;
 import dev.mvc.manager.ManagerProcInter;
+import dev.mvc.reply.ReplyProcInter;
+import dev.mvc.reply.ReplyVO;
 import dev.mvc.res.ResProcInter;
 import dev.mvc.res.ResVO;
 import dev.mvc.score.ScoreProcInter;
@@ -51,6 +53,11 @@ public class RescontentsCont {
   @Autowired
   @Qualifier("dev.mvc.customer.CustomerProc") // @Component("dev.mvc.score.ScoreProc")
   private CustomerProcInter customerProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.reply.ReplyProc") // @Component("dev.mvc.score.ScoreProc")
+  private ReplyProcInter replyProc;
+  
   
   public RescontentsCont () {
     System.out.println("-> RescontentsCont created.");
@@ -428,6 +435,10 @@ public class RescontentsCont {
     }
     mav.addObject("rescontentsVO", rescontentsVO);
     mav.addObject("avgScore", avgScore);
+    
+    ArrayList<ReplyVO> list = this.replyProc.read(rescontentsno);
+    mav.addObject("replylist",list);
+    
     
     return mav;
   }

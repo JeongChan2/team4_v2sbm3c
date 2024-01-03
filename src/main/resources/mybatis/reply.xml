@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.reply.ReplyDAOInter">
+  <!-- 등록한 레코드 갯수 1 리턴, #{adminno}: public int getAdminno() 호출됨 -->
+  <insert id="create" parameterType="dev.mvc.reply.ReplyVO">
+    INSERT INTO REPLY(replyno, replycontents, rdate, rescontentsno, customerno) 
+    VALUES(reply_seq.nextval, #{replycontents}, sysdate, #{rescontentsno},#{customerno})
+  </insert>
+  
+    <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.reply.ReplyVO" parameterType="int">
+        SELECT r.replyno, r.replycontents, r.rdate, r.rescontentsno, r.customerno,
+                c.customerno, c.cname
+        FROM REPLY r INNER JOIN n_customer c ON c.customerno = r.customerno
+        WHERE rescontentsno = #{rescontentsno}
+        ORDER BY r.rdate ASC
+  </select>
+  
+  
+    <!-- 댓글 수정 -->
+  <update id="update" parameterType="dev.mvc.reply.ReplyVO">
+    UPDATE REPLY 
+    SET replycontents = #{replycontents}
+    WHERE replyno = #{replyno}
+  </update>
+  
+  
+    <!-- 컨텐츠 삭제 시 자식 테이블 삭제용 -->
+  <delete id="delete_by_rescontentsno" parameterType="int">
+    DELETE FROM REPLY WHERE rescontentsno=#{rescontentsno}
+  </delete>
+  
+      <!-- 일반적인 댓글 삭제 -->
+  <delete id="delete_by_replyno" parameterType="int">
+    DELETE FROM REPLY WHERE replyno=#{replyno}
+  </delete>
+  
+    <!-- 회원 삭제시 자식 테이블 삭제용(실제 구현 X) -->
+  <delete id="delete_by_customerno" parameterType="int">
+    DELETE FROM REPLY WHERE customerno=#{customerno}
+  </delete>
+
+  
+</mapper> 
