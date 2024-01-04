@@ -33,7 +33,8 @@ import com.zaxxer.hikari.HikariDataSource;
                            "dev.mvc.sell",
                            "dev.mvc.reply",
                            "dev.mvc.reservation",
-                           "dev.mvc.withdrawalLog"})
+                           "dev.mvc.withdrawalLog",
+                           "dev.mvc.reply_of_reply"})
 public class DatabaseConfiguration {
     
     @Autowired

@@ -16,7 +16,9 @@
 <c:set var="file1" value="${rescontentsVO.file1 }" />
 <c:set var="size1_label" value="${rescontentsVO.size1_label }" />
 <c:set var="word" value="${rescontentsVO.word }" />
- 
+<c:set var="scustomerno" value="${sessionScope.customerno }" />
+<c:set var="smanagerid" value="${sessionScope.manager_id }" />
+
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -49,6 +51,8 @@ window.onload = function(){
  
 <body>
 <c:import url="/menu/top.do" />
+  <p id='scustom' style="display: none;">${scustomerno }</p>
+  <p id='smanager' style="display: none;">${smanagerid }</p>
   <DIV class='title_line'><A href="./list_by_resno.do?resno=${resno }" class='title_link'>${resname }</A></DIV>
 
   <ASIDE class="aside_right">
@@ -245,7 +249,7 @@ window.onload = function(){
               </c:choose>
               
               <!-- 작성된 댓글 표현 창 -->
-              <div style="width:100%">
+              <div style="width: 100%">
                   <c:forEach var="replyVO" items="${replylist }" varStatus="status">
                     <c:set var="replyno" value="${replyVO.replyno }" />
                     <c:set var="replycontents" value="${replyVO.replycontents }" />
@@ -253,10 +257,11 @@ window.onload = function(){
                     <c:set var="rescontentsno" value="${replyVO.rescontentsno }" />
                     <c:set var="customerno" value="${replyVO.customerno }" />
                     <c:set var="cname" value="${replyVO.cname }" />
+                    <c:set var="re_reply" value="${replyVO.re_reply }" />
                      <div class="d-flex mb-4">
                         
                         <!-- Parent comment-->
-                        <div class="flex-shrink-0"><img class="rounded-circle" style="width:60px;'" src="/css/images/profile.png" alt="..." /></div>
+                        <div class="flex-shrink-0"><img class="rounded-circle" style="width:60px;" src="/css/images/profile.png" alt="..." /></div>
                         <div class="ms-3">
                             <form class="mb-4" name='frm4' id='frm4' method='get' action='./reply_delete.do'>
                                 <div class="fw-bold" style="display:inline;">${cname }        ${rdate }  </div>
@@ -272,6 +277,87 @@ window.onload = function(){
                                   </c:choose>
                                   ${replycontents }
                             </form>
+                            
+                            <button type="button" class="btn btn-sm btn-secondary" onclick="showDependentButtons(${replyno})">답글 ${re_reply }</button>
+                            
+                            <!-- 댓글에 종속된 댓글들을 나타낼 div -->
+                            <div id="dependentButtons_${replyno}" style="display:none; margin-top: 10px;">
+                                
+                            </div>
+                            
+                            <script>
+                                function showDependentButtons(replyno) {
+                               	   const url = '/reply_of_reply/reply_fetch.do?replyno=' + String(replyno); // http://localhost:9091/javascript/select_menu_fetch.do
+                                   console.log('-> url: ' + url);
+                              
+                                   fetch(url, {
+                                     method: 'GET', // HTTP GET or POST 요청
+                                     // headers: {
+                                     //   'Content-Type': 'application/json' // JSON 형식으로 데이터 전송을 알림
+                                     // },
+                                     // body: JSON.stringify({foodno}) // 보내는 데이터, {"foodno":foodno}, object -> json
+                                   })
+                                   .then((response) => response.json())  // response.json() or response.text()
+                                   .then((rdata) => {// 서버 응답 처리
+                                	     var scustom = document.getElementById('scustom').innerHTML;
+                                	     var smanager = document.getElementById('smanager').innerHTML;
+                                	     // console.log('-> ' + scustom); // string
+                                	     // console.log('-> ' + smanager);
+                                       
+	                                	   var visualizationDiv = document.getElementById('dependentButtons_' + String(replyno));
+	                                     visualizationDiv.innerHTML = '';
+
+	                                     var visualizationHTML = '<div style="width: 100%">';
+
+	                                     if (scustom != '') {
+	                                    	  visualizationHTML += '<form class="mb-4" name="frm6" id="frm6" method="post" action="/reply_of_reply/reply.do">';
+	                                    	  visualizationHTML += '<input type="hidden" name="replyno" value="'+ String(replyno) +'" />';
+	                                    	  visualizationHTML += '<input type="hidden" name="customerno" value="${customerno }" />';
+	                                    	  visualizationHTML += '<input type="hidden" name="resno" value="${resno }" />';
+	                                    	  visualizationHTML += '<div>';
+	                                    	  visualizationHTML += '<textarea class="form-control" style="width:70%; float:left;" name="replycontents" rows="2" placeholder="댓글 입력해주세요"></textarea>';
+	                                    	  visualizationHTML += '<button type="submit"style="width:30%; height:35px; font-size:16px;" class="btn btn-primary btn-sm">등록</button>';
+	                                    	  visualizationHTML += '</div><br><div><div></div></div></form>';
+	                                     }
+
+	                                     for (let rreply of rdata) { // Spring -> Js
+	                                    	 visualizationHTML += '<div class="d-flex mb-4">';
+	                                    	 visualizationHTML += '<div class="flex-shrink-0"><img class="rounded-circle" style="width:60px;" src="/css/images/profile.png" alt="..." /></div>';
+	                                    	 visualizationHTML += '<div class="ms-3">';
+	                                    	 visualizationHTML += '<form class="mb-4" name="frm" id="frm" method="get" action="/reply_of_reply/reply_of_reply_delete.do">';
+	                                    	 visualizationHTML += '<div class="fw-bold" style="display:inline;">'+ rreply.cname +'   '+ rreply.rdate +' </div>';
+	                                    	 visualizationHTML += '<input type="hidden" name="replyofreplyno" value="'+ rreply.replyofreplyno +'" />';
+	                                    	 visualizationHTML += '<input type="hidden" name="resno" value="${resno }" />';
+
+	                                    	 if (scustom == rreply.customerno || smanager != '') {
+                                   	       visualizationHTML += '<button type="submit" class="btn btn-sm" style="width:16px; vertical-align : bottom;"><img  src="/rescontents/images/delete.png" width="16"></button><br>';
+                                   	     } else {
+                                   	       visualizationHTML += '<button type="submit" class="btn btn-sm" style="visibility : hidden; width:16px; vertical-align : bottom;"><img  src="/rescontents/images/delete.png" width="16"></button><br>';
+                                   	     }
+
+	                                    	 visualizationHTML += '<br>' + rreply.replycontents;
+	                                    	 visualizationHTML += '</form></div></div></div>'
+	                                       //console.log('->' + rreply.replyofreplyno);
+	                                       //console.log('->' + rreply.replycontents);
+	                                       //console.log('->' + rreply.rdate);
+	                                       console.log('->' + rreply.customerno);
+	                                       //console.log('->' + rreply.cname);
+	                                       //console.log('->' + rreply.replyno);
+	                                    	 console.log('->' + rreply.replyno);
+	                                     }
+	                                     visualizationDiv.innerHTML = visualizationHTML;
+                                   })
+                                   .catch(error => { // 오류 처리
+                                     console.log('-> error:' + error);
+                                     // document.getElementById('progress').style.display="none"; // hide
+                                   });
+                                   // 해당 댓글에 종속된 div를 나타내거나 숨김
+                                   var dependentButtonsDiv = document.getElementById('dependentButtons_' + replyno);
+                                   dependentButtonsDiv.style.display = (dependentButtonsDiv.style.display === 'none') ? 'block' : 'none';
+                                }
+                            </script>
+                            
+                            <hr/>
                             
                         </div>
                     </div>

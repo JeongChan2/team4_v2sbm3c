@@ -1,4 +1,4 @@
-package dev.mvc.reply;
+package dev.mvc.reply_of_reply;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,51 +6,30 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import dev.mvc.expense.Expense;
-import dev.mvc.expense.Expense_JoinVO;
-
-@Component("dev.mvc.reply.ReplyProc")
-public class ReplyProc implements ReplyProcInter {
+@Component("dev.mvc.reply_of_reply.Reply_OF_ReplyProc")
+public class Reply_OF_ReplyProc implements Reply_OF_ReplyProcInter {
     @Autowired
-    private ReplyDAOInter replyDAO;
+    private Reply_OF_ReplyDAOInter replyDAO;
     
-    public ReplyProc() {
-        System.out.println("-> ReplyProc created.");
+    public Reply_OF_ReplyProc() {
+        System.out.println("-> Reply_OF_ReplyProc created.");
     }
 
     @Override
-    public int create(ReplyVO replyVO) {
+    public int create(Reply_OF_ReplyVO replyVO) {
         int cnt = this.replyDAO.create(replyVO);
         return cnt;
     }
 
     @Override
-    public ArrayList<ReplyVO> read(int rescontentsno) {
-        ArrayList<ReplyVO> list = this.replyDAO.read(rescontentsno);
-        return list;
+    public Reply_OF_ReplyVO read(int replyofreplyno) {
+        Reply_OF_ReplyVO replyVO = this.replyDAO.read(replyofreplyno);
+        return replyVO;
     }
 
     @Override
-    public int update(ReplyVO replyVO) {
+    public int update(Reply_OF_ReplyVO replyVO) {
         int cnt = this.replyDAO.update(replyVO);
-        return cnt;
-    }
-    
-    @Override
-    public int re_plus(int replyno) {
-        int cnt = this.replyDAO.re_plus(replyno);
-        return cnt;
-    }
-    
-    @Override
-    public int re_minus(int replyno) {
-        int cnt = this.replyDAO.re_minus(replyno);
-        return cnt;
-    }
-
-    @Override
-    public int delete_by_rescontentsno(int rescontentsno) {
-        int cnt = this.replyDAO.delete_by_rescontentsno(rescontentsno);
         return cnt;
     }
 
@@ -61,49 +40,55 @@ public class ReplyProc implements ReplyProcInter {
     }
 
     @Override
+    public int delete_by_reply_of_replyno(int replyofreplyno) {
+        int cnt = this.replyDAO.delete_by_reply_of_replyno(replyofreplyno);
+        return cnt;
+    }
+
+    @Override
     public int delete_by_customerno(int customerno) {
         int cnt = this.replyDAO.delete_by_customerno(customerno);
         return cnt;
     }
 
     @Override
-    public ArrayList<ReplyVO> read_paging(ReplyVO replyVO) {
-        int begin_of_page = (replyVO.getNow_page() - 1) * Reply.RECORD_PER_PAGE;
+    public ArrayList<Reply_OF_ReplyVO> read_paging(Reply_OF_ReplyVO replyVO) {
+        int begin_of_page = (replyVO.getReply_now_page() - 1) * Reply_OF_Reply.RECORD_PER_PAGE;
         int start_num = begin_of_page + 1;
-        int end_num = begin_of_page + Reply.RECORD_PER_PAGE;   
+        int end_num = begin_of_page + Reply_OF_Reply.RECORD_PER_PAGE;   
         
         replyVO.setStart_num(start_num);
         replyVO.setEnd_num(end_num);
         
-        ArrayList<ReplyVO> list = this.replyDAO.read_paging(replyVO);
+        ArrayList<Reply_OF_ReplyVO> list = this.replyDAO.read_paging(replyVO);
 
         return list;
     }
 
     @Override
-    public int search_count(int rescontentsno) {
-        int cnt = this.replyDAO.search_count(rescontentsno);
+    public int search_count(int replyno) {
+        int cnt = this.replyDAO.search_count(replyno);
         return cnt;
     }
 
     @Override
-    public String pagingBox(int rescontentsno, int resno, int now_page, String list_file) {
+    public String pagingBox(int replyno, int rescontentsno, int resno, int now_page, int reply_now_page, String list_file) {
               
-        int search_count = this.replyDAO.search_count(rescontentsno);  // 검색된 레코드 갯수 ->  전체 페이지 규모 파악
+        int search_count = this.replyDAO.search_count(replyno);  // 검색된 레코드 갯수 ->  전체 페이지 규모 파악
         
         // 객체를 만들지 않고 쓰는 메소드 -> static method ( 정적 메소드 ) 라고 한다.
-        int total_page = (int)(Math.ceil((double)search_count / Expense.RECORD_PER_PAGE)); // 전체 페이지 수: (double)1/10 = 0.1 -> 1 (Math.ceil)로 올림이 된다.
+        int total_page = (int)(Math.ceil((double)search_count / Reply_OF_Reply.RECORD_PER_PAGE)); // 전체 페이지 수: (double)1/10 = 0.1 -> 1 (Math.ceil)로 올림이 된다.
                                                                                             // 자료가 1개라고 페이지가 0이면 안되기 때문
         // 전체 그룹 수 : (double)1/10 -> 0.1 -> 1그룹, (double)12/10 -> 1.2 -> 2그룹
-        int total_grp = (int)(Math.ceil((double)total_page / Expense.PAGE_PER_BLOCK)); // 전체 그룹  수
+        int total_grp = (int)(Math.ceil((double)total_page / Reply_OF_Reply.PAGE_PER_BLOCK)); // 전체 그룹  수
         // 현재 그룹 번호 : (double)1/10 -> 0.1 -> 1그룹, (double)12/10 -> 1.2 -> 2그룹
-        int now_grp = (int)(Math.ceil((double)now_page / Expense.PAGE_PER_BLOCK));  // 현재 그룹 번호
+        int now_grp = (int)(Math.ceil((double)now_page / Reply_OF_Reply.PAGE_PER_BLOCK));  // 현재 그룹 번호
         
         // 1 group: 1, 2, 3 ... 9, 10
         // 2 group: 11, 12 ... 19, 20
         // 3 group: 21, 22 ... 29, 30
-        int start_page = ((now_grp - 1) * Expense.PAGE_PER_BLOCK) + 1; // 특정 그룹의 시작  페이지  
-        int end_page = (now_grp * Expense.PAGE_PER_BLOCK);               // 특정 그룹의 마지막 페이지   
+        int start_page = ((now_grp - 1) * Reply_OF_Reply.PAGE_PER_BLOCK) + 1; // 특정 그룹의 시작  페이지  
+        int end_page = (now_grp * Reply_OF_Reply.PAGE_PER_BLOCK);               // 특정 그룹의 마지막 페이지   
          
         StringBuffer str = new StringBuffer(); // String class 보다 문자열 추가등의 편집시 속도가 빠름 
          
@@ -143,9 +128,9 @@ public class ReplyProc implements ReplyProcInter {
         // now_grp: 3 (21 ~ 30 page) 
         // 현재 2그룹일 경우: (2 - 1) * 10 = 1그룹의 마지막 페이지 10
         // 현재 3그룹일 경우: (3 - 1) * 10 = 2그룹의 마지막 페이지 20
-        int _now_page = (now_grp - 1) * Expense.PAGE_PER_BLOCK;  
+        int _now_page = (now_grp - 1) * Reply_OF_Reply.PAGE_PER_BLOCK;  
         if (now_grp >= 2){ // 현재 그룹번호가 2이상이면 페이지수가 11페이 이상임으로 이전 그룹으로 갈수 있는 링크 생성 
-          str.append("<span class='span_box_1'><A href='"+list_file+"?rescontentsno="+rescontentsno+"&word=&now_page="+_now_page+"&resno="+resno+"'>이전</A></span>"); 
+          str.append("<span class='span_box_1'><A href='"+list_file+"?rescontentsno="+rescontentsno+"&word=&now_page="+_now_page+"&replyno="+replyno+"&reply_now_page="+reply_now_page+"&resno="+resno+"'>이전</A></span>"); 
         } 
      
         // 중앙의 페이지 목록
@@ -158,7 +143,7 @@ public class ReplyProc implements ReplyProcInter {
             str.append("<span class='span_box_2'>"+i+"</span>"); // 현재 페이지, 강조 
           }else{
             // 현재 페이지가 아닌 페이지는 이동이 가능하도록 링크를 설정
-            str.append("<span class='span_box_1'><A href='"+list_file+"?rescontentsno="+rescontentsno+"&word=&now_page="+i+"&resno="+resno+"'>"+i+"</A></span>");   
+            str.append("<span class='span_box_1'><A href='"+list_file+"?rescontentsno="+rescontentsno+"&word=&now_page="+i+"&replyno="+replyno+"&reply_now_page="+reply_now_page+"&resno="+resno+"'>"+i+"</A></span>");   
           } 
         } 
      
@@ -167,9 +152,9 @@ public class ReplyProc implements ReplyProcInter {
         // 현재 페이지 5일경우 -> 현재 1그룹: (1 * 10) + 1 = 2그룹의 시작페이지 11
         // 현재 페이지 15일경우 -> 현재 2그룹: (2 * 10) + 1 = 3그룹의 시작페이지 21
         // 현재 페이지 25일경우 -> 현재 3그룹: (3 * 10) + 1 = 4그룹의 시작페이지 31
-        _now_page = (now_grp * Expense.PAGE_PER_BLOCK)+1; //  최대 페이지수 + 1 
+        _now_page = (now_grp * Reply_OF_Reply.PAGE_PER_BLOCK)+1; //  최대 페이지수 + 1 
         if (now_grp < total_grp){ 
-          str.append("<span class='span_box_1'><A href='"+list_file+"?rescontentsno="+rescontentsno+"&word=&now_page="+_now_page+"&resno="+resno+"'>다음</A></span>"); 
+          str.append("<span class='span_box_1'><A href='"+list_file+"?rescontentsno="+rescontentsno+"&word=&now_page="+_now_page+"&replyno="+replyno+"&reply_now_page="+reply_now_page+"&resno="+resno+"'>다음</A></span>"); 
         } 
         str.append("</DIV>"); 
          

@@ -23,6 +23,7 @@ import dev.mvc.manager.ManagerProcInter;
 import dev.mvc.reply.Reply;
 import dev.mvc.reply.ReplyProcInter;
 import dev.mvc.reply.ReplyVO;
+import dev.mvc.reply_of_reply.Reply_OF_ReplyProcInter;
 import dev.mvc.res.ResProcInter;
 import dev.mvc.res.ResVO;
 import dev.mvc.score.ScoreProcInter;
@@ -59,6 +60,10 @@ public class RescontentsCont {
   @Autowired
   @Qualifier("dev.mvc.reply.ReplyProc") // @Component("dev.mvc.score.ScoreProc")
   private ReplyProcInter replyProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.reply_of_reply.Reply_OF_ReplyProc")
+  private Reply_OF_ReplyProcInter reply_of_replyProc;
   
   
   public RescontentsCont () {
@@ -595,6 +600,8 @@ public class RescontentsCont {
   public ModelAndView reply_delete(ReplyVO replyVO, RescontentsVO rescontentsVO) {
     ModelAndView mav = new ModelAndView();
     
+    
+    int cnt2 = this.reply_of_replyProc.delete_by_replyno(replyVO.getReplyno());
     int cnt = this.replyProc.delete_by_replyno(replyVO.getReplyno());
     
     if (cnt == 1) {
