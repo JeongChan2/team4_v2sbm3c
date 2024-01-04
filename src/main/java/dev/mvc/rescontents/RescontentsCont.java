@@ -564,7 +564,7 @@ public class RescontentsCont {
     }
     mav.addObject("resno", rescontentsVO.getResno()); // redirect parameter 적용
     mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
-    mav.setViewName("/rescontents/read"); // /WEB-INF/views/contents/map.jsp
+    //mav.setViewName("/rescontents/read"); // /WEB-INF/views/contents/map.jsp
     mav.addObject("url", "/rescontents/msg"); // msg.jsp, redirect parameter 적용
     mav.setViewName("redirect:/rescontents/msg.do"); // Post -> Get - param...     
     return mav;
@@ -580,17 +580,16 @@ public class RescontentsCont {
   public ModelAndView reply_delete(ReplyVO replyVO, RescontentsVO rescontentsVO) {
     ModelAndView mav = new ModelAndView();
     
-    int cnt = this.replyProc.create(replyVO);
+    int cnt = this.replyProc.delete_by_replyno(replyVO.getReplyno());
     
     if (cnt == 1) {
-        mav.addObject("code", "reply_success");
-        // resProc.increaseCnt(rescontentsVO.getResno()); // 글수 증가
+        mav.addObject("code", "reply_delete_success");
     } else {
-        mav.addObject("code", "reply_fail");
+        mav.addObject("code", "reply_delete_fail");
     }
     mav.addObject("resno", rescontentsVO.getResno()); // redirect parameter 적용
     mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
-    mav.setViewName("/rescontents/read"); // /WEB-INF/views/contents/map.jsp
+    //mav.setViewName("/rescontents/read"); // /WEB-INF/views/contents/map.jsp
     mav.addObject("url", "/rescontents/msg"); // msg.jsp, redirect parameter 적용
     mav.setViewName("redirect:/rescontents/msg.do"); // Post -> Get - param...     
     return mav;

@@ -254,14 +254,25 @@ window.onload = function(){
                     <c:set var="customerno" value="${replyVO.customerno }" />
                     <c:set var="cname" value="${replyVO.cname }" />
                      <div class="d-flex mb-4">
-                        <input type="hidden" name="replyno" value="${replyno }" />
+                        
                         <!-- Parent comment-->
                         <div class="flex-shrink-0"><img class="rounded-circle" style="width:60px;'" src="/images/profile.png" alt="..." /></div>
                         <div class="ms-3">
-                            <div class="fw-bold" style="display:inline;">${cname }        ${rdate }  </div>
-                            <input type="button" style="background:url(/rescontents/images/delete.png) no-repeat; width:20px; height:20px;" onclick="alert('클릭!')"><br>
-                            ${replycontents }
-
+                            <form class="mb-4" name='frm4' id='frm4' method='get' action='./reply_delete.do'>
+                                <div class="fw-bold" style="display:inline;">${cname }        ${rdate }  </div>
+                                  <input type="hidden" name="replyno" value="${replyno }" />
+                                  <input type="hidden" name="resno" value="${resno }" />
+                                  <c:choose>
+                                    <c:when test="${sessionScope.customerno == customerno}">
+                                       <button type="submit" class="btn btn-sm" style="width:16px; vertical-align : bottom;"><img  src="/rescontents/images/delete.png" width="16"></button><br>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button type="submit" class="btn btn-sm" style="visibility : hidden; width:16px; vertical-align : bottom;"><img  src="/rescontents/images/delete.png" width="16"></button><br>
+                                    </c:otherwise>
+                                  </c:choose>
+                                  ${replycontents }
+                            </form>
+                            
                         </div>
                     </div>
                   </c:forEach>
