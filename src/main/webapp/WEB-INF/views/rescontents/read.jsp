@@ -228,8 +228,18 @@ window.onload = function(){
               <!-- 댓글 입력 창 -->
               <c:choose>
                 <c:when test="${sessionScope.id != null}"> <%-- 회원 로그인했을 경우 --%>
-                  <form class="mb-4" name='frm3' id='frm3' method='get' action='/res/create.do'>
-                        <textarea class="form-control" rows="3" placeholder="댓글 입력해주세요"></textarea>
+                  <form class="mb-4" name='frm3' id='frm3' method='get' action='./reply.do'>
+                    <input type="hidden" name="rescontentsno" value="${rescontentsno }" />
+                    <input type="hidden" name="resno" value="${resno }" />
+                    <input type="hidden" name="customerno" value="${customerno }" />
+                    <div>
+                          <textarea class="form-control" style="width:90%; float:left;" name="replycontents" rows="3" placeholder="댓글 입력해주세요"></textarea>
+                          <button type="submit"style="width:10%; height:86px; font-size:24px;" class="btn btn-primary btn-sm">등록</button>
+                    </div>
+                    <br>
+                    <div>
+                        <div></div>
+                    </div>
                   </form>
                 </c:when>
               </c:choose>
@@ -244,10 +254,12 @@ window.onload = function(){
                     <c:set var="customerno" value="${replyVO.customerno }" />
                     <c:set var="cname" value="${replyVO.cname }" />
                      <div class="d-flex mb-4">
+                        <input type="hidden" name="replyno" value="${replyno }" />
                         <!-- Parent comment-->
-                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                        <div class="flex-shrink-0"><img class="rounded-circle" style="width:60px;'" src="/images/profile.png" alt="..." /></div>
                         <div class="ms-3">
-                            <div class="fw-bold">${cname }        ${rdate }  </div>
+                            <div class="fw-bold" style="display:inline;">${cname }        ${rdate }  </div>
+                            <input type="button" style="background:url(/rescontents/images/delete.png) no-repeat; width:20px; height:20px;" onclick="alert('클릭!')"><br>
                             ${replycontents }
 
                         </div>

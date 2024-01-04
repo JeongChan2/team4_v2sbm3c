@@ -54,6 +54,18 @@
           </LI>                                                                      
         </c:when>
         
+                <c:when test="${code == 'reply_success'}"> <%-- Java if --%>
+          <LI class='li_none'>
+            <span class="span_success">댓글 등록이 완료되었습니다.</span>
+          </LI> 
+        </c:when>
+        
+        <c:when test="${code == 'reply_fail'}"> <%-- Java if --%>
+          <LI class='li_none'>
+            <span class="span_fail">댓글 등록에 실패했습니다.</span>
+          </LI>                                                                      
+        </c:when>
+        
         <c:when test="${code == 'score_delete_success'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_success">평점 삭제 완료되었습니다.</span>
@@ -96,7 +108,7 @@
       <LI class='li_none'>
         <br>
         <c:choose>
-            <c:when test="${code == 'score_success' }">
+            <c:when test="${code == 'score_success' || code == 'reply_success' }">
                 <button type='button' onclick="history.back()" class="btn btn-primary">이전 화면으로</button>    
             </c:when>
             <c:when test="${cnt == 0 }">

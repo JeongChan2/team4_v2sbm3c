@@ -545,6 +545,59 @@ public class RescontentsCont {
     return mav;
   }
   
+  /**
+   * 맵 등록/수정/삭제 폼
+   * http://localhost:9092/rescontents/map.do?rescontentsno=1
+   * @return
+   */
+  @RequestMapping(value="/rescontents/reply.do", method=RequestMethod.GET )
+  public ModelAndView reply(ReplyVO replyVO, RescontentsVO rescontentsVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    int cnt = this.replyProc.create(replyVO);
+    
+    if (cnt == 1) {
+        mav.addObject("code", "reply_success");
+        // resProc.increaseCnt(rescontentsVO.getResno()); // 글수 증가
+    } else {
+        mav.addObject("code", "reply_fail");
+    }
+    mav.addObject("resno", rescontentsVO.getResno()); // redirect parameter 적용
+    mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
+    mav.setViewName("/rescontents/read"); // /WEB-INF/views/contents/map.jsp
+    mav.addObject("url", "/rescontents/msg"); // msg.jsp, redirect parameter 적용
+    mav.setViewName("redirect:/rescontents/msg.do"); // Post -> Get - param...     
+    return mav;
+  }
+  
+  
+  /**
+   * 맵 등록/수정/삭제 폼
+   * http://localhost:9092/rescontents/map.do?rescontentsno=1
+   * @return
+   */
+  @RequestMapping(value="/rescontents/reply_delete.do", method=RequestMethod.GET )
+  public ModelAndView reply_delete(ReplyVO replyVO, RescontentsVO rescontentsVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    int cnt = this.replyProc.create(replyVO);
+    
+    if (cnt == 1) {
+        mav.addObject("code", "reply_success");
+        // resProc.increaseCnt(rescontentsVO.getResno()); // 글수 증가
+    } else {
+        mav.addObject("code", "reply_fail");
+    }
+    mav.addObject("resno", rescontentsVO.getResno()); // redirect parameter 적용
+    mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
+    mav.setViewName("/rescontents/read"); // /WEB-INF/views/contents/map.jsp
+    mav.addObject("url", "/rescontents/msg"); // msg.jsp, redirect parameter 적용
+    mav.setViewName("redirect:/rescontents/msg.do"); // Post -> Get - param...     
+    return mav;
+  }
+  
+  
+  
 
   /**
    * 맵 등록/수정/삭제 폼
@@ -877,6 +930,7 @@ public class RescontentsCont {
     // 파일 삭제 종료
     // -------------------------------------------------------------------
     this.scoreProc.delete_all(rescontentsVO.getRescontentsno()); //자식 DBMS(평점) 삭제
+    this.replyProc.delete_by_rescontentsno(rescontentsVO.getRescontentsno()); //자식 DBMS(댓글) 삭제
     this.rescontentsProc.delete(rescontentsVO.getRescontentsno()); // DBMS 삭제
         
     // -------------------------------------------------------------------------------------

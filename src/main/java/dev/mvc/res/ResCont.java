@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.expense.ExpenseProcInter;
 import dev.mvc.food.FoodProcInter;
 import dev.mvc.manager.ManagerProcInter;
+import dev.mvc.reply.ReplyProcInter;
 import dev.mvc.rescontents.Rescontents;
 import dev.mvc.rescontents.RescontentsProcInter;
 import dev.mvc.rescontents.RescontentsVO;
@@ -56,6 +57,11 @@ public class ResCont {
   @Autowired
   @Qualifier("dev.mvc.score.ScoreProc")   // "dev.mvc.admin.AdminProc"라고 명명된 클래스 (Qualifier->이름을 찾아와주는 역할)
   private ScoreProcInter scoreProc; 
+  
+  @Autowired
+  @Qualifier("dev.mvc.reply.ReplyProc")   // "dev.mvc.admin.AdminProc"라고 명명된 클래스 (Qualifier->이름을 찾아와주는 역할)
+  private ReplyProcInter replyProc; 
+  
   
   public ResCont() {
     System.out.println("-> ResCont created");
@@ -237,6 +243,7 @@ public class ResCont {
         Tool.deleteFile(uploadDir, thumb1);     // preview 이미지 삭제
         int cnt = rescontentsVO.getRescontentsno();
         this.scoreProc.delete_all(cnt);
+        this.replyProc.delete_by_rescontentsno(cnt);
         
         // -------------------------------------------------------------------
         // 파일 삭제 종료
