@@ -397,6 +397,7 @@ public class RescontentsCont {
     return mav;
   }
   
+  
   /**
    * 조회
    * http://localhost:9092/rescontents/read.do?rescontentsno=17

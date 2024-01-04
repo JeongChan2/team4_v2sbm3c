@@ -277,13 +277,12 @@ window.onload = function(){
                     </div>
                   </c:forEach>
                   <c:choose>
-                    <c:when test="${replylist != null} ">
-                      <!-- 페이지 목록 출력 부분 시작 -->
-                      <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
-                        <!-- 페이지 목록 출력 부분 종료 -->
+                    <c:when test="${replylist.isEmpty()} ">
                     </c:when>
+                    <c:otherwise>
+                        <DIV class='bottom_menu'>${paging }</DIV> 
+                    </c:otherwise>
                   </c:choose>
-
               </div>
 
             </div>
