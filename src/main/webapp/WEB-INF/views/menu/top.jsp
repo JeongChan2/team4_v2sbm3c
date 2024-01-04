@@ -114,6 +114,7 @@
                     <a class="dropdown-item" href='/expense/list_all_managerno.do?word=&now_page=1'>지출내역 목록</a>
                     <a class="dropdown-item" href='/sell/list_all_managerno.do?word=&now_page=1'>판매내역 목록</a>
                     <a class="dropdown-item" href='/reservation/list_all_managerno.do?word=&now_page=1'>예약 내역</a>
+                    <a class="dropdown-item" href='/withdrawalLog/log_list.do'>탈퇴 내역</a>
                     <a class="dropdown-item" href='/manager/logout.do'>관리자 ${sessionScope.manager_id } 로그아웃</a>
                   </div>
                 </li>

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.login.LoginProc;
 import dev.mvc.login.LoginProcInter;
 import dev.mvc.manager.ManagerProcInter;
+import dev.mvc.withdrawalLog.WithdrawalLogProc;
 
 @Controller
 public class CustomerCont {
@@ -36,6 +37,9 @@ public class CustomerCont {
   @Qualifier("dev.mvc.customer.CustomerProc")
   private CustomerProcInter customerProc = null;
   
+  @Autowired
+  @Qualifier("dev.mvc.withdrawalLog.WithdrawalLogProc")
+  private WithdrawalLogProc withdrawalLogProc = null; // 탈퇴내역
   
   public CustomerCont(){
     System.out.println("-> CustomerCont created.");
@@ -641,6 +645,7 @@ public class CustomerCont {
     //int customerno = 3; // 테스트
     
     int cnt = this.customerProc.user_withdrawal(customerno);
+    this.withdrawalLogProc.loginsert(customerno);
     
     if (cnt == 1) {
       mav.addObject("code", "passwd_update_success"); // 탈퇴 성공

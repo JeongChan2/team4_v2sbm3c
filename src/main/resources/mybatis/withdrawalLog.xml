@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "dev.mvc.withdrawalLog.WithdrawalLogDAOInter">
+  <insert id="loginsert" parameterType="int">
+    INSERT INTO WithdrawalLog(logno, customerno, logdate)
+    VALUES(log_seq.nextval, #{customerno}, sysdate)
+  </insert>
+  
+  <select id="log_list" resultType="dev.mvc.withdrawalLog.JoinLogVO">
+    SELECT l.logno, l.customerno, n.id ,l.logdate
+		from WithdrawalLog l, n_customer n
+		where l.customerno = n.customerno
+		ORDER BY logno ASC
+   </select>
+  
+</mapper> 

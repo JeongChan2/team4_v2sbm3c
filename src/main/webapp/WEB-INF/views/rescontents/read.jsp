@@ -263,7 +263,7 @@ window.onload = function(){
                                   <input type="hidden" name="replyno" value="${replyno }" />
                                   <input type="hidden" name="resno" value="${resno }" />
                                   <c:choose>
-                                    <c:when test="${sessionScope.customerno == customerno}">
+                                    <c:when test="${sessionScope.customerno == customerno || sessionScope.manager_id != null}">
                                        <button type="submit" class="btn btn-sm" style="width:16px; vertical-align : bottom;"><img  src="/rescontents/images/delete.png" width="16"></button><br>
                                     </c:when>
                                     <c:otherwise>
@@ -277,7 +277,7 @@ window.onload = function(){
                     </div>
                   </c:forEach>
                   <c:choose>
-                    <c:when test="${replylist != null}">
+                    <c:when test="${replylist != null} ">
                       <!-- 페이지 목록 출력 부분 시작 -->
                       <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
                         <!-- 페이지 목록 출력 부분 종료 -->
