@@ -206,7 +206,7 @@ public class RequirementCont {
        }
   
        if(this.takeProc.check(customerno) == 0) { // 마이페이지로 들어갈 때 오늘의 섭취 영양소가 있는지 확인 => 오늘의 영양소가 없는 경우 생성한다.
-         System.out.println("customerno=>"+customerno);
+         //System.out.println("customerno=>"+customerno);
          int cnt = this.takeProc.create(customerno); // 생성 (생성 성공 1리턴, 실패 0리턴)
        }
        
