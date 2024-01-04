@@ -14,12 +14,9 @@
 
 <script type="text/javascript">
   window.onload = ()=> {
-    document.getElementById('btn_create').addEventListener('click', () => {
-      location.href="./create.do";
-    });
 
-    document.getElementById('btn_loadDefault').addEventListener('click', () => {
-      document.getElementById('id').value = 'user1@gmail.com';
+    document.getElementById('btn_create').addEventListener('click', () => {
+      document.getElementById('id').value = 'user4@gmail.com';
       document.getElementById('passwd').value = '1234';
     });
   }
@@ -49,6 +46,7 @@
           </Label>     
 
           <input type="submit" value="Login">
+          <input type="button" id="btn_create" value="테스트 계정">
           
       </form>
   </div>

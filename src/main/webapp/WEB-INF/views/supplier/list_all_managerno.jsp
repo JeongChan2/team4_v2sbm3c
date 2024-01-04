@@ -86,7 +86,7 @@
     <c:forEach var="supplierVO" items="${list }" varStatus="info">
       <c:set var="supplierno" value="${supplierVO.supplierno }"/>
 		    <tr>
-		      <td class="td_bs">${info.count }</td>
+		      <td class="td_bs">${record_per_page*(param.now_page-1)+info.count}</td>
 		      <td class="td_bs">${supplierVO.name }</a></td>
 		      <td class="td_bs">${supplierVO.rdate }</td>
 		      <td class="td_bs">

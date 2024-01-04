@@ -51,5 +51,42 @@
   <delete id="delete_resno" parameterType="int">
     DELETE FROM reservation where resno = #{resno}
   </delete>
+  
+  <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM reservation
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE managerno=#{managerno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE managerno=#{managerno} AND (UPPER(reserv_name) LIKE '%' || UPPER(#{word}) || '%'
+                                          OR UPPER(reserv_phone) LIKE '%' || UPPER(#{word}) || '%')
+      </otherwise>
+    </choose>
+  </select>  
+
+  <select id="list_by_managerno_search_paging" resultType="dev.mvc.reservation.ReservationVO" parameterType="dev.mvc.reservation.ReservationVO">
+    SELECT reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate, r
+    FROM (
+      SELECT reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate, rownum as r
+      FROM (
+        SELECT reserv_no, res_name, reserv_name, reserv_phone, cnt, rdate
+        FROM reservation
+        <choose>
+          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+            WHERE managerno=#{managerno}
+          </when>
+          <otherwise>
+            WHERE managerno=#{managerno} AND (UPPER(reserv_name) LIKE '%' || UPPER(#{word}) || '%'
+                                              OR UPPER(reserv_phone) LIKE '%' || UPPER(#{word}) || '%')
+            ORDER BY reserv_no ASC
+          </otherwise>
+        </choose>
+      )          
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+  </select>
 
 </mapper> 

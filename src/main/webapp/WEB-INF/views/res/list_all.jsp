@@ -35,6 +35,7 @@
             <div style="text-align: center;">
                   <label for="lang">식당 음식 분류</label>
                   <select name="typenum" id="lang">
+                    <option value="0">선택해주세요.</option>
                     <option value="1">족발, 보쌈</option>
                     <option value="2">짬, 탕, 찌개</option>
                     <option value="3">돈까스, 회, 일식</option>

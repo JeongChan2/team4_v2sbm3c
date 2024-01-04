@@ -47,5 +47,41 @@
       WHERE s.managerno = #{managerno}
       ORDER BY sellno ASC
    </select>
+   
+  <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM sell
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE managerno=#{managerno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE managerno=#{managerno} AND (UPPER(name) LIKE '%' || UPPER(#{word}) || '%')
+      </otherwise>
+    </choose>
+  </select>  
+
+  <select id="list_by_managerno_search_paging" resultType="dev.mvc.sell.Sell_JoinVO" parameterType="dev.mvc.sell.Sell_JoinVO">
+    SELECT sellno, name, cnt, price, rdate, resname, r
+    FROM (
+      SELECT sellno, name, cnt, price, rdate, resname, rownum as r
+      FROM (
+        SELECT s.sellno, s.name, s.cnt, s.price, s.rdate, r.resname AS resname
+        FROM sell s
+        INNER JOIN restaurant r ON s.resno = r.resno
+        <choose>
+          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+            WHERE s.managerno=#{managerno}
+          </when>
+          <otherwise>
+            WHERE s.managerno=#{managerno} AND (UPPER(s.name) LIKE '%' || UPPER(#{word}) || '%' )
+            ORDER BY sellno DESC
+          </otherwise>
+        </choose>
+      )          
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+  </select>
 
 </mapper> 

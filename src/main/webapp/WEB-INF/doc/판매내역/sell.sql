@@ -59,16 +59,31 @@ WHERE sellno=1;
 DELETE FROM expense where expenseno = 1;
 
 6. 식당이름, 공급업체이름 출력
-SELECT expenseno, name, cnt, price, rdate, supplierno, managerno, resno
-FROM expense
-WHERE managerno = 1
-ORDER BY expenseno ASC;
+SELECT s.sellno, s.name, s.cnt, s.price, s.rdate, r.resname
+FROM sell s
+INNER JOIN restaurant r ON s.resno = r.resno
+WHERE s.managerno = 1
+ORDER BY sellno ASC
 
-SELECT e.expenseno, e.name, e.cnt, e.price, e.rdate, s.name AS supplier_name, r.resname
-FROM expense e
-INNER JOIN restaurant r ON e.resno = r.resno
-INNER JOIN supplier s ON e.supplierno = s.supplierno
-WHERE e.managerno = 1 and e.resno = 1
-ORDER BY expenseno ASC;
+
+7. 페이징
+SELECT sellno, name, cnt, price, rdate, resname, r
+FROM (
+           SELECT sellno, name, cnt, price, rdate, resname, rownum as r
+           FROM (
+                     SELECT s.sellno, s.name, s.cnt, s.price, s.rdate, r.resname AS resname
+                     FROM sell s
+                     INNER JOIN restaurant r ON s.resno = r.resno
+                     WHERE s.managerno = 1 AND (UPPER(s.name) LIKE '%' || UPPER('제육') || '%')
+                     ORDER BY sellno DESC
+           )          
+)
+WHERE r >= 1 AND r <= 3;
+
+8. 검색 레코드 갯수
+SELECT COUNT(*) as cnt
+    FROM sell
+        -- WHERE managerno=#{managerno}
+        WHERE managerno=1 AND (UPPER(name) LIKE '%' || UPPER('제육') || '%')
 
 commit;

@@ -11,6 +11,15 @@
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 
+<script type="text/javascript">
+  window.onload = function(){
+    document.getElementById('resno').value=${expenseVO.resno};
+
+    document.getElementById('supplierno').value=${expenseVO.supplierno};
+  }
+
+</script>
+
 </head>
 <body>
 <c:import url="/menu/top.do" />

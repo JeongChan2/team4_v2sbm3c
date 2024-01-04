@@ -1,7 +1,9 @@
 package dev.mvc.sell;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import dev.mvc.expense.Expense_JoinVO;
 import dev.mvc.food.FoodVO;
 
 public interface SellDAOInter {
@@ -49,4 +51,18 @@ public interface SellDAOInter {
    * @return
    */
   public ArrayList<Sell_JoinVO> list_all_names(int managerno);
+  
+  /**
+   * 검색된 레코드 갯수
+   * @param map
+   * @return
+   */
+  public int search_count(HashMap<String, Object> hashMap);
+  
+  /**
+   * 매니저별 검색 목록 + 페이징
+   * @param Sell_JoinVO
+   * @return
+   */
+  public ArrayList<Sell_JoinVO> list_by_managerno_search_paging(Sell_JoinVO sell_JoinVO);
 }

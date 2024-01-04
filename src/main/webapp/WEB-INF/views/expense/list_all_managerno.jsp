@@ -15,7 +15,12 @@
 <body>
 <c:import url="/menu/top.do" />
 
-    <div class='title_line'>지출내역 목록</div>
+    <div class='title_line'>
+      지출내역 목록
+      <c:if test="${param.word.length() > 0 }">
+        > 「${param.word }」 검색 ${search_count } 건
+      </c:if>
+    </div>
 
 		<aside class="aside_right">
 		  <a href="#">등록</a>
@@ -23,6 +28,26 @@
 		  <a href="javascript:location.reload();">새로고침</a>
 		</aside>
 		<div class="menu_line"></div> 
+		
+		<%-- 동적 sql --%>
+   <div style="text-align: right; clear: both;">  
+    <form name='frm' id='frm' method='get' action='./list_all_managerno.do'> <%-- 자기자신한테 submit --%>
+      
+      <c:choose>
+        <c:when test="${param.word != '' }"> <%-- 검색하는 경우는 검색어를 출력 --%>
+          <input type='text' name='word' id='word' value='${param.word }' class='input_word'>
+        </c:when>
+        <c:otherwise> <%-- 검색하지 않는 경우 --%>
+          <input type='text' name='word' id='word' value='' class='input_word'>
+        </c:otherwise>
+      </c:choose>
+      <button type='submit' class='btn btn-secondary btn-sm'>검색</button>
+      <c:if test="${param.word.length() > 0 }"> <%-- 검색 상태라면 '검색 취소' 버튼을 출력한다 --%>
+        <button type='button' class='btn btn-secondary btn-sm' 
+                    onclick="location.href='./list_all_managerno.do?word='">검색 취소</button>  
+      </c:if>    
+    </form>
+  </div>
 		
 		
 		<form name='frm' method='post' action='/expense/create.do'>
@@ -45,6 +70,7 @@
      <div style="text-align: center;">
        <label for="resno">식당 분류</label>
        <select name="resno" id="resno">
+         <option value="0">선택해주세요.</option>
          <c:forEach var="resVO" items="${res_list }" varStatus="info">
            <c:set var="resno" value="${resVO.resno }"/>
            <c:set var="resname" value="${resVO.resname }"/>
@@ -56,6 +82,7 @@
      <div style="text-align: center;">
        <label for="supplierno">공급업체 분류</label>
        <select name="supplierno" id="supplierno">
+         <option value="0">선택해주세요.</option>
          <c:forEach var="supplierVO" items="${supplier_list }" varStatus="info">
            <c:set var="supplierno" value="${supplierVO.supplierno }"/>
            <c:set var="supplier_name" value="${supplierVO.name }"/>
@@ -98,7 +125,7 @@
     <c:forEach var="expense_JoinVO" items="${list }" varStatus="info">
       <c:set var="expenseno" value="${expense_JoinVO.expenseno }"/>
 		    <tr>
-		      <td class="td_bs">${info.count }</td>
+		      <td class="td_bs">${record_per_page*(param.now_page-1)+info.count}</td>
 		      <td class="td_bs">${expense_JoinVO.name }</td>
 		      <td class="td_bs">${expense_JoinVO.cnt }</td>
 		      <td class="td_bs">${expense_JoinVO.price }</td>
@@ -114,6 +141,10 @@
 
   </tbody>
 </table>
+
+<!-- 페이지 목록 출력 부분 시작 -->
+  <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
+<!-- 페이지 목록 출력 부분 종료 -->
  
 <jsp:include page="../menu/bottom.jsp" flush='false' /> 
 </body>

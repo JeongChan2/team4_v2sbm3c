@@ -64,11 +64,32 @@ FROM expense
 WHERE managerno = 1
 ORDER BY expenseno ASC;
 
-SELECT e.expenseno, e.name, e.cnt, e.price, e.rdate, s.name AS supplier_name, r.resname
+SELECT e.expenseno, e.name, e.cnt, e.price, e.rdate, s.name AS supplier_name, r.resname, e.supplierno, e.managerno, e.resno
 FROM expense e
 INNER JOIN restaurant r ON e.resno = r.resno
 INNER JOIN supplier s ON e.supplierno = s.supplierno
 WHERE e.managerno = 1 and e.resno = 1
 ORDER BY expenseno ASC;
+
+7. 페이징
+SELECT expenseno, name, cnt, price, rdate, supplier_name, resname, supplierno, managerno, resno, r
+FROM (
+           SELECT expenseno, name, cnt, price, rdate, supplier_name, resname, supplierno, managerno, resno, rownum as r
+           FROM (
+                     SELECT e.expenseno, e.name, e.cnt, e.price, e.rdate, s.name AS supplier_name, r.resname, e.supplierno, e.managerno, e.resno
+                     FROM expense e
+                     INNER JOIN restaurant r ON e.resno = r.resno
+                     INNER JOIN supplier s ON e.supplierno = s.supplierno
+                     WHERE e.managerno = 1 AND (UPPER(e.name) LIKE '%' || UPPER('밥그릇') || '%')
+                     ORDER BY expenseno DESC
+           )          
+)
+WHERE r >= 1 AND r <= 3;
+
+8. 검색 레코드 갯수
+SELECT COUNT(*) as cnt
+    FROM expense
+        -- WHERE managerno=#{managerno}
+        WHERE managerno=1 AND (UPPER(name) LIKE '%' || UPPER('밥그릇') || '%')
 
 commit;

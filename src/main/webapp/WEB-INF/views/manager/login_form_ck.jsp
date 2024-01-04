@@ -10,7 +10,14 @@
 <title>Resort world</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
-
+<script type="text/javascript">
+	window.onload = ()=> {
+    document.getElementById('btn_create').addEventListener('click', () => {
+      document.getElementById('id').value = 'MANAGER1';
+      document.getElementById('passwd').value = '1234';
+    });
+  }
+</script>
 
 </head> 
  
@@ -35,6 +42,7 @@
           </Label>     
 
           <input type="submit" value="Login">
+          <input type="button" id="btn_create" value="테스트 계정">
           
       </form>
   </div>
