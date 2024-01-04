@@ -256,7 +256,7 @@ window.onload = function(){
                      <div class="d-flex mb-4">
                         
                         <!-- Parent comment-->
-                        <div class="flex-shrink-0"><img class="rounded-circle" style="width:60px;'" src="/images/profile.png" alt="..." /></div>
+                        <div class="flex-shrink-0"><img class="rounded-circle" style="width:60px;'" src="/css/images/profile.png" alt="..." /></div>
                         <div class="ms-3">
                             <form class="mb-4" name='frm4' id='frm4' method='get' action='./reply_delete.do'>
                                 <div class="fw-bold" style="display:inline;">${cname }        ${rdate }  </div>
