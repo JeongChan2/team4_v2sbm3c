@@ -67,4 +67,44 @@ SELECT COUNT(*) as cnt
 FROM REPLY
 WHERE RESCONTENTSNO = 9;
 
+SELECT r.replyno, r.replycontents, r.rdate, r.rescontentsno, r.customerno,
+        c.customerno, c.cname
+FROM REPLY r INNER JOIN n_customer c ON c.customerno = r.customerno
+WHERE rescontentsno = 11
+ORDER BY r.rdate ASC;
+
+
+
+SELECT replyno, replycontents, rdate, rescontentsno, customerno, cname, rownum as t
+        FROM (SELECT r.replyno, r.replycontents, r.rdate, r.rescontentsno,
+                        c.customerno, c.cname
+                FROM REPLY r INNER JOIN n_customer c ON c.customerno = r.customerno
+                WHERE rescontentsno = 11
+                ORDER BY r.rdate ASC)
+
+SELECT replyno, replycontents, rdate, rescontentsno, customerno, cname, t
+FROM(
+    SELECT replyno, replycontents, rdate, rescontentsno, customerno, cname, rownum as t
+            FROM (SELECT r.replyno, r.replycontents, r.rdate, r.rescontentsno,
+                            c.customerno, c.cname
+                    FROM REPLY r INNER JOIN n_customer c ON c.customerno = r.customerno
+                    WHERE rescontentsno = 11
+                    ORDER BY r.rdate ASC)
+)
+WHERE t >= 1 AND t <= 4;
+
+SELECT rescontentsno, managerno, resno, title, rescontent, recom, cnt, replycnt, passwd, word, rdate,file1, file1saved, thumb1, size1, foodno
+FROM(
+SELECT r.rescontentsno, r.managerno, r.resno, r.title, r.rescontent, r.recom, r.cnt, r.replycnt, r.passwd, r.word, r.rdate,r.file1, r.file1saved, r.thumb1, r.size1, r.foodno
+    FROM rescontents r
+    WHERE r.resno = (SELECT resno FROM restaurant WHERE typenum = (SELECT typenum FROM recommend WHERE customerno = 10))
+    ORDER BY NVL((SELECT AVG(NVL(score,0)) FROM score WHERE rescontentsno = r.rescontentsno),0) DESC
+)
+WHERE rownum<=5 
+    
+
+
+
+
+
 COMMIT;

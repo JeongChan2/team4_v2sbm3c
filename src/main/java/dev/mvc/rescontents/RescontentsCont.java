@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import dev.mvc.customer.CustomerProcInter;
+import dev.mvc.expense.Expense;
 import dev.mvc.food.FoodProcInter;
 import dev.mvc.food.FoodVO;
 import dev.mvc.manager.ManagerProcInter;
+import dev.mvc.reply.Reply;
 import dev.mvc.reply.ReplyProcInter;
 import dev.mvc.reply.ReplyVO;
 import dev.mvc.res.ResProcInter;
@@ -401,7 +403,7 @@ public class RescontentsCont {
    * @return
    */
   @RequestMapping(value="/rescontents/read.do", method = RequestMethod.GET)
-  public ModelAndView read(HttpSession session, int rescontentsno) { // int resno = (int)request.getParameter("resno");
+  public ModelAndView read(HttpSession session, int rescontentsno, ReplyVO replyVO) { // int resno = (int)request.getParameter("resno");
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/rescontents/read"); // /WEB-INF/views/contents/read.jsp
     
@@ -436,10 +438,22 @@ public class RescontentsCont {
     mav.addObject("rescontentsVO", rescontentsVO);
     mav.addObject("avgScore", avgScore);
     
-    ArrayList<ReplyVO> list = this.replyProc.read(rescontentsno);
+//    ArrayList<ReplyVO> list = this.replyProc.read(rescontentsno);
+//    mav.addObject("replylist",list);
+    
+    replyVO.setRescontentsno(rescontentsno);
+    
+    ArrayList<ReplyVO> list = this.replyProc.read_paging(replyVO);
     mav.addObject("replylist",list);
     
+    int search_count = this.replyProc.search_count(rescontentsno);
+    mav.addObject("search_count",search_count);
     
+    String paging = replyProc.pagingBox(replyVO.getRescontentsno(),rescontentsVO.getResno(), replyVO.getNow_page(), "read.do");
+    mav.addObject("paging", paging);
+    
+    int record_per_page = Reply.RECORD_PER_PAGE;   // 페이지가 바뀌어도 번호 증가 하기위함
+    mav.addObject("record_per_page", record_per_page);
     return mav;
   }
 

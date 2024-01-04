@@ -1,6 +1,7 @@
 package dev.mvc.reply;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface ReplyDAOInter {
     /**
@@ -15,6 +16,21 @@ public interface ReplyDAOInter {
      * @return
      */
     public ArrayList<ReplyVO> read(int rescontentsno);
+    
+    /**
+     * 검색된 레코드 갯수
+     * @param map
+     * @return
+     */
+    public int search_count(int rescontentsno);
+    
+    /**
+     * 페이징 조회
+     * @param 
+     * @return
+     */
+    public ArrayList<ReplyVO> read_paging(ReplyVO replyVO);
+    
     /**
      * 수정
      * @param replyVO

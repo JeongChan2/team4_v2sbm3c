@@ -20,6 +20,28 @@
   </select>
   
   
+    <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt
+    FROM REPLY
+    WHERE rescontentsno=#{rescontentsno}
+  </select> 
+  
+      <!-- 페이징 조회 -->
+  <select id="read_paging" resultType="dev.mvc.reply.ReplyVO" parameterType="dev.mvc.reply.ReplyVO">
+      SELECT replyno, replycontents, rdate, rescontentsno, customerno, cname, t
+      FROM(
+          SELECT replyno, replycontents, rdate, rescontentsno, customerno, cname, rownum as t
+                  FROM (SELECT r.replyno, r.replycontents, r.rdate, r.rescontentsno,
+                                  c.customerno, c.cname
+                          FROM REPLY r INNER JOIN n_customer c ON c.customerno = r.customerno
+                          WHERE rescontentsno = #{rescontentsno}
+                          ORDER BY r.rdate DESC)
+      )
+      WHERE <![CDATA[ t >= #{start_num} AND t <= #{end_num} ]]>
+  </select>
+  
+  
     <!-- 댓글 수정 -->
   <update id="update" parameterType="dev.mvc.reply.ReplyVO">
     UPDATE REPLY 
