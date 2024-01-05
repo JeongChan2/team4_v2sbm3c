@@ -37,6 +37,21 @@ public interface ReplyDAOInter {
      * @return
      */
     public int update(ReplyVO replyVO);
+    
+    /**
+     * 수정
+     * @param replyno
+     * @return
+     */
+    public int re_plus(int replyno);
+    
+    /**
+     * 수정
+     * @param replyno
+     * @return
+     */
+    public int re_minus(int replyno);
+    
     /**
      * 컨텐츠 삭제 시 자식 삭제용
      * @param replyVO

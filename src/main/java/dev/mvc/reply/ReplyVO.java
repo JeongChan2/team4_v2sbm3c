@@ -6,6 +6,7 @@ package dev.mvc.reply;
 //        RDATE                               DATE         NOT NULL,
 //        RESCONTENTSNO                       NUMBER(10)       NULL ,
 //        CUSTOMERNO                          NUMBER(10)       NULL ,
+//        RE_REPLY                            NUMBER(5)   DEFAULT 0   NULL ,
 //  FOREIGN KEY (RESCONTENTSNO) REFERENCES RESCONTENTS (RESCONTENTSNO),
 //  FOREIGN KEY (CUSTOMERNO) REFERENCES N_CUSTOMER (CUSTOMERNO)
 //);
@@ -16,6 +17,7 @@ public class ReplyVO {
     private String rdate = "";
     private int rescontentsno;
     private int customerno;
+    private int re_reply;
 
     //회원 관련
     // -----------------------------------------------------------------------------------
@@ -103,6 +105,12 @@ public class ReplyVO {
     }
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+    public int getRe_reply() {
+      return re_reply;
+    }
+    public void setRe_reply(int re_reply) {
+      this.re_reply = re_reply;
     }
     
     

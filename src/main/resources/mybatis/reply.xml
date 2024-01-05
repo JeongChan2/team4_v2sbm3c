@@ -12,7 +12,7 @@
   
     <!-- 일반적인 조회 -->
   <select id="read" resultType="dev.mvc.reply.ReplyVO" parameterType="int">
-        SELECT r.replyno, r.replycontents, r.rdate, r.rescontentsno, r.customerno,
+        SELECT r.replyno, r.replycontents, r.rdate, r.rescontentsno, r.customerno, r.re_reply,
                 c.customerno, c.cname
         FROM REPLY r INNER JOIN n_customer c ON c.customerno = r.customerno
         WHERE rescontentsno = #{rescontentsno}
@@ -29,11 +29,11 @@
   
       <!-- 페이징 조회 -->
   <select id="read_paging" resultType="dev.mvc.reply.ReplyVO" parameterType="dev.mvc.reply.ReplyVO">
-      SELECT replyno, replycontents, rdate, rescontentsno, customerno, cname, t
+      SELECT replyno, replycontents, rdate, rescontentsno, customerno, cname, re_reply, t
       FROM(
-          SELECT replyno, replycontents, rdate, rescontentsno, customerno, cname, rownum as t
+          SELECT replyno, replycontents, rdate, rescontentsno, customerno, cname, re_reply, rownum as t
                   FROM (SELECT r.replyno, r.replycontents, r.rdate, r.rescontentsno,
-                                  c.customerno, c.cname
+                                  c.customerno, c.cname, r.re_reply
                           FROM REPLY r INNER JOIN n_customer c ON c.customerno = r.customerno
                           WHERE rescontentsno = #{rescontentsno}
                           ORDER BY r.rdate DESC)
@@ -46,6 +46,18 @@
   <update id="update" parameterType="dev.mvc.reply.ReplyVO">
     UPDATE REPLY 
     SET replycontents = #{replycontents}
+    WHERE replyno = #{replyno}
+  </update>
+  
+  <update id="re_plus" parameterType="int">
+    UPDATE REPLY 
+    SET re_reply = re_reply + 1
+    WHERE replyno = #{replyno}
+  </update>
+  
+  <update id="re_minus" parameterType="int">
+    UPDATE REPLY 
+    SET re_reply = re_reply - 1
     WHERE replyno = #{replyno}
   </update>
   

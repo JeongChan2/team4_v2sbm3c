@@ -121,7 +121,7 @@
         <br>
         <c:choose>
             <c:when test="${code == 'score_success' || code == 'reply_success' || code == 'reply_delete_success' }">
-                <button type='button' onclick="history.back()" class="btn btn-primary">이전 화면으로</button>    
+                <button type='button' onclick="history.back();" class="btn btn-primary">이전 화면으로</button>    
             </c:when>
             <c:when test="${cnt == 0 }">
                 <button type='button' onclick="history.back()" class="btn btn-warning">다시 시도</button>
