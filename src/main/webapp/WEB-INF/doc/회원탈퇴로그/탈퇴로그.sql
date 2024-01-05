@@ -6,7 +6,7 @@ CREATE TABLE WithdrawalLog(
 );
 
 COMMENT ON TABLE WithdrawalLog is '로그인 내역';
-COMMENT ON COLUMN WithdrawalLog.logno is '로그인 번호';
+COMMENT ON COLUMN WithdrawalLog.logno is '로그 번호';
 COMMENT ON COLUMN WithdrawalLog.customerno is '회원 번호';
 COMMENT ON COLUMN WithdrawalLog.logdate is '탈퇴 날짜';
 
