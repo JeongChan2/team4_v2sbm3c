@@ -80,5 +80,17 @@
 	  FROM n_customer
 	  WHERE cname=#{cname} and tel=#{tel}
   </select>
+  
+  <select id="find_pw" resultType="int" parameterType="HashMap">
+    SELECT count(*)
+    FROM n_customer
+    WHERE id=#{id} and cname=#{cname}
+  </select>
+
+  <update id="pw_reset" parameterType="HashMap">
+		UPDATE n_customer 
+		SET passwd='1234'
+		WHERE id=#{id} and cname=#{cname}
+  </update>
 
 </mapper> 

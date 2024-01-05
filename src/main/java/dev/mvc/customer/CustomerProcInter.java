@@ -103,4 +103,18 @@ public interface CustomerProcInter {
    */
   public String find_id(HashMap<String, Object> map);
   
+  /**
+   * 비밀번호 초기화
+   * @param map
+   * @return
+   */
+  public int find_pw(HashMap<String, Object> map);
+  
+  /**
+   * 비번 초기화
+   * @param id
+   * @return 
+   */
+  public int pw_reset(HashMap<String, Object> map);
+  
 }

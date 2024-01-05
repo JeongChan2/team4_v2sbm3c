@@ -172,6 +172,15 @@ SELECT id
 FROM n_customer
 WHERE cname='황규현' and TEL='010-1111-2333';
 
+SELECT count(*)
+FROM n_customer
+WHERE cname='황규현' and id='user4@gmail.com';
+
+-- 비밀번호 1234로 초기화
+UPDATE n_customer 
+SET passwd='1234'
+WHERE id='user4@gmail.com';
+
 -- grade가 99일 시 탈퇴
 9. 회원탈퇴 기능
 UPDATE n_customer 

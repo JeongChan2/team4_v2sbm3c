@@ -81,7 +81,7 @@
                   <a class="dropdown-item" href="/customer/login.do">로그인</a>
                     <a class="dropdown-item" href="/customer/create.do">회원 가입</a>
                     <a class="dropdown-item" href="/customer/find_id.do">아이디 찾기</a>
-                    <a class="dropdown-item" href="#">비밀번호 찾기</a>
+                    <a class="dropdown-item" href="/customer/find_pw.do">비밀번호 찾기</a>
                   </c:when>
                   <c:otherwise>
                     <a class="dropdown-item" href="http://3.38.81.88:8000/ais/recommend_form/?customerno=${sessionScope.customerno }">취향 음식 등록하고 추천받기</a>

@@ -118,7 +118,19 @@
         
         <c:when test="${param.code == 'user_withdrawal_fail'}"> <%-- Java if --%>
           <li class='li_none'>
-            <span class="span_success">회원탈퇴에 실패했습니다.</span>
+            <span class="span_fail">회원탈퇴에 실패했습니다.</span>
+          </li>                                                                      
+        </c:when> 
+        
+        <c:when test="${param.code == 'find_pw_msg'}"> <%-- Java if --%>
+          <li class='li_none'>
+            <span class="span_success">비밀번호를 초기화 했습니다.</span>
+          </li>                                                                      
+        </c:when> 
+        
+        <c:when test="${param.code == 'find_pw_fail_msg'}"> <%-- Java if --%>
+          <li class='li_none'>
+            <span class="span_fail">비밀번호 초기화에 실패했습니다.</span>
           </li>                                                                      
         </c:when> 
         

@@ -129,4 +129,16 @@ public class CustomerProc implements CustomerProcInter {
     String id = this.customerDAO.find_id(map);
     return id;
   }
+
+  @Override
+  public int find_pw(HashMap<String, Object> map) {
+    int cnt = this.customerDAO.find_pw(map);
+    return cnt;
+  }
+
+  @Override
+  public int pw_reset(HashMap<String, Object> map) {
+    int cnt = this.customerDAO.pw_reset(map);
+    return cnt;
+  }
 }

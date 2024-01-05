@@ -712,4 +712,53 @@ public class CustomerCont {
     return mav;
   }
   
+  /**
+   * 비번 초기화
+   * @return
+   */
+  // http://localhost:9092/customer/find_pw.do 
+  @RequestMapping(value = "/customer/find_pw.do", 
+                             method = RequestMethod.GET)
+  public ModelAndView find_pw(HttpServletRequest request) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/customer/find_pw"); // /customer/find_id.jsp
+    
+    return mav;
+  }
+ 
+  /**
+   * 비번 초기화
+   * @return
+   */
+  // http://localhost:9092/customer/find_pw.do 
+  @RequestMapping(value = "/customer/find_pw.do", 
+                             method = RequestMethod.POST)
+  public ModelAndView find_pw(HttpServletRequest request, String id, String cname) {
+    ModelAndView mav = new ModelAndView();
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("id", id);
+    map.put("cname", cname);
+    
+    System.out.println("-> cname:"+cname);
+    System.out.println("-> id:"+id);
+    
+    try {
+      int cnt = customerProc.find_pw(map);
+      System.out.println("-> cnt:"+cnt);
+      if (cnt == 1) {
+        mav.addObject("code", "find_pw_msg");
+        customerProc.pw_reset(map);
+      }else {
+        mav.addObject("code", "find_pw_fail_msg");
+      }
+    } catch(Exception e) {
+      mav.addObject("code", "find_pw_fail_msg");
+    }
+    
+    mav.addObject("url", "/customer/msg");  // /customer/msg -> /customer/msg.jsp
+    mav.setViewName("redirect:/customer/msg.do"); 
+    
+    return mav;
+  }
+  
 }
