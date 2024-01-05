@@ -110,6 +110,18 @@
           </li>                                                                      
         </c:when> 
         
+        <c:when test="${param.code == 'user_withdrawal_succes'}"> <%-- Java if --%>
+          <li class='li_none'>
+            <span class="span_success">회원탈퇴에 성공했습니다.</span>
+          </li>                                                                      
+        </c:when> 
+        
+        <c:when test="${param.code == 'user_withdrawal_fail'}"> <%-- Java if --%>
+          <li class='li_none'>
+            <span class="span_success">회원탈퇴에 실패했습니다.</span>
+          </li>                                                                      
+        </c:when> 
+        
         <c:otherwise>
           <li class='li_none_left'>
             <span class="span_fail">알 수 없는 에러로 작업에 실패했습니다.</span>

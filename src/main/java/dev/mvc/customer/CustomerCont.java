@@ -648,9 +648,9 @@ public class CustomerCont {
     this.withdrawalLogProc.loginsert(customerno);
     
     if (cnt == 1) {
-      mav.addObject("code", "passwd_update_success"); // 탈퇴 성공
+      mav.addObject("code", "user_withdrawal_success"); // 탈퇴 성공
     } else {
-      mav.addObject("code", "passwd_update_fail");       // 탈퇴 실패
+      mav.addObject("code", "user_withdrawal_fail");       // 탈퇴 실패
     }
 
 
